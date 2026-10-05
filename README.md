@@ -1,14 +1,33 @@
 # causalrun
 
-Check external writes after a lost response or a crash.
+Help your coding agent avoid duplicate API writes after a crash or a lost response.
 
-Your agent reads the API docs and writes a result check. causalrun tests the check
-before it permits the write. You approve each write rule once. It saves the rule,
-action, and result in SQLite.
+You ask your agent to create a GitHub issue. GitHub creates it, but the response
+never reaches the agent. Sending the request again could create a second issue.
+
+causalrun saves the action before it sends the request. If the result is unclear,
+it checks GitHub for evidence of that action. It can recover the result without
+creating another issue. If the evidence is missing, it stops and reports an
+unknown result.
+
+## Why use causalrun?
+
+- **Avoid sending the same write twice.** Repeat an action with the same key to
+  get its saved record. causalrun does not send that write again.
+- **Check what happened after an interruption.** Use a saved result check to look
+  for evidence in the target application.
+- **Review the check before the write.** Your agent builds the check from API
+  docs. causalrun tests it, then asks you to approve the rule.
+- **Keep setup small.** Actions and results stay in local SQLite. You do not need
+  Docker, a cloud service, or a second AI model.
+
+Works with OpenCode. Other agent tools can connect through
+[MCP](docs/install-mcp.md). Current support covers GitHub issue creation and a
+local test API. Protection applies to writes sent through causalrun.
 
 ## Install
 
-You need Python 3.10+ and OpenCode on macOS or Linux. You do not need Docker.
+You need Python 3.10+ and OpenCode on macOS or Linux.
 
 Run these commands once:
 ```sh
@@ -23,29 +42,56 @@ causalrun starts for you in each new session. No extra start command is needed.
 To use GitHub, run `gh auth login` before you start OpenCode.
 OpenCode 1.18.34 is the tested version.
 
-## Use
+## Create an issue
 
 Ask your agent:
 
-> Create an issue in OWNER/REPO titled "Test issue" with body "Test from OpenCode."
+> Use causalrun_write to create an issue in OWNER/REPO titled "Test issue" with
+> body "Test from OpenCode." Use action key "test/issue-001". Do not use gh or
+> shell commands to create it.
 
-Replace `OWNER/REPO` with your repository. You do not need to name causalrun.
-The plugin tells the agent to use it for supported writes.
+Replace `OWNER/REPO` with a repository you can use for tests.
 
-The agent sets up a result check before the first write. It asks for your approval.
-Read the short summary and its full review file before you allow the rule.
-Normal output shows the result and the next step. Ask for details to see the full
-record, receipt, or timeline.
+The agent reads the API docs and prepares a result check. It asks what success
+means only when the request and docs leave that unclear. For GitHub tests, it
+also asks for consent to use the repository and add an action marker to the issue.
+
+causalrun tests the check before it permits the write. Read the short summary and
+the full review file before you approve the rule. An unchanged approved rule can
+be used again. Normal output shows the result and the next step.
+
+To return to the action in a new session, ask:
+
+> Use causalrun to get the result for action key "test/issue-001" in OWNER/REPO.
+> If it is unknown, check whether the issue was created. Do not create a new issue.
+
+Keep the same key for the same action. A new key means a new action. Changing the
+payload under an existing key is rejected. Ask for details to see the saved
+receipt and timeline.
+
+## How it works
+
+1. Your agent writes a result check for the supported API operation.
+2. causalrun tests the check. You review and approve the write rule.
+3. causalrun saves the action and sends the write once.
+4. It saves the result. After an unclear outcome, a check can read application
+   evidence and confirm success without another write.
 
 ## Limits
 
-Supported writes: GitHub issue creation and the local value API used in tests.
-Missing evidence leaves the result unknown. It does not prove that the write failed.
-Do not use a new action key to repeat an uncertain write.
+This is an early project. It does not yet support arbitrary APIs or restore an
+agent's full task after a crash.
 
-Other tools and shell scripts can bypass the plugin. Full ASD-STE100 conformance
-of model replies is not certified. Fixed status messages use short templates;
-the agent receives the writing rules in each session.
+Missing evidence leaves the result unknown (`IN_DOUBT`). It does not prove that
+the write failed. Recovery depends on the application's evidence and access to
+it. Do not use a new action key to repeat an uncertain write.
+
+The OpenCode plugin starts causalrun in new sessions and tells the agent to use
+it. Other tools and shell scripts can bypass the plugin. It does not intercept
+every external API write.
+
+Status messages use short templates. The agent receives plain-language writing
+rules, but full ASD-STE100 conformance of model replies is not certified.
 
 ## More information
 
