@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Controlled receipt application",
+    "version": "1"
+  },
+  "security": [
+    {
+      "providerBearer": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "providerBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "receiptBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/values": {
+      "post": {
+        "operationId": "createValue",
+        "description": "Create one value. action_id is caller-owned. The value and durable receipt commit in one transaction. Repeating the same ID and payload returns the receipt; a changed payload conflicts.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "action_id",
+                  "payload"
+                ],
+                "properties": {
+                  "action_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "maxLength": 4096
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Committed receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "action_id",
+                    "payload_digest",
+                    "result"
+                  ],
+                  "properties": {
+                    "action_id": {
+                      "type": "string"
+                    },
+                    "payload_digest": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Action ID used with different payload"
+          }
+        },
+        "x-causalrun-recovery": {
+          "receipt_path": "/receipts/{action_id}",
+          "correlation": "action_id",
+          "payload_digest": "SHA-256 of UTF-8 bytes of json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False)",
+          "missing_receipt": "Unknown: the original request can still complete"
+        }
+      }
+    },
+    "/receipts/{action_id}": {
+      "get": {
+        "operationId": "getReceipt",
+        "description": "Read an immutable receipt. Missing evidence does not prove non-execution. Receipts persist while the controlled database is retained.",
+        "parameters": [
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Committed receipt"
+          },
+          "404": {
+            "description": "No evidence available"
+          }
+        },
+        "security": [
+          {
+            "receiptBearer": []
+          }
+        ]
+      }
+    }
+  }
+}

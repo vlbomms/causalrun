@@ -1,0 +1,11 @@
+{
+  "command": "python3 -m causalrun.installer --build .local/dist/causalrun.pyz",
+  "archive": ".local/dist/causalrun.pyz",
+  "bytes": 126325,
+  "sha256": "8966de801fd14e68e71973a52d50566da791efce08258a0605bfa2b271884045",
+  "implementation_digest": "0feb564ff6fb31050cd1eee3e59171e9bcf96638cbdd2493a1ac9846a25b213e",
+  "source_matches_archive": true,
+  "reuse_demo_implementation_matches": true,
+  "assisted_trial_implementations_match": true,
+  "published": false
+}

@@ -1,0 +1,124 @@
+{
+  "codex": "codex-cli 0.159.0-alpha.12.1",
+  "model": "Local scripted Responses fixture, no model inference",
+  "config_overrides": {
+    "model_provider": "causalrun_fixture",
+    "model": "scripted-fixture",
+    "approval_policy": "never",
+    "model_providers.causalrun_fixture.name": "Local scripted test fixture",
+    "model_providers.causalrun_fixture.base_url": "http://127.0.0.1:58355/v1",
+    "model_providers.causalrun_fixture.env_key": "CAUSALRUN_TEST_MODEL_TOKEN",
+    "model_providers.causalrun_fixture.wire_api": "responses",
+    "model_providers.causalrun_fixture.requires_openai_auth": false,
+    "model_providers.causalrun_fixture.supports_websockets": false,
+    "model_providers.causalrun_fixture.request_max_retries": 0,
+    "model_providers.causalrun_fixture.stream_max_retries": 0,
+    "mcp_servers.causalrun.command": "/Library/Frameworks/Python.framework/Versions/3.10/bin/python3",
+    "mcp_servers.causalrun.args": [
+      "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpzednyl_a/causalrun.pyz",
+      "--mcp",
+      "--state-dir",
+      "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpzednyl_a/state"
+    ],
+    "mcp_servers.causalrun.startup_timeout_sec": 20,
+    "mcp_servers.causalrun.tool_timeout_sec": 30,
+    "mcp_servers.causalrun.required": true,
+    "features.apps": false,
+    "features.plugins": false,
+    "features.remote_plugin": false,
+    "features.shell_tool": false,
+    "features.shell_snapshot": false
+  },
+  "elapsed_seconds": 1.424640916986391,
+  "returncode": 0,
+  "events": [
+    {
+      "type": "thread.started",
+      "thread_id": "01a108f7-85fa-7611-a898-b243a952f21c"
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_0",
+        "type": "error",
+        "message": "Model metadata for `scripted-fixture` not found. Defaulting to fallback metadata; this can degrade performance and cause issues."
+      }
+    },
+    {
+      "type": "turn.started"
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_1",
+        "type": "agent_message",
+        "text": "Codex MCP acceptance fixture complete."
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 4,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4,
+        "reasoning_output_tokens": 0
+      }
+    }
+  ],
+  "stderr": "Reading additional input from stdin...\n2026-10-04T22:10:01.851961Z  WARN codex_models_manager::model_info: Unknown model scripted-fixture is used. This will use fallback model metadata.\n2026-10-04T22:10:02.052027Z  WARN codex_models_manager::model_info: Unknown model scripted-fixture is used. This will use fallback model metadata.\n2026-10-04T22:10:02.289550Z ERROR codex_core::tools::router: error=unsupported call: mcp__causalrun.causalrun_write\n2026-10-04T22:10:02.292836Z ERROR codex_core::tools::router: error=unsupported call: mcp__causalrun.causalrun_result\n2026-10-04T22:10:02.296335Z ERROR codex_core::tools::router: error=unsupported call: mcp__causalrun.causalrun_verify\n",
+  "model_calls": [
+    {
+      "step": 0,
+      "tool": "mcp__causalrun.causalrun_write",
+      "arguments": {
+        "operation": "controlled.value.create.v1",
+        "target": "http://127.0.0.1:58034",
+        "action_key": "opencode-acceptance-write",
+        "payload": {
+          "value": "OpenCode durable value"
+        }
+      }
+    },
+    {
+      "step": 1,
+      "tool": "mcp__causalrun.causalrun_result",
+      "arguments": {
+        "action_id": "missing"
+      }
+    },
+    {
+      "step": 2,
+      "tool": "mcp__causalrun.causalrun_verify",
+      "arguments": {
+        "action_id": "missing"
+      }
+    },
+    {
+      "step": 3,
+      "tool": null,
+      "arguments": null
+    }
+  ],
+  "advertised_tools": [
+    "list_mcp_resources",
+    "list_mcp_resource_templates",
+    "read_mcp_resource",
+    "request_user_input",
+    "view_image",
+    "multi_agent_v1.close_agent",
+    "multi_agent_v1.resume_agent",
+    "multi_agent_v1.send_input",
+    "multi_agent_v1.spawn_agent",
+    "multi_agent_v1.wait_agent",
+    "mcp__causalrun.causalrun_lookup",
+    "mcp__causalrun.causalrun_prepare",
+    "mcp__causalrun.causalrun_result",
+    "mcp__causalrun.causalrun_verify",
+    "mcp__causalrun.causalrun_write",
+    "get_goal",
+    "create_goal",
+    "update_goal",
+    ""
+  ]
+}

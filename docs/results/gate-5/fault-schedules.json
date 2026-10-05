@@ -1,0 +1,641 @@
+{
+  "schedules": [
+    {
+      "fault": "POST paused before commit, missing GET, release commit",
+      "uncertain": {
+        "id": "87777442-1991-4985-9212-282ea093e4d0",
+        "connector_digest": "1fec2167768afff701dfca05ea32706592ed10f2d315d5d87e1c4323659bd1c1",
+        "action_key": "delayed",
+        "payload": {
+          "value": "later"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54753"
+            },
+            "recorded_at": "2026-10-04T22:21:20.479475+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:20.506409+00:00"
+          }
+        ]
+      },
+      "recovered": {
+        "id": "87777442-1991-4985-9212-282ea093e4d0",
+        "connector_digest": "1fec2167768afff701dfca05ea32706592ed10f2d315d5d87e1c4323659bd1c1",
+        "action_key": "delayed",
+        "payload": {
+          "value": "later"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "87777442-1991-4985-9212-282ea093e4d0",
+          "payload_digest": "adf7ed45a9b64567159da0ac08e94c45047d95346dd06fcc70f60af6cf2ffc77",
+          "result": {
+            "value": "later"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54753"
+            },
+            "recorded_at": "2026-10-04T22:21:20.479475+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:20.506409+00:00"
+          },
+          {
+            "sequence": 3,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "87777442-1991-4985-9212-282ea093e4d0",
+              "payload_digest": "adf7ed45a9b64567159da0ac08e94c45047d95346dd06fcc70f60af6cf2ffc77",
+              "result": {
+                "value": "later"
+              }
+            },
+            "recorded_at": "2026-10-04T22:21:20.513393+00:00"
+          }
+        ]
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    },
+    {
+      "fault": "missing_receipt",
+      "uncertain": {
+        "id": "eea7afa1-fdbf-4850-9fe5-612516295462",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "missing_receipt",
+        "payload": {
+          "value": "test"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.267328+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.271282+00:00"
+          },
+          {
+            "sequence": 3,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.284180+00:00"
+          }
+        ]
+      },
+      "recovered": {
+        "id": "eea7afa1-fdbf-4850-9fe5-612516295462",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "missing_receipt",
+        "payload": {
+          "value": "test"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "eea7afa1-fdbf-4850-9fe5-612516295462",
+          "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+          "result": {
+            "value": "test"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.267328+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.271282+00:00"
+          },
+          {
+            "sequence": 3,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.284180+00:00"
+          },
+          {
+            "sequence": 4,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "eea7afa1-fdbf-4850-9fe5-612516295462",
+              "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+              "result": {
+                "value": "test"
+              }
+            },
+            "recorded_at": "2026-10-04T22:21:23.309425+00:00"
+          }
+        ]
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    },
+    {
+      "fault": "wrong_action",
+      "uncertain": {
+        "id": "a09edbff-df52-423e-84de-780ce36edac5",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "wrong_action",
+        "payload": {
+          "value": "test"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 5,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.319794+00:00"
+          },
+          {
+            "sequence": 6,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.322307+00:00"
+          },
+          {
+            "sequence": 7,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.333615+00:00"
+          }
+        ]
+      },
+      "recovered": {
+        "id": "a09edbff-df52-423e-84de-780ce36edac5",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "wrong_action",
+        "payload": {
+          "value": "test"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "a09edbff-df52-423e-84de-780ce36edac5",
+          "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+          "result": {
+            "value": "test"
+          }
+        },
+        "events": [
+          {
+            "sequence": 5,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.319794+00:00"
+          },
+          {
+            "sequence": 6,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.322307+00:00"
+          },
+          {
+            "sequence": 7,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.333615+00:00"
+          },
+          {
+            "sequence": 8,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "a09edbff-df52-423e-84de-780ce36edac5",
+              "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+              "result": {
+                "value": "test"
+              }
+            },
+            "recorded_at": "2026-10-04T22:21:23.352306+00:00"
+          }
+        ]
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    },
+    {
+      "fault": "wrong_payload",
+      "uncertain": {
+        "id": "fbd5d3a7-18a9-4ab2-aa22-ebb755634ae3",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "wrong_payload",
+        "payload": {
+          "value": "test"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 9,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.360960+00:00"
+          },
+          {
+            "sequence": 10,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.363073+00:00"
+          },
+          {
+            "sequence": 11,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.372924+00:00"
+          }
+        ]
+      },
+      "recovered": {
+        "id": "fbd5d3a7-18a9-4ab2-aa22-ebb755634ae3",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "wrong_payload",
+        "payload": {
+          "value": "test"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "fbd5d3a7-18a9-4ab2-aa22-ebb755634ae3",
+          "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+          "result": {
+            "value": "test"
+          }
+        },
+        "events": [
+          {
+            "sequence": 9,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.360960+00:00"
+          },
+          {
+            "sequence": 10,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.363073+00:00"
+          },
+          {
+            "sequence": 11,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.372924+00:00"
+          },
+          {
+            "sequence": 12,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "fbd5d3a7-18a9-4ab2-aa22-ebb755634ae3",
+              "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+              "result": {
+                "value": "test"
+              }
+            },
+            "recorded_at": "2026-10-04T22:21:23.389877+00:00"
+          }
+        ]
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    },
+    {
+      "fault": "wrong_value",
+      "uncertain": {
+        "id": "477fce17-2ecb-43c8-8cce-0c3c393034d2",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "wrong_value",
+        "payload": {
+          "value": "test"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 13,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.397663+00:00"
+          },
+          {
+            "sequence": 14,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.399722+00:00"
+          },
+          {
+            "sequence": 15,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.409402+00:00"
+          }
+        ]
+      },
+      "recovered": {
+        "id": "477fce17-2ecb-43c8-8cce-0c3c393034d2",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "wrong_value",
+        "payload": {
+          "value": "test"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "477fce17-2ecb-43c8-8cce-0c3c393034d2",
+          "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+          "result": {
+            "value": "test"
+          }
+        },
+        "events": [
+          {
+            "sequence": 13,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.397663+00:00"
+          },
+          {
+            "sequence": 14,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.399722+00:00"
+          },
+          {
+            "sequence": 15,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.409402+00:00"
+          },
+          {
+            "sequence": 16,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "477fce17-2ecb-43c8-8cce-0c3c393034d2",
+              "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+              "result": {
+                "value": "test"
+              }
+            },
+            "recorded_at": "2026-10-04T22:21:23.426326+00:00"
+          }
+        ]
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    },
+    {
+      "fault": "verifier_error",
+      "uncertain": {
+        "id": "9533a4f7-ae3d-43d3-a33a-ff480e8b1582",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "verifier_error",
+        "payload": {
+          "value": "test"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 17,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.434366+00:00"
+          },
+          {
+            "sequence": 18,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.436368+00:00"
+          },
+          {
+            "sequence": 19,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.444024+00:00"
+          }
+        ]
+      },
+      "recovered": {
+        "id": "9533a4f7-ae3d-43d3-a33a-ff480e8b1582",
+        "connector_digest": "5ec8c5b993b2b5ac4a1c43726e510b561e8d88448c28d385d30754901a0b54a9",
+        "action_key": "verifier_error",
+        "payload": {
+          "value": "test"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "9533a4f7-ae3d-43d3-a33a-ff480e8b1582",
+          "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+          "result": {
+            "value": "test"
+          }
+        },
+        "events": [
+          {
+            "sequence": 17,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:54833"
+            },
+            "recorded_at": "2026-10-04T22:21:23.434366+00:00"
+          },
+          {
+            "sequence": 18,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.436368+00:00"
+          },
+          {
+            "sequence": 19,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T22:21:23.444024+00:00"
+          },
+          {
+            "sequence": 20,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "9533a4f7-ae3d-43d3-a33a-ff480e8b1582",
+              "payload_digest": "93268aced3bf3c807a4c872a65a2dfd877d14af1b2baaf94951f8ead505502ae",
+              "result": {
+                "value": "test"
+              }
+            },
+            "recorded_at": "2026-10-04T22:21:23.460954+00:00"
+          }
+        ]
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    },
+    {
+      "fault": "MCP process restart after lost response",
+      "uncertain": {
+        "action_key": "stdio-original",
+        "connector_digest": "6f3f541e18d8b04040c2d03d47ad6b7809d0f6e34e2f4c21909638bdcd59829e",
+        "events": [
+          {
+            "detail": {
+              "target": "http://127.0.0.1:54922"
+            },
+            "kind": "AUTHORIZED",
+            "recorded_at": "2026-10-04T22:21:26.271425+00:00",
+            "sequence": 1
+          },
+          {
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "kind": "OUTCOME_UNCONFIRMED",
+            "recorded_at": "2026-10-04T22:21:26.273968+00:00",
+            "sequence": 2
+          }
+        ],
+        "id": "e987f528-17dc-445c-9531-436a55e5d16c",
+        "payload": {
+          "value": "stdio"
+        },
+        "receipt": null,
+        "state": "IN_DOUBT"
+      },
+      "recovered": {
+        "action_key": "stdio-original",
+        "connector_digest": "6f3f541e18d8b04040c2d03d47ad6b7809d0f6e34e2f4c21909638bdcd59829e",
+        "events": [
+          {
+            "detail": {
+              "target": "http://127.0.0.1:54922"
+            },
+            "kind": "AUTHORIZED",
+            "recorded_at": "2026-10-04T22:21:26.271425+00:00",
+            "sequence": 1
+          },
+          {
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "kind": "OUTCOME_UNCONFIRMED",
+            "recorded_at": "2026-10-04T22:21:26.273968+00:00",
+            "sequence": 2
+          },
+          {
+            "detail": {
+              "action_id": "e987f528-17dc-445c-9531-436a55e5d16c",
+              "payload_digest": "c358d3d99138759b2b3887224b38be249e7ce438721874e519a69e6f42b212fb",
+              "result": {
+                "value": "stdio"
+              }
+            },
+            "kind": "VERIFIED_SUCCESS",
+            "recorded_at": "2026-10-04T22:21:26.404347+00:00",
+            "sequence": 3
+          }
+        ],
+        "id": "e987f528-17dc-445c-9531-436a55e5d16c",
+        "payload": {
+          "value": "stdio"
+        },
+        "receipt": {
+          "action_id": "e987f528-17dc-445c-9531-436a55e5d16c",
+          "payload_digest": "c358d3d99138759b2b3887224b38be249e7ce438721874e519a69e6f42b212fb",
+          "result": {
+            "value": "stdio"
+          }
+        },
+        "state": "COMMITTED"
+      },
+      "provider_posts": 1,
+      "provider_objects": 1
+    }
+  ],
+  "blocked_observations": 7,
+  "recovered": 7,
+  "provider_posts": 7,
+  "provider_objects": 7
+}

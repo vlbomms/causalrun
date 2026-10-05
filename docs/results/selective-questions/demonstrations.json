@@ -1,0 +1,4669 @@
+[
+  {
+    "recorded_at": "2026-10-04T23:12:07.050335+00:00",
+    "command": "python3 -m tests.demo_gate4",
+    "opencode": "1.18.34",
+    "model": "Scripted local OpenAI-compatible tool-call fixture, no paid/model inference",
+    "approval": "Harness replies to actual OpenCode question and permission HTTP requests; not a human usability test",
+    "questions": [
+      {
+        "id": "que_109307fac0018n6TT4IvxwmKXm",
+        "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+        "questions": [
+          {
+            "question": "May validation use a disposable local fixture?",
+            "header": "Sandbox",
+            "options": [
+              {
+                "label": "Fixture only",
+                "description": "No configured-target validation writes"
+              }
+            ]
+          },
+          {
+            "question": "How should inconclusive evidence be handled?",
+            "header": "Unknown",
+            "options": [
+              {
+                "label": "Keep blocked",
+                "description": "Request review without resending"
+              }
+            ]
+          }
+        ],
+        "tool": {
+          "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+          "callID": "fixture-call-4"
+        }
+      }
+    ],
+    "permissions": [
+      {
+        "id": "per_109308237001xrQka9jVXnwYk3",
+        "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+        "permission": "causalrun_approve",
+        "patterns": [
+          "10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5"
+        ],
+        "metadata": {
+          "scope": {
+            "operation": "controlled.value.create.v1",
+            "target": "http://127.0.0.1:60250"
+          },
+          "connector_digest": "10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5",
+          "report_digest": "8b85bca4e1bfe24eab0793df46dc3ed0348a63184adebaccdbefc0b02c8cea41",
+          "artifact": {
+            "schema_version": 2,
+            "name": "controlled-value",
+            "version": 1,
+            "target": "http://127.0.0.1:60250",
+            "operation": "controlled.value.create.v1",
+            "expected": {
+              "value_from": "payload.value",
+              "description": "The returned value must exactly match payload.value"
+            },
+            "verifier": {
+              "kind": "python.receipt.v1",
+              "source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n"
+            },
+            "adapter": {
+              "write_path": "/values",
+              "receipt_path": "/receipts/{action_id}"
+            },
+            "authentication": {
+              "type": "bearer",
+              "write_secret": "CAUSALRUN_PROVIDER_TOKEN",
+              "read_secret": "CAUSALRUN_RECEIPT_TOKEN"
+            },
+            "interview": {
+              "sandbox": "Yes, only the disposable fixture",
+              "unknown_policy": "Keep blocked and request review",
+              "expected_behavior": "The returned value must exactly match payload.value"
+            },
+            "limitations": [
+              "Missing receipt does not prove non-execution"
+            ],
+            "sources": [
+              "http://127.0.0.1:60250/openapi.json"
+            ],
+            "api_version": "1",
+            "implementation": "1f8a87300693117606320896493f897e8970a07cb6202bbe2d58e9a4114490b3"
+          },
+          "validation": {
+            "connector_digest": "10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5",
+            "checked_at": "2026-10-04T23:12:16.432435+00:00",
+            "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+            "passed": 10,
+            "failed": 0,
+            "provider_objects": 3,
+            "provider_requests": 3,
+            "false_successes": 0,
+            "false_failures": 0,
+            "failure_conclusions_supported": false,
+            "cases": [
+              {
+                "name": "matching_receipt",
+                "passed": true,
+                "expected_confirmation": true,
+                "actual_confirmation": true,
+                "oracle_matched": true
+              },
+              {
+                "name": "missing_receipt",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "malformed_receipt",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "wrong_action",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "wrong_payload",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "wrong_value",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "partial_receipt",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "lost_response",
+                "passed": true,
+                "schedule": "provider commit, disconnect response, GET receipt"
+              },
+              {
+                "name": "delayed_commit",
+                "passed": true,
+                "confirmed_before_commit": false,
+                "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+              },
+              {
+                "name": "verifier_unavailable",
+                "passed": true,
+                "actual_confirmation": false,
+                "schedule": "receipt GET returns 503; no conclusion"
+              }
+            ]
+          },
+          "ready": false
+        },
+        "always": [],
+        "tool": {
+          "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+          "callID": "fixture-call-5"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "step": 0,
+        "tool": "http_request"
+      },
+      {
+        "step": 1,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 2,
+        "tool": "webfetch"
+      },
+      {
+        "step": 3,
+        "tool": "question"
+      },
+      {
+        "step": 4,
+        "tool": "causalrun_prepare"
+      },
+      {
+        "step": 5,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 6,
+        "tool": "causalrun_verify"
+      },
+      {
+        "step": 7,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 8,
+        "tool": "causalrun_result"
+      },
+      {
+        "step": 9,
+        "tool": null
+      },
+      {
+        "step": 10,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 11,
+        "tool": "causalrun_result"
+      },
+      {
+        "step": 12,
+        "tool": null
+      }
+    ],
+    "passed": 2,
+    "failed": 0,
+    "installation": {
+      "installed": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/config/plugins/causalrun.ts",
+      "runtime": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/state/runtime",
+      "state": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/state",
+      "next": "Restart OpenCode. The plugin starts the service automatically. Use local gh auth login for GitHub; no secrets in chat."
+    },
+    "session_id": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+    "first_session_messages": [
+      {
+        "info": {
+          "id": "msg_1093078f4001kQukqZnBdPunxG",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "user",
+          "time": {
+            "created": 1791155534068
+          },
+          "summary": {
+            "diffs": []
+          },
+          "agent": "build",
+          "model": {
+            "providerID": "fixture",
+            "modelID": "scripted"
+          }
+        },
+        "parts": [
+          {
+            "id": "prt_1093078f90014UuPKzvURRDvDc",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093078f4001kQukqZnBdPunxG",
+            "type": "text",
+            "text": "Run the controlled API acceptance workflow. Never send a direct unapproved write."
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307a8200127Qk1tSwDGntu9",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155534466,
+            "completed": 1791155535627
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307efe001Kt91ZzOPDTgW50",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307a8200127Qk1tSwDGntu9",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307f010017rJ898icsDJpzp",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307a8200127Qk1tSwDGntu9",
+            "type": "tool",
+            "callID": "fixture-call-1",
+            "tool": "http_request",
+            "state": {
+              "status": "error",
+              "input": {
+                "method": "POST",
+                "url": "http://127.0.0.1:60250/values"
+              },
+              "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+              "time": {
+                "start": 1791155535620,
+                "end": 1791155535622
+              }
+            }
+          },
+          {
+            "id": "prt_109307f08001r5Rnxvam6HA8z3",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307a8200127Qk1tSwDGntu9",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307f0d001D0C4q9Awn0tP4s",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535629,
+            "completed": 1791155535740
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307f22001Wjl1WeAHEShXVy",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f0d001D0C4q9Awn0tP4s",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307f23001w2dA6Ea6YJFWP4",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f0d001D0C4q9Awn0tP4s",
+            "type": "tool",
+            "callID": "fixture-call-2",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"status\":\"PREPARATION_REQUIRED\",\"ready\":false,\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60250\"},\"next\":\"Discover the API, ask only missing user intent, generate source, then prepare and review\",\"discovery_sources\":[\"http://127.0.0.1:60250/openapi.json\"],\"authentication\":\"Explicit controlled write token and distinct receipt-read token\",\"github_author\":null,\"questions\":[{\"id\":\"sandbox\",\"title\":\"May validation write to a disposable controlled fixture?\",\"options\":[\"Yes, only the disposable fixture\",\"No; stop before any test writes\"],\"free_text\":true},{\"id\":\"unknown_policy\",\"title\":\"If evidence is inconclusive, what should the agent do?\",\"options\":[\"Keep blocked and request review\",\"Keep blocked and check again later\"],\"free_text\":true}],\"prepare_fields\":[\"operation\",\"repository or target\",\"source\",\"answers\",\"api_version for controlled profile\"],\"documented_success\":{\"expected_behavior\":\"The returned value must exactly match payload.value\",\"sources\":[\"http://127.0.0.1:60250/openapi.json\"],\"origin\":\"API profile, not a user answer\"},\"success_clarification\":{\"id\":\"expected_behavior\",\"title\":\"What observable result should count as success?\",\"options\":[\"The returned value must exactly match payload.value\",\"Describe another requirement\"],\"free_text\":true},\"answers_format\":\"Exact answers for unresolved questions. Omit expected_behavior to use documented success; never fabricate sandbox or marker consent.\",\"intent_rule\":\"Read documentation and existing user request first. Ask success_clarification only if a material ambiguity remains; then set needs_success_clarification=true and supply the actual answer. Do not ask the user to restate documented behavior.\",\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"expected_fields\":\"action_id, payload_digest, result.value matching payload.value\",\"helpers\":\"digest(payload), isinstance(value, dict)\",\"language\":\"One pure boolean return expression; dictionary subscripts, membership, comparisons, boolean operations; no imports, attributes, network, loops, or assignments\",\"false_means\":\"Unknown; never failure\"},\"workflow\":\"causalrun protects its registered API tools. Before a first write, use the API's official OpenAPI/Swagger/WSDL or reference docs and safe reads to check inputs, authentication, scopes, consistency, and recovery. Infer success from documentation and the existing user request. Do not ask what success means when it is already clear. Omit answers.expected_behavior to use documented_success; if the request has a material ambiguity, set needs_success_clarification=true, ask one focused question using OpenCode's question tool, and supply the answer. Ask only other missing intent with options and free text; reuse explicit authorization in the conversation, never fabricate consent. Generate a pure Python verify(action_id, payload, evidence) expression with no imports, side effects, or arbitrary calls. Then call causalrun_prepare. The developer must review the exact connector and validation in the permission prompt. Do not approve your own permissions, change action keys to bypass IN_DOUBT, send secrets to tools, or substitute a shell/network write. Reuse the original logical action_key across retries and restarts. False verification means unknown, never failure. Shell scripts and unregistered tools are outside plugin enforcement.\"}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535655,
+                "end": 1791155535737
+              }
+            }
+          },
+          {
+            "id": "prt_109307f7a001j1gJ29Sr6ob0Wk",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f0d001D0C4q9Awn0tP4s",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307f7d001F7LOf90QCfn1SU",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535741,
+            "completed": 1791155535767
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307f8e001EzNjVPk4pzYoPZ",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f7d001F7LOf90QCfn1SU",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307f8f001eis6XDqueUmWSB",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f7d001F7LOf90QCfn1SU",
+            "type": "tool",
+            "callID": "fixture-call-3",
+            "tool": "webfetch",
+            "state": {
+              "status": "completed",
+              "input": {
+                "url": "http://127.0.0.1:60250/openapi.json",
+                "format": "text"
+              },
+              "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Controlled receipt application\", \"version\": \"1\"}, \"security\": [{\"providerBearer\": []}], \"components\": {\"securitySchemes\": {\"providerBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}, \"receiptBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}}}, \"paths\": {\"/values\": {\"post\": {\"operationId\": \"createValue\", \"description\": \"Create one value. action_id is caller-owned. The value and durable receipt commit in one transaction. Repeating the same ID and payload returns the receipt; a changed payload conflicts.\", \"requestBody\": {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload\"], \"properties\": {\"action_id\": {\"type\": \"string\", \"format\": \"uuid\"}, \"payload\": {\"type\": \"object\", \"required\": [\"value\"], \"properties\": {\"value\": {\"type\": \"string\", \"maxLength\": 4096}}}}}}}}, \"responses\": {\"200\": {\"description\": \"Committed receipt\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload_digest\", \"result\"], \"properties\": {\"action_id\": {\"type\": \"string\"}, \"payload_digest\": {\"type\": \"string\"}, \"result\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"string\"}}}}}}}}, \"409\": {\"description\": \"Action ID used with different payload\"}}, \"x-causalrun-recovery\": {\"receipt_path\": \"/receipts/{action_id}\", \"correlation\": \"action_id\", \"payload_digest\": \"SHA-256 of UTF-8 bytes of json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False)\", \"missing_receipt\": \"Unknown: the original request can still complete\"}}}, \"/receipts/{action_id}\": {\"get\": {\"operationId\": \"getReceipt\", \"description\": \"Read an immutable receipt. Missing evidence does not prove non-execution. Receipts persist while the controlled database is retained.\", \"parameters\": [{\"name\": \"action_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\"}}], \"responses\": {\"200\": {\"description\": \"Committed receipt\"}, \"404\": {\"description\": \"No evidence available\"}}, \"security\": [{\"receiptBearer\": []}]}}}}",
+              "title": "http://127.0.0.1:60250/openapi.json (application/json)",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535762,
+                "end": 1791155535765
+              }
+            }
+          },
+          {
+            "id": "prt_109307f96001WD7g87zZFvOOQ4",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f7d001F7LOf90QCfn1SU",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307f99001EuYIgG2OXgrQ2n",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535769,
+            "completed": 1791155535805
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307fa9001rKodXa9O6jRg0X",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307faa001m1AX02V8YTdkz7",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+            "type": "tool",
+            "callID": "fixture-call-4",
+            "tool": "question",
+            "state": {
+              "status": "completed",
+              "input": {
+                "questions": [
+                  {
+                    "header": "Sandbox",
+                    "question": "May validation use a disposable local fixture?",
+                    "options": [
+                      {
+                        "label": "Fixture only",
+                        "description": "No configured-target validation writes"
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Unknown",
+                    "question": "How should inconclusive evidence be handled?",
+                    "options": [
+                      {
+                        "label": "Keep blocked",
+                        "description": "Request review without resending"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "output": "User has answered your questions: \"May validation use a disposable local fixture?\"=\"Fixture only\", \"How should inconclusive evidence be handled?\"=\"Keep blocked\". You can now continue with the user's answers in mind.",
+              "title": "Asked 2 questions",
+              "metadata": {
+                "answers": [
+                  [
+                    "Fixture only"
+                  ],
+                  [
+                    "Keep blocked"
+                  ]
+                ],
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535788,
+                "end": 1791155535802
+              }
+            }
+          },
+          {
+            "id": "prt_109307fbb001TEra5Wo5pMNodh",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307fbe001wr3Xb9Z2R4fU00",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535806,
+            "completed": 1791155536530
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307fcf001Ko03Rijd6dJu3p",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307fd0001FhnsoCgvfbjn53",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+            "type": "tool",
+            "callID": "fixture-call-5",
+            "tool": "causalrun_prepare",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "api_version": "1",
+                "source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+                "answers": {
+                  "sandbox": "Yes, only the disposable fixture",
+                  "unknown_policy": "Keep blocked and request review"
+                }
+              },
+              "output": "{\"status\":\"APPROVED\",\"ready\":true,\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60250\"},\"expected\":{\"description\":\"The returned value must exactly match payload.value\",\"value_from\":\"payload.value\"},\"limitations\":[\"Missing receipt does not prove non-execution\"]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535827,
+                "end": 1791155536527
+              }
+            }
+          },
+          {
+            "id": "prt_109308290001iFFofPZcUyUco1",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308293001jnT9TSyfJEKOX5",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536531,
+            "completed": 1791155536710
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_1093082a4001A413VnCCSZP9EC",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308293001jnT9TSyfJEKOX5",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_1093082a5001T8nPTnBA0mx3Ua",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308293001jnT9TSyfJEKOX5",
+            "type": "tool",
+            "callID": "fixture-call-6",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"IN_DOUBT\",\"receipt\":null,\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155536551,
+                "end": 1791155536706
+              }
+            }
+          },
+          {
+            "id": "prt_1093083440011MNdI3U5kEKfV5",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308293001jnT9TSyfJEKOX5",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308347001g0qr4oUl9WTIAk",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536711,
+            "completed": 1791155536818
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930835b0016Z075airj3d0Zn",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308347001g0qr4oUl9WTIAk",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930835c001jRD2P66AbeFKVB",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308347001g0qr4oUl9WTIAk",
+            "type": "tool",
+            "callID": "fixture-call-7",
+            "tool": "causalrun_verify",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155536735,
+                "end": 1791155536815
+              }
+            }
+          },
+          {
+            "id": "prt_1093083b0001GICJZIh0vZPifg",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308347001g0qr4oUl9WTIAk",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_1093083b4001l3313eGkb5C7Uh",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536820,
+            "completed": 1791155536989
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_1093083c5001ykaAWwWiqr4vjS",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093083b4001l3313eGkb5C7Uh",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_1093083c6001og0HWbv2CSBtI5",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093083b4001l3313eGkb5C7Uh",
+            "type": "tool",
+            "callID": "fixture-call-8",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155536841,
+                "end": 1791155536986
+              }
+            }
+          },
+          {
+            "id": "prt_10930845b001F7ds66qZ8pB9fU",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093083b4001l3313eGkb5C7Uh",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930845f001Ow384f7KU8PEL8",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536991,
+            "completed": 1791155537093
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109308472001g2eOrvexdy9Z42",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_10930845f001Ow384f7KU8PEL8",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109308473001CLbnrmj4LfVt4G",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_10930845f001Ow384f7KU8PEL8",
+            "type": "tool",
+            "callID": "fixture-call-9",
+            "tool": "causalrun_result",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155537014,
+                "end": 1791155537089
+              }
+            }
+          },
+          {
+            "id": "prt_1093084c2001Shqh0CBbYDU1H3",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_10930845f001Ow384f7KU8PEL8",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_1093084c7001bZPDVFcigogkkG",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155537095,
+            "completed": 1791155537122
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "stop"
+        },
+        "parts": [
+          {
+            "id": "prt_1093084dd0014bhKp3rdmye5B1",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093084c7001bZPDVFcigogkkG",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_1093084de001UaT7FQTU06rPxu",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093084c7001bZPDVFcigogkkG",
+            "type": "text",
+            "text": "Acceptance fixture complete.",
+            "time": {
+              "start": 1791155537118,
+              "end": 1791155537119
+            }
+          },
+          {
+            "id": "prt_1093084e0001dyVSWvnNGMIZo8",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093084c7001bZPDVFcigogkkG",
+            "type": "step-finish",
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "step": "first write held",
+        "state": "PREPARATION_REQUIRED"
+      },
+      {
+        "step": "provider commit, response lost",
+        "state": "IN_DOUBT",
+        "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+      },
+      {
+        "step": "read recovery and repeated key",
+        "state": "COMMITTED",
+        "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+      },
+      {
+        "step": "host and service restart, same key",
+        "state": "COMMITTED",
+        "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+      }
+    ],
+    "first_counts": {
+      "objects": 1,
+      "writes": 1
+    },
+    "first_action": {
+      "id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa",
+      "state": "COMMITTED",
+      "receipt": {
+        "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa",
+        "payload_digest": "ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56",
+        "result": {
+          "value": "OpenCode durable value"
+        }
+      }
+    },
+    "restart_schedule": {
+      "host_signal": "SIGKILL",
+      "runtime_signal": "SIGKILL",
+      "before": {
+        "instance": "7cb2d4ffb62621b6429d6f35f3c756d85ea4f800af038c28",
+        "pid": 84531,
+        "url": "http://127.0.0.1:60385"
+      },
+      "after": {
+        "instance": "d506a3f2737104f0228fdaffaa9a849fae83e8a451beda93",
+        "pid": 84549,
+        "url": "http://127.0.0.1:60521"
+      }
+    },
+    "restart_messages": [
+      {
+        "info": {
+          "id": "msg_1093078f4001kQukqZnBdPunxG",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "user",
+          "time": {
+            "created": 1791155534068
+          },
+          "summary": {
+            "diffs": []
+          },
+          "agent": "build",
+          "model": {
+            "providerID": "fixture",
+            "modelID": "scripted"
+          }
+        },
+        "parts": [
+          {
+            "id": "prt_1093078f90014UuPKzvURRDvDc",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093078f4001kQukqZnBdPunxG",
+            "type": "text",
+            "text": "Run the controlled API acceptance workflow. Never send a direct unapproved write."
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307a8200127Qk1tSwDGntu9",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155534466,
+            "completed": 1791155535627
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307efe001Kt91ZzOPDTgW50",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307a8200127Qk1tSwDGntu9",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307f010017rJ898icsDJpzp",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307a8200127Qk1tSwDGntu9",
+            "type": "tool",
+            "callID": "fixture-call-1",
+            "tool": "http_request",
+            "state": {
+              "status": "error",
+              "input": {
+                "method": "POST",
+                "url": "http://127.0.0.1:60250/values"
+              },
+              "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+              "time": {
+                "start": 1791155535620,
+                "end": 1791155535622
+              }
+            }
+          },
+          {
+            "id": "prt_109307f08001r5Rnxvam6HA8z3",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307a8200127Qk1tSwDGntu9",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307f0d001D0C4q9Awn0tP4s",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535629,
+            "completed": 1791155535740
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307f22001Wjl1WeAHEShXVy",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f0d001D0C4q9Awn0tP4s",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307f23001w2dA6Ea6YJFWP4",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f0d001D0C4q9Awn0tP4s",
+            "type": "tool",
+            "callID": "fixture-call-2",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"status\":\"PREPARATION_REQUIRED\",\"ready\":false,\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60250\"},\"next\":\"Discover the API, ask only missing user intent, generate source, then prepare and review\",\"discovery_sources\":[\"http://127.0.0.1:60250/openapi.json\"],\"authentication\":\"Explicit controlled write token and distinct receipt-read token\",\"github_author\":null,\"questions\":[{\"id\":\"sandbox\",\"title\":\"May validation write to a disposable controlled fixture?\",\"options\":[\"Yes, only the disposable fixture\",\"No; stop before any test writes\"],\"free_text\":true},{\"id\":\"unknown_policy\",\"title\":\"If evidence is inconclusive, what should the agent do?\",\"options\":[\"Keep blocked and request review\",\"Keep blocked and check again later\"],\"free_text\":true}],\"prepare_fields\":[\"operation\",\"repository or target\",\"source\",\"answers\",\"api_version for controlled profile\"],\"documented_success\":{\"expected_behavior\":\"The returned value must exactly match payload.value\",\"sources\":[\"http://127.0.0.1:60250/openapi.json\"],\"origin\":\"API profile, not a user answer\"},\"success_clarification\":{\"id\":\"expected_behavior\",\"title\":\"What observable result should count as success?\",\"options\":[\"The returned value must exactly match payload.value\",\"Describe another requirement\"],\"free_text\":true},\"answers_format\":\"Exact answers for unresolved questions. Omit expected_behavior to use documented success; never fabricate sandbox or marker consent.\",\"intent_rule\":\"Read documentation and existing user request first. Ask success_clarification only if a material ambiguity remains; then set needs_success_clarification=true and supply the actual answer. Do not ask the user to restate documented behavior.\",\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"expected_fields\":\"action_id, payload_digest, result.value matching payload.value\",\"helpers\":\"digest(payload), isinstance(value, dict)\",\"language\":\"One pure boolean return expression; dictionary subscripts, membership, comparisons, boolean operations; no imports, attributes, network, loops, or assignments\",\"false_means\":\"Unknown; never failure\"},\"workflow\":\"causalrun protects its registered API tools. Before a first write, use the API's official OpenAPI/Swagger/WSDL or reference docs and safe reads to check inputs, authentication, scopes, consistency, and recovery. Infer success from documentation and the existing user request. Do not ask what success means when it is already clear. Omit answers.expected_behavior to use documented_success; if the request has a material ambiguity, set needs_success_clarification=true, ask one focused question using OpenCode's question tool, and supply the answer. Ask only other missing intent with options and free text; reuse explicit authorization in the conversation, never fabricate consent. Generate a pure Python verify(action_id, payload, evidence) expression with no imports, side effects, or arbitrary calls. Then call causalrun_prepare. The developer must review the exact connector and validation in the permission prompt. Do not approve your own permissions, change action keys to bypass IN_DOUBT, send secrets to tools, or substitute a shell/network write. Reuse the original logical action_key across retries and restarts. False verification means unknown, never failure. Shell scripts and unregistered tools are outside plugin enforcement.\"}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535655,
+                "end": 1791155535737
+              }
+            }
+          },
+          {
+            "id": "prt_109307f7a001j1gJ29Sr6ob0Wk",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f0d001D0C4q9Awn0tP4s",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307f7d001F7LOf90QCfn1SU",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535741,
+            "completed": 1791155535767
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307f8e001EzNjVPk4pzYoPZ",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f7d001F7LOf90QCfn1SU",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307f8f001eis6XDqueUmWSB",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f7d001F7LOf90QCfn1SU",
+            "type": "tool",
+            "callID": "fixture-call-3",
+            "tool": "webfetch",
+            "state": {
+              "status": "completed",
+              "input": {
+                "url": "http://127.0.0.1:60250/openapi.json",
+                "format": "text"
+              },
+              "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Controlled receipt application\", \"version\": \"1\"}, \"security\": [{\"providerBearer\": []}], \"components\": {\"securitySchemes\": {\"providerBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}, \"receiptBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}}}, \"paths\": {\"/values\": {\"post\": {\"operationId\": \"createValue\", \"description\": \"Create one value. action_id is caller-owned. The value and durable receipt commit in one transaction. Repeating the same ID and payload returns the receipt; a changed payload conflicts.\", \"requestBody\": {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload\"], \"properties\": {\"action_id\": {\"type\": \"string\", \"format\": \"uuid\"}, \"payload\": {\"type\": \"object\", \"required\": [\"value\"], \"properties\": {\"value\": {\"type\": \"string\", \"maxLength\": 4096}}}}}}}}, \"responses\": {\"200\": {\"description\": \"Committed receipt\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload_digest\", \"result\"], \"properties\": {\"action_id\": {\"type\": \"string\"}, \"payload_digest\": {\"type\": \"string\"}, \"result\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"string\"}}}}}}}}, \"409\": {\"description\": \"Action ID used with different payload\"}}, \"x-causalrun-recovery\": {\"receipt_path\": \"/receipts/{action_id}\", \"correlation\": \"action_id\", \"payload_digest\": \"SHA-256 of UTF-8 bytes of json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False)\", \"missing_receipt\": \"Unknown: the original request can still complete\"}}}, \"/receipts/{action_id}\": {\"get\": {\"operationId\": \"getReceipt\", \"description\": \"Read an immutable receipt. Missing evidence does not prove non-execution. Receipts persist while the controlled database is retained.\", \"parameters\": [{\"name\": \"action_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\"}}], \"responses\": {\"200\": {\"description\": \"Committed receipt\"}, \"404\": {\"description\": \"No evidence available\"}}, \"security\": [{\"receiptBearer\": []}]}}}}",
+              "title": "http://127.0.0.1:60250/openapi.json (application/json)",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535762,
+                "end": 1791155535765
+              }
+            }
+          },
+          {
+            "id": "prt_109307f96001WD7g87zZFvOOQ4",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f7d001F7LOf90QCfn1SU",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307f99001EuYIgG2OXgrQ2n",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535769,
+            "completed": 1791155535805
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307fa9001rKodXa9O6jRg0X",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307faa001m1AX02V8YTdkz7",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+            "type": "tool",
+            "callID": "fixture-call-4",
+            "tool": "question",
+            "state": {
+              "status": "completed",
+              "input": {
+                "questions": [
+                  {
+                    "header": "Sandbox",
+                    "question": "May validation use a disposable local fixture?",
+                    "options": [
+                      {
+                        "label": "Fixture only",
+                        "description": "No configured-target validation writes"
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Unknown",
+                    "question": "How should inconclusive evidence be handled?",
+                    "options": [
+                      {
+                        "label": "Keep blocked",
+                        "description": "Request review without resending"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "output": "User has answered your questions: \"May validation use a disposable local fixture?\"=\"Fixture only\", \"How should inconclusive evidence be handled?\"=\"Keep blocked\". You can now continue with the user's answers in mind.",
+              "title": "Asked 2 questions",
+              "metadata": {
+                "answers": [
+                  [
+                    "Fixture only"
+                  ],
+                  [
+                    "Keep blocked"
+                  ]
+                ],
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535788,
+                "end": 1791155535802
+              }
+            }
+          },
+          {
+            "id": "prt_109307fbb001TEra5Wo5pMNodh",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307f99001EuYIgG2OXgrQ2n",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109307fbe001wr3Xb9Z2R4fU00",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155535806,
+            "completed": 1791155536530
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109307fcf001Ko03Rijd6dJu3p",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109307fd0001FhnsoCgvfbjn53",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+            "type": "tool",
+            "callID": "fixture-call-5",
+            "tool": "causalrun_prepare",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "api_version": "1",
+                "source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+                "answers": {
+                  "sandbox": "Yes, only the disposable fixture",
+                  "unknown_policy": "Keep blocked and request review"
+                }
+              },
+              "output": "{\"status\":\"APPROVED\",\"ready\":true,\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60250\"},\"expected\":{\"description\":\"The returned value must exactly match payload.value\",\"value_from\":\"payload.value\"},\"limitations\":[\"Missing receipt does not prove non-execution\"]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155535827,
+                "end": 1791155536527
+              }
+            }
+          },
+          {
+            "id": "prt_109308290001iFFofPZcUyUco1",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109307fbe001wr3Xb9Z2R4fU00",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308293001jnT9TSyfJEKOX5",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536531,
+            "completed": 1791155536710
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_1093082a4001A413VnCCSZP9EC",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308293001jnT9TSyfJEKOX5",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_1093082a5001T8nPTnBA0mx3Ua",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308293001jnT9TSyfJEKOX5",
+            "type": "tool",
+            "callID": "fixture-call-6",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"IN_DOUBT\",\"receipt\":null,\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155536551,
+                "end": 1791155536706
+              }
+            }
+          },
+          {
+            "id": "prt_1093083440011MNdI3U5kEKfV5",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308293001jnT9TSyfJEKOX5",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308347001g0qr4oUl9WTIAk",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536711,
+            "completed": 1791155536818
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930835b0016Z075airj3d0Zn",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308347001g0qr4oUl9WTIAk",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930835c001jRD2P66AbeFKVB",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308347001g0qr4oUl9WTIAk",
+            "type": "tool",
+            "callID": "fixture-call-7",
+            "tool": "causalrun_verify",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155536735,
+                "end": 1791155536815
+              }
+            }
+          },
+          {
+            "id": "prt_1093083b0001GICJZIh0vZPifg",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308347001g0qr4oUl9WTIAk",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_1093083b4001l3313eGkb5C7Uh",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536820,
+            "completed": 1791155536989
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_1093083c5001ykaAWwWiqr4vjS",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093083b4001l3313eGkb5C7Uh",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_1093083c6001og0HWbv2CSBtI5",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093083b4001l3313eGkb5C7Uh",
+            "type": "tool",
+            "callID": "fixture-call-8",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155536841,
+                "end": 1791155536986
+              }
+            }
+          },
+          {
+            "id": "prt_10930845b001F7ds66qZ8pB9fU",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093083b4001l3313eGkb5C7Uh",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930845f001Ow384f7KU8PEL8",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155536991,
+            "completed": 1791155537093
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109308472001g2eOrvexdy9Z42",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_10930845f001Ow384f7KU8PEL8",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109308473001CLbnrmj4LfVt4G",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_10930845f001Ow384f7KU8PEL8",
+            "type": "tool",
+            "callID": "fixture-call-9",
+            "tool": "causalrun_result",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155537014,
+                "end": 1791155537089
+              }
+            }
+          },
+          {
+            "id": "prt_1093084c2001Shqh0CBbYDU1H3",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_10930845f001Ow384f7KU8PEL8",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_1093084c7001bZPDVFcigogkkG",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155537095,
+            "completed": 1791155537122
+          },
+          "parentID": "msg_1093078f4001kQukqZnBdPunxG",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "stop"
+        },
+        "parts": [
+          {
+            "id": "prt_1093084dd0014bhKp3rdmye5B1",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093084c7001bZPDVFcigogkkG",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_1093084de001UaT7FQTU06rPxu",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093084c7001bZPDVFcigogkkG",
+            "type": "text",
+            "text": "Acceptance fixture complete.",
+            "time": {
+              "start": 1791155537118,
+              "end": 1791155537119
+            }
+          },
+          {
+            "id": "prt_1093084e0001dyVSWvnNGMIZo8",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093084c7001bZPDVFcigogkkG",
+            "type": "step-finish",
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_1093089550014zxuMI9bXAAA2S",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "user",
+          "time": {
+            "created": 1791155538261
+          },
+          "summary": {
+            "diffs": []
+          },
+          "agent": "build",
+          "model": {
+            "providerID": "fixture",
+            "modelID": "scripted"
+          }
+        },
+        "parts": [
+          {
+            "id": "prt_109308956001yD08s59jeENMIS",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_1093089550014zxuMI9bXAAA2S",
+            "type": "text",
+            "text": "Continue after the restart. Reuse the original action key and retrieve the durable result."
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308a93001c7NACVoJNbXwEP",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155538579,
+            "completed": 1791155539512
+          },
+          "parentID": "msg_1093089550014zxuMI9bXAAA2S",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109308da4001egQm8477LLA4rQ",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308a93001c7NACVoJNbXwEP",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109308da6001gkuZITzWyp5ux6",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308a93001c7NACVoJNbXwEP",
+            "type": "tool",
+            "callID": "fixture-call-11",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60250",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155539371,
+                "end": 1791155539506
+              }
+            }
+          },
+          {
+            "id": "prt_109308e35001zgEsYWo1oz26IM",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308a93001c7NACVoJNbXwEP",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308e39001lFtsGkVa2jH0o6",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155539513,
+            "completed": 1791155539606
+          },
+          "parentID": "msg_1093089550014zxuMI9bXAAA2S",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_109308e4c001arw5SjIfAlQXeD",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308e39001lFtsGkVa2jH0o6",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109308e4d001DpaJgzxqtTjEzN",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308e39001lFtsGkVa2jH0o6",
+            "type": "tool",
+            "callID": "fixture-call-12",
+            "tool": "causalrun_result",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "d8f7d32f-7661-4262-a0df-f7f9b86bdeaa"
+              },
+              "output": "{\"id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"connector_digest\":\"10fcd1214b6828b5c7a88621a5924f82c72f184eb11f7f246e3437238ad38ac5\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60250\"},\"recorded_at\":\"2026-10-04T23:12:16.701928+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:16.704319+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"d8f7d32f-7661-4262-a0df-f7f9b86bdeaa\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:16.810608+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155539536,
+                "end": 1791155539603
+              }
+            }
+          },
+          {
+            "id": "prt_109308e940017aeeMm45qd4RI6",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308e39001lFtsGkVa2jH0o6",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_109308e98001Wuw0afrt90iskg",
+          "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+          "role": "assistant",
+          "time": {
+            "created": 1791155539608,
+            "completed": 1791155539631
+          },
+          "parentID": "msg_1093089550014zxuMI9bXAAA2S",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb7nrcteb/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "stop"
+        },
+        "parts": [
+          {
+            "id": "prt_109308ea9001G4Wm8v3Mu8V2k9",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308e98001Wuw0afrt90iskg",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_109308eab001KJt5XD1FT3aeg1",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308e98001Wuw0afrt90iskg",
+            "type": "text",
+            "text": "Acceptance fixture complete.",
+            "time": {
+              "start": 1791155539627,
+              "end": 1791155539628
+            }
+          },
+          {
+            "id": "prt_109308ead001BBIpvprH539HhS",
+            "sessionID": "ses_ef6cf8730ffeTyzvuircbEzKT3",
+            "messageID": "msg_109308e98001Wuw0afrt90iskg",
+            "type": "step-finish",
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "final_counts": {
+      "objects": 1,
+      "writes": 1
+    },
+    "workflow_elapsed_seconds": 11.856105500133708,
+    "scenario": "documented success",
+    "question_headers": [
+      "Sandbox",
+      "Unknown"
+    ]
+  },
+  {
+    "recorded_at": "2026-10-04T23:12:20.655401+00:00",
+    "command": "python3 -m tests.demo_gate4",
+    "opencode": "1.18.34",
+    "model": "Scripted local OpenAI-compatible tool-call fixture, no paid/model inference",
+    "approval": "Harness replies to actual OpenCode question and permission HTTP requests; not a human usability test",
+    "questions": [
+      {
+        "id": "que_10930a64b001UD7Tew2CwBYVzg",
+        "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+        "questions": [
+          {
+            "question": "What should count as success?",
+            "header": "Result",
+            "options": [
+              {
+                "label": "Exact value",
+                "description": "Value and original identity must match"
+              }
+            ]
+          },
+          {
+            "question": "May validation use a disposable local fixture?",
+            "header": "Sandbox",
+            "options": [
+              {
+                "label": "Fixture only",
+                "description": "No configured-target validation writes"
+              }
+            ]
+          },
+          {
+            "question": "How should inconclusive evidence be handled?",
+            "header": "Unknown",
+            "options": [
+              {
+                "label": "Keep blocked",
+                "description": "Request review without resending"
+              }
+            ]
+          }
+        ],
+        "tool": {
+          "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+          "callID": "fixture-call-4"
+        }
+      }
+    ],
+    "permissions": [
+      {
+        "id": "per_10930a981001226bhjotFgi6ko",
+        "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+        "permission": "causalrun_approve",
+        "patterns": [
+          "8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e"
+        ],
+        "metadata": {
+          "scope": {
+            "operation": "controlled.value.create.v1",
+            "target": "http://127.0.0.1:60582"
+          },
+          "connector_digest": "8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e",
+          "report_digest": "624a614bc305490315691a7e3762215694e597d96a2294da04c88a2cad4ebb2b",
+          "artifact": {
+            "schema_version": 2,
+            "name": "controlled-value",
+            "version": 1,
+            "target": "http://127.0.0.1:60582",
+            "operation": "controlled.value.create.v1",
+            "expected": {
+              "value_from": "payload.value",
+              "description": "The returned value must exactly match payload.value"
+            },
+            "verifier": {
+              "kind": "python.receipt.v1",
+              "source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n"
+            },
+            "adapter": {
+              "write_path": "/values",
+              "receipt_path": "/receipts/{action_id}"
+            },
+            "authentication": {
+              "type": "bearer",
+              "write_secret": "CAUSALRUN_PROVIDER_TOKEN",
+              "read_secret": "CAUSALRUN_RECEIPT_TOKEN"
+            },
+            "interview": {
+              "expected_behavior": "The returned value must exactly match payload.value",
+              "sandbox": "Yes, only the disposable fixture",
+              "unknown_policy": "Keep blocked and request review"
+            },
+            "limitations": [
+              "Missing receipt does not prove non-execution"
+            ],
+            "sources": [
+              "http://127.0.0.1:60582/openapi.json"
+            ],
+            "api_version": "1",
+            "implementation": "1f8a87300693117606320896493f897e8970a07cb6202bbe2d58e9a4114490b3"
+          },
+          "validation": {
+            "connector_digest": "8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e",
+            "checked_at": "2026-10-04T23:12:26.488369+00:00",
+            "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+            "passed": 10,
+            "failed": 0,
+            "provider_objects": 3,
+            "provider_requests": 3,
+            "false_successes": 0,
+            "false_failures": 0,
+            "failure_conclusions_supported": false,
+            "cases": [
+              {
+                "name": "matching_receipt",
+                "passed": true,
+                "expected_confirmation": true,
+                "actual_confirmation": true,
+                "oracle_matched": true
+              },
+              {
+                "name": "missing_receipt",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "malformed_receipt",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "wrong_action",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "wrong_payload",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "wrong_value",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "partial_receipt",
+                "passed": true,
+                "expected_confirmation": false,
+                "actual_confirmation": false
+              },
+              {
+                "name": "lost_response",
+                "passed": true,
+                "schedule": "provider commit, disconnect response, GET receipt"
+              },
+              {
+                "name": "delayed_commit",
+                "passed": true,
+                "confirmed_before_commit": false,
+                "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+              },
+              {
+                "name": "verifier_unavailable",
+                "passed": true,
+                "actual_confirmation": false,
+                "schedule": "receipt GET returns 503; no conclusion"
+              }
+            ]
+          },
+          "ready": false
+        },
+        "always": [],
+        "tool": {
+          "messageID": "msg_10930a701001avLXR04NPZvyWr",
+          "callID": "fixture-call-5"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "step": 0,
+        "tool": "http_request"
+      },
+      {
+        "step": 1,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 2,
+        "tool": "webfetch"
+      },
+      {
+        "step": 3,
+        "tool": "question"
+      },
+      {
+        "step": 4,
+        "tool": "causalrun_prepare"
+      },
+      {
+        "step": 5,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 6,
+        "tool": "causalrun_verify"
+      },
+      {
+        "step": 7,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 8,
+        "tool": "causalrun_result"
+      },
+      {
+        "step": 9,
+        "tool": null
+      },
+      {
+        "step": 10,
+        "tool": "causalrun_write"
+      },
+      {
+        "step": 11,
+        "tool": "causalrun_result"
+      },
+      {
+        "step": 12,
+        "tool": null
+      }
+    ],
+    "passed": 2,
+    "failed": 0,
+    "installation": {
+      "installed": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/config/plugins/causalrun.ts",
+      "runtime": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/state/runtime",
+      "state": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/state",
+      "next": "Restart OpenCode. The plugin starts the service automatically. Use local gh auth login for GitHub; no secrets in chat."
+    },
+    "session_id": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+    "first_session_messages": [
+      {
+        "info": {
+          "id": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "user",
+          "time": {
+            "created": 1791155544247
+          },
+          "summary": {
+            "diffs": []
+          },
+          "agent": "build",
+          "model": {
+            "providerID": "fixture",
+            "modelID": "scripted"
+          }
+        },
+        "parts": [
+          {
+            "id": "prt_10930a0bb00128lGj5cp35VcIP",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a0b7001QYtRibaJkIFcFf",
+            "type": "text",
+            "text": "Run the controlled API acceptance workflow. Never send a direct unapproved write."
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a20d001mE9nNj26tWiASD",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155544589,
+            "completed": 1791155545525
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a5a8001OOnOpR9XB0ZIWS",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a20d001mE9nNj26tWiASD",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a5aa001b2QpuJwOntPGVr",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a20d001mE9nNj26tWiASD",
+            "type": "tool",
+            "callID": "fixture-call-1",
+            "tool": "http_request",
+            "state": {
+              "status": "error",
+              "input": {
+                "method": "POST",
+                "url": "http://127.0.0.1:60582/values"
+              },
+              "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+              "time": {
+                "start": 1791155545518,
+                "end": 1791155545520
+              }
+            }
+          },
+          {
+            "id": "prt_10930a5b2001LOPMptqHTHLFv9",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a20d001mE9nNj26tWiASD",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a5b6001cX0OhGUqniAQwl",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545526,
+            "completed": 1791155545623
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a5ca001N4MDT1cJr5Ap0k",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a5b6001cX0OhGUqniAQwl",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a5cb0010t3L6TXidUo8HY",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a5b6001cX0OhGUqniAQwl",
+            "type": "tool",
+            "callID": "fixture-call-2",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                },
+                "needs_success_clarification": true
+              },
+              "output": "{\"status\":\"PREPARATION_REQUIRED\",\"ready\":false,\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60582\"},\"next\":\"Discover the API, ask only missing user intent, generate source, then prepare and review\",\"discovery_sources\":[\"http://127.0.0.1:60582/openapi.json\"],\"authentication\":\"Explicit controlled write token and distinct receipt-read token\",\"github_author\":null,\"questions\":[{\"id\":\"expected_behavior\",\"title\":\"What observable result should count as success?\",\"options\":[\"The returned value must exactly match payload.value\",\"Describe another requirement\"],\"free_text\":true},{\"id\":\"sandbox\",\"title\":\"May validation write to a disposable controlled fixture?\",\"options\":[\"Yes, only the disposable fixture\",\"No; stop before any test writes\"],\"free_text\":true},{\"id\":\"unknown_policy\",\"title\":\"If evidence is inconclusive, what should the agent do?\",\"options\":[\"Keep blocked and request review\",\"Keep blocked and check again later\"],\"free_text\":true}],\"prepare_fields\":[\"operation\",\"repository or target\",\"source\",\"answers\",\"api_version for controlled profile\"],\"documented_success\":{\"expected_behavior\":\"The returned value must exactly match payload.value\",\"sources\":[\"http://127.0.0.1:60582/openapi.json\"],\"origin\":\"API profile, not a user answer\"},\"success_clarification\":{\"id\":\"expected_behavior\",\"title\":\"What observable result should count as success?\",\"options\":[\"The returned value must exactly match payload.value\",\"Describe another requirement\"],\"free_text\":true},\"answers_format\":\"Exact answers for unresolved questions. Omit expected_behavior to use documented success; never fabricate sandbox or marker consent.\",\"intent_rule\":\"Read documentation and existing user request first. Ask success_clarification only if a material ambiguity remains; then set needs_success_clarification=true and supply the actual answer. Do not ask the user to restate documented behavior.\",\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"expected_fields\":\"action_id, payload_digest, result.value matching payload.value\",\"helpers\":\"digest(payload), isinstance(value, dict)\",\"language\":\"One pure boolean return expression; dictionary subscripts, membership, comparisons, boolean operations; no imports, attributes, network, loops, or assignments\",\"false_means\":\"Unknown; never failure\"},\"workflow\":\"causalrun protects its registered API tools. Before a first write, use the API's official OpenAPI/Swagger/WSDL or reference docs and safe reads to check inputs, authentication, scopes, consistency, and recovery. Infer success from documentation and the existing user request. Do not ask what success means when it is already clear. Omit answers.expected_behavior to use documented_success; if the request has a material ambiguity, set needs_success_clarification=true, ask one focused question using OpenCode's question tool, and supply the answer. Ask only other missing intent with options and free text; reuse explicit authorization in the conversation, never fabricate consent. Generate a pure Python verify(action_id, payload, evidence) expression with no imports, side effects, or arbitrary calls. Then call causalrun_prepare. The developer must review the exact connector and validation in the permission prompt. Do not approve your own permissions, change action keys to bypass IN_DOUBT, send secrets to tools, or substitute a shell/network write. Reuse the original logical action_key across retries and restarts. False verification means unknown, never failure. Shell scripts and unregistered tools are outside plugin enforcement.\"}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545551,
+                "end": 1791155545620
+              }
+            }
+          },
+          {
+            "id": "prt_10930a615001qxp5ARLl72W222",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a5b6001cX0OhGUqniAQwl",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a618001EUwwWndn2IW2pq",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545624,
+            "completed": 1791155545654
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a62c001jBfYdlMuef6Xfq",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a618001EUwwWndn2IW2pq",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a62d0015Gl7wT9FZgyuKA",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a618001EUwwWndn2IW2pq",
+            "type": "tool",
+            "callID": "fixture-call-3",
+            "tool": "webfetch",
+            "state": {
+              "status": "completed",
+              "input": {
+                "url": "http://127.0.0.1:60582/openapi.json",
+                "format": "text"
+              },
+              "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Controlled receipt application\", \"version\": \"1\"}, \"security\": [{\"providerBearer\": []}], \"components\": {\"securitySchemes\": {\"providerBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}, \"receiptBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}}}, \"paths\": {\"/values\": {\"post\": {\"operationId\": \"createValue\", \"description\": \"Create one value. action_id is caller-owned. The value and durable receipt commit in one transaction. Repeating the same ID and payload returns the receipt; a changed payload conflicts.\", \"requestBody\": {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload\"], \"properties\": {\"action_id\": {\"type\": \"string\", \"format\": \"uuid\"}, \"payload\": {\"type\": \"object\", \"required\": [\"value\"], \"properties\": {\"value\": {\"type\": \"string\", \"maxLength\": 4096}}}}}}}}, \"responses\": {\"200\": {\"description\": \"Committed receipt\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload_digest\", \"result\"], \"properties\": {\"action_id\": {\"type\": \"string\"}, \"payload_digest\": {\"type\": \"string\"}, \"result\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"string\"}}}}}}}}, \"409\": {\"description\": \"Action ID used with different payload\"}}, \"x-causalrun-recovery\": {\"receipt_path\": \"/receipts/{action_id}\", \"correlation\": \"action_id\", \"payload_digest\": \"SHA-256 of UTF-8 bytes of json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False)\", \"missing_receipt\": \"Unknown: the original request can still complete\"}}}, \"/receipts/{action_id}\": {\"get\": {\"operationId\": \"getReceipt\", \"description\": \"Read an immutable receipt. Missing evidence does not prove non-execution. Receipts persist while the controlled database is retained.\", \"parameters\": [{\"name\": \"action_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\"}}], \"responses\": {\"200\": {\"description\": \"Committed receipt\"}, \"404\": {\"description\": \"No evidence available\"}}, \"security\": [{\"receiptBearer\": []}]}}}}",
+              "title": "http://127.0.0.1:60582/openapi.json (application/json)",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545649,
+                "end": 1791155545652
+              }
+            }
+          },
+          {
+            "id": "prt_10930a6350018OXOsN72D6QSNS",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a618001EUwwWndn2IW2pq",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a638001X0nK7Gp9rsCrgG",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545656,
+            "completed": 1791155545855
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a648001RaUiOpi76ZzZH9",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a6490014fRMehU8UBDSJu",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+            "type": "tool",
+            "callID": "fixture-call-4",
+            "tool": "question",
+            "state": {
+              "status": "completed",
+              "input": {
+                "questions": [
+                  {
+                    "header": "Result",
+                    "question": "What should count as success?",
+                    "options": [
+                      {
+                        "label": "Exact value",
+                        "description": "Value and original identity must match"
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Sandbox",
+                    "question": "May validation use a disposable local fixture?",
+                    "options": [
+                      {
+                        "label": "Fixture only",
+                        "description": "No configured-target validation writes"
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Unknown",
+                    "question": "How should inconclusive evidence be handled?",
+                    "options": [
+                      {
+                        "label": "Keep blocked",
+                        "description": "Request review without resending"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "output": "User has answered your questions: \"What should count as success?\"=\"Exact value\", \"May validation use a disposable local fixture?\"=\"Fixture only\", \"How should inconclusive evidence be handled?\"=\"Keep blocked\". You can now continue with the user's answers in mind.",
+              "title": "Asked 3 questions",
+              "metadata": {
+                "answers": [
+                  [
+                    "Exact value"
+                  ],
+                  [
+                    "Fixture only"
+                  ],
+                  [
+                    "Keep blocked"
+                  ]
+                ],
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545676,
+                "end": 1791155545851
+              }
+            }
+          },
+          {
+            "id": "prt_10930a6fd0019E1pGFFHO3XRbk",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a701001avLXR04NPZvyWr",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545857,
+            "completed": 1791155546620
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a7160014QFWL6KENbD4ma",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a701001avLXR04NPZvyWr",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a717001RIZtfDAorDboXT",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a701001avLXR04NPZvyWr",
+            "type": "tool",
+            "callID": "fixture-call-5",
+            "tool": "causalrun_prepare",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "api_version": "1",
+                "source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+                "answers": {
+                  "expected_behavior": "The returned value must exactly match payload.value",
+                  "sandbox": "Yes, only the disposable fixture",
+                  "unknown_policy": "Keep blocked and request review"
+                },
+                "needs_success_clarification": true
+              },
+              "output": "{\"status\":\"APPROVED\",\"ready\":true,\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60582\"},\"expected\":{\"description\":\"The returned value must exactly match payload.value\",\"value_from\":\"payload.value\"},\"limitations\":[\"Missing receipt does not prove non-execution\"]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545882,
+                "end": 1791155546609
+              }
+            }
+          },
+          {
+            "id": "prt_10930a9f5001xTMV1Aqnr9sIsx",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a701001avLXR04NPZvyWr",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930aa08001uPkmDQp2CWQZd8",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155546632,
+            "completed": 1791155546820
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930aa2a001bhx7PCVoNNTlg6",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aa08001uPkmDQp2CWQZd8",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930aa2c001kESdkjD14b67Hb",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aa08001uPkmDQp2CWQZd8",
+            "type": "tool",
+            "callID": "fixture-call-6",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"IN_DOUBT\",\"receipt\":null,\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155546671,
+                "end": 1791155546817
+              }
+            }
+          },
+          {
+            "id": "prt_10930aac20016bemzpxkOCwnNx",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aa08001uPkmDQp2CWQZd8",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930aac5001jLxpxVDE5UZ2eh",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155546821,
+            "completed": 1791155546920
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930aad7001Ze4DYfpienoqNQ",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aac5001jLxpxVDE5UZ2eh",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930aad8001mSFAKw5vQPgfXt",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aac5001jLxpxVDE5UZ2eh",
+            "type": "tool",
+            "callID": "fixture-call-7",
+            "tool": "causalrun_verify",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155546843,
+                "end": 1791155546916
+              }
+            }
+          },
+          {
+            "id": "prt_10930ab26001O2Q4QotHDCSgn9",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aac5001jLxpxVDE5UZ2eh",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930ab29001nPIUucRWIHl5Lh",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155546921,
+            "completed": 1791155547107
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930ab3d0016hyt7hLd7L2ap7",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ab29001nPIUucRWIHl5Lh",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930ab3e001ZoWNMWR0Iq65MR",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ab29001nPIUucRWIHl5Lh",
+            "type": "tool",
+            "callID": "fixture-call-8",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155546944,
+                "end": 1791155547103
+              }
+            }
+          },
+          {
+            "id": "prt_10930abe10016L2HMmpls8Iukb",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ab29001nPIUucRWIHl5Lh",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930abe5001gQYOk74wTHF2pK",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155547109,
+            "completed": 1791155547216
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930ac06001vLaLnaxRp3UMmI",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930abe5001gQYOk74wTHF2pK",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930ac07001KWQ3pb3nirWaVO",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930abe5001gQYOk74wTHF2pK",
+            "type": "tool",
+            "callID": "fixture-call-9",
+            "tool": "causalrun_result",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155547145,
+                "end": 1791155547213
+              }
+            }
+          },
+          {
+            "id": "prt_10930ac4e001low7zJx8yzjISW",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930abe5001gQYOk74wTHF2pK",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930ac51001BwoAQ3JcHgxFYS",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155547218,
+            "completed": 1791155547240
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "stop"
+        },
+        "parts": [
+          {
+            "id": "prt_10930ac63001bBLkIJK6L0qipI",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ac51001BwoAQ3JcHgxFYS",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930ac64001LcNdffxWGNcgSb",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ac51001BwoAQ3JcHgxFYS",
+            "type": "text",
+            "text": "Acceptance fixture complete.",
+            "time": {
+              "start": 1791155547236,
+              "end": 1791155547237
+            }
+          },
+          {
+            "id": "prt_10930ac66001JLt7HzFRpxIMKI",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ac51001BwoAQ3JcHgxFYS",
+            "type": "step-finish",
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "step": "first write held",
+        "state": "PREPARATION_REQUIRED"
+      },
+      {
+        "step": "provider commit, response lost",
+        "state": "IN_DOUBT",
+        "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+      },
+      {
+        "step": "read recovery and repeated key",
+        "state": "COMMITTED",
+        "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+      },
+      {
+        "step": "host and service restart, same key",
+        "state": "COMMITTED",
+        "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+      }
+    ],
+    "first_counts": {
+      "objects": 1,
+      "writes": 1
+    },
+    "first_action": {
+      "id": "81353636-e9fc-4a88-a829-fb9b7fac5334",
+      "state": "COMMITTED",
+      "receipt": {
+        "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334",
+        "payload_digest": "ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56",
+        "result": {
+          "value": "OpenCode durable value"
+        }
+      }
+    },
+    "restart_schedule": {
+      "host_signal": "SIGKILL",
+      "runtime_signal": "SIGKILL",
+      "before": {
+        "instance": "cf523c15d0ededae7e6694df8f9d8b32bb8feb29b4b069dd",
+        "pid": 84561,
+        "url": "http://127.0.0.1:60629"
+      },
+      "after": {
+        "instance": "fc99347ec28fd8296a1566c10282ed95ca84151fe8bad1dd",
+        "pid": 84577,
+        "url": "http://127.0.0.1:60768"
+      }
+    },
+    "restart_messages": [
+      {
+        "info": {
+          "id": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "user",
+          "time": {
+            "created": 1791155544247
+          },
+          "summary": {
+            "diffs": []
+          },
+          "agent": "build",
+          "model": {
+            "providerID": "fixture",
+            "modelID": "scripted"
+          }
+        },
+        "parts": [
+          {
+            "id": "prt_10930a0bb00128lGj5cp35VcIP",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a0b7001QYtRibaJkIFcFf",
+            "type": "text",
+            "text": "Run the controlled API acceptance workflow. Never send a direct unapproved write."
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a20d001mE9nNj26tWiASD",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155544589,
+            "completed": 1791155545525
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a5a8001OOnOpR9XB0ZIWS",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a20d001mE9nNj26tWiASD",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a5aa001b2QpuJwOntPGVr",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a20d001mE9nNj26tWiASD",
+            "type": "tool",
+            "callID": "fixture-call-1",
+            "tool": "http_request",
+            "state": {
+              "status": "error",
+              "input": {
+                "method": "POST",
+                "url": "http://127.0.0.1:60582/values"
+              },
+              "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+              "time": {
+                "start": 1791155545518,
+                "end": 1791155545520
+              }
+            }
+          },
+          {
+            "id": "prt_10930a5b2001LOPMptqHTHLFv9",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a20d001mE9nNj26tWiASD",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a5b6001cX0OhGUqniAQwl",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545526,
+            "completed": 1791155545623
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a5ca001N4MDT1cJr5Ap0k",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a5b6001cX0OhGUqniAQwl",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a5cb0010t3L6TXidUo8HY",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a5b6001cX0OhGUqniAQwl",
+            "type": "tool",
+            "callID": "fixture-call-2",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                },
+                "needs_success_clarification": true
+              },
+              "output": "{\"status\":\"PREPARATION_REQUIRED\",\"ready\":false,\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60582\"},\"next\":\"Discover the API, ask only missing user intent, generate source, then prepare and review\",\"discovery_sources\":[\"http://127.0.0.1:60582/openapi.json\"],\"authentication\":\"Explicit controlled write token and distinct receipt-read token\",\"github_author\":null,\"questions\":[{\"id\":\"expected_behavior\",\"title\":\"What observable result should count as success?\",\"options\":[\"The returned value must exactly match payload.value\",\"Describe another requirement\"],\"free_text\":true},{\"id\":\"sandbox\",\"title\":\"May validation write to a disposable controlled fixture?\",\"options\":[\"Yes, only the disposable fixture\",\"No; stop before any test writes\"],\"free_text\":true},{\"id\":\"unknown_policy\",\"title\":\"If evidence is inconclusive, what should the agent do?\",\"options\":[\"Keep blocked and request review\",\"Keep blocked and check again later\"],\"free_text\":true}],\"prepare_fields\":[\"operation\",\"repository or target\",\"source\",\"answers\",\"api_version for controlled profile\"],\"documented_success\":{\"expected_behavior\":\"The returned value must exactly match payload.value\",\"sources\":[\"http://127.0.0.1:60582/openapi.json\"],\"origin\":\"API profile, not a user answer\"},\"success_clarification\":{\"id\":\"expected_behavior\",\"title\":\"What observable result should count as success?\",\"options\":[\"The returned value must exactly match payload.value\",\"Describe another requirement\"],\"free_text\":true},\"answers_format\":\"Exact answers for unresolved questions. Omit expected_behavior to use documented success; never fabricate sandbox or marker consent.\",\"intent_rule\":\"Read documentation and existing user request first. Ask success_clarification only if a material ambiguity remains; then set needs_success_clarification=true and supply the actual answer. Do not ask the user to restate documented behavior.\",\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"expected_fields\":\"action_id, payload_digest, result.value matching payload.value\",\"helpers\":\"digest(payload), isinstance(value, dict)\",\"language\":\"One pure boolean return expression; dictionary subscripts, membership, comparisons, boolean operations; no imports, attributes, network, loops, or assignments\",\"false_means\":\"Unknown; never failure\"},\"workflow\":\"causalrun protects its registered API tools. Before a first write, use the API's official OpenAPI/Swagger/WSDL or reference docs and safe reads to check inputs, authentication, scopes, consistency, and recovery. Infer success from documentation and the existing user request. Do not ask what success means when it is already clear. Omit answers.expected_behavior to use documented_success; if the request has a material ambiguity, set needs_success_clarification=true, ask one focused question using OpenCode's question tool, and supply the answer. Ask only other missing intent with options and free text; reuse explicit authorization in the conversation, never fabricate consent. Generate a pure Python verify(action_id, payload, evidence) expression with no imports, side effects, or arbitrary calls. Then call causalrun_prepare. The developer must review the exact connector and validation in the permission prompt. Do not approve your own permissions, change action keys to bypass IN_DOUBT, send secrets to tools, or substitute a shell/network write. Reuse the original logical action_key across retries and restarts. False verification means unknown, never failure. Shell scripts and unregistered tools are outside plugin enforcement.\"}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545551,
+                "end": 1791155545620
+              }
+            }
+          },
+          {
+            "id": "prt_10930a615001qxp5ARLl72W222",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a5b6001cX0OhGUqniAQwl",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a618001EUwwWndn2IW2pq",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545624,
+            "completed": 1791155545654
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a62c001jBfYdlMuef6Xfq",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a618001EUwwWndn2IW2pq",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a62d0015Gl7wT9FZgyuKA",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a618001EUwwWndn2IW2pq",
+            "type": "tool",
+            "callID": "fixture-call-3",
+            "tool": "webfetch",
+            "state": {
+              "status": "completed",
+              "input": {
+                "url": "http://127.0.0.1:60582/openapi.json",
+                "format": "text"
+              },
+              "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Controlled receipt application\", \"version\": \"1\"}, \"security\": [{\"providerBearer\": []}], \"components\": {\"securitySchemes\": {\"providerBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}, \"receiptBearer\": {\"type\": \"http\", \"scheme\": \"bearer\"}}}, \"paths\": {\"/values\": {\"post\": {\"operationId\": \"createValue\", \"description\": \"Create one value. action_id is caller-owned. The value and durable receipt commit in one transaction. Repeating the same ID and payload returns the receipt; a changed payload conflicts.\", \"requestBody\": {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload\"], \"properties\": {\"action_id\": {\"type\": \"string\", \"format\": \"uuid\"}, \"payload\": {\"type\": \"object\", \"required\": [\"value\"], \"properties\": {\"value\": {\"type\": \"string\", \"maxLength\": 4096}}}}}}}}, \"responses\": {\"200\": {\"description\": \"Committed receipt\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"action_id\", \"payload_digest\", \"result\"], \"properties\": {\"action_id\": {\"type\": \"string\"}, \"payload_digest\": {\"type\": \"string\"}, \"result\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"string\"}}}}}}}}, \"409\": {\"description\": \"Action ID used with different payload\"}}, \"x-causalrun-recovery\": {\"receipt_path\": \"/receipts/{action_id}\", \"correlation\": \"action_id\", \"payload_digest\": \"SHA-256 of UTF-8 bytes of json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False)\", \"missing_receipt\": \"Unknown: the original request can still complete\"}}}, \"/receipts/{action_id}\": {\"get\": {\"operationId\": \"getReceipt\", \"description\": \"Read an immutable receipt. Missing evidence does not prove non-execution. Receipts persist while the controlled database is retained.\", \"parameters\": [{\"name\": \"action_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\"}}], \"responses\": {\"200\": {\"description\": \"Committed receipt\"}, \"404\": {\"description\": \"No evidence available\"}}, \"security\": [{\"receiptBearer\": []}]}}}}",
+              "title": "http://127.0.0.1:60582/openapi.json (application/json)",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545649,
+                "end": 1791155545652
+              }
+            }
+          },
+          {
+            "id": "prt_10930a6350018OXOsN72D6QSNS",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a618001EUwwWndn2IW2pq",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a638001X0nK7Gp9rsCrgG",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545656,
+            "completed": 1791155545855
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a648001RaUiOpi76ZzZH9",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a6490014fRMehU8UBDSJu",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+            "type": "tool",
+            "callID": "fixture-call-4",
+            "tool": "question",
+            "state": {
+              "status": "completed",
+              "input": {
+                "questions": [
+                  {
+                    "header": "Result",
+                    "question": "What should count as success?",
+                    "options": [
+                      {
+                        "label": "Exact value",
+                        "description": "Value and original identity must match"
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Sandbox",
+                    "question": "May validation use a disposable local fixture?",
+                    "options": [
+                      {
+                        "label": "Fixture only",
+                        "description": "No configured-target validation writes"
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Unknown",
+                    "question": "How should inconclusive evidence be handled?",
+                    "options": [
+                      {
+                        "label": "Keep blocked",
+                        "description": "Request review without resending"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "output": "User has answered your questions: \"What should count as success?\"=\"Exact value\", \"May validation use a disposable local fixture?\"=\"Fixture only\", \"How should inconclusive evidence be handled?\"=\"Keep blocked\". You can now continue with the user's answers in mind.",
+              "title": "Asked 3 questions",
+              "metadata": {
+                "answers": [
+                  [
+                    "Exact value"
+                  ],
+                  [
+                    "Fixture only"
+                  ],
+                  [
+                    "Keep blocked"
+                  ]
+                ],
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545676,
+                "end": 1791155545851
+              }
+            }
+          },
+          {
+            "id": "prt_10930a6fd0019E1pGFFHO3XRbk",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a638001X0nK7Gp9rsCrgG",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930a701001avLXR04NPZvyWr",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155545857,
+            "completed": 1791155546620
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930a7160014QFWL6KENbD4ma",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a701001avLXR04NPZvyWr",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930a717001RIZtfDAorDboXT",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a701001avLXR04NPZvyWr",
+            "type": "tool",
+            "callID": "fixture-call-5",
+            "tool": "causalrun_prepare",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "api_version": "1",
+                "source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+                "answers": {
+                  "expected_behavior": "The returned value must exactly match payload.value",
+                  "sandbox": "Yes, only the disposable fixture",
+                  "unknown_policy": "Keep blocked and request review"
+                },
+                "needs_success_clarification": true
+              },
+              "output": "{\"status\":\"APPROVED\",\"ready\":true,\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"scope\":{\"operation\":\"controlled.value.create.v1\",\"target\":\"http://127.0.0.1:60582\"},\"expected\":{\"description\":\"The returned value must exactly match payload.value\",\"value_from\":\"payload.value\"},\"limitations\":[\"Missing receipt does not prove non-execution\"]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155545882,
+                "end": 1791155546609
+              }
+            }
+          },
+          {
+            "id": "prt_10930a9f5001xTMV1Aqnr9sIsx",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930a701001avLXR04NPZvyWr",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930aa08001uPkmDQp2CWQZd8",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155546632,
+            "completed": 1791155546820
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930aa2a001bhx7PCVoNNTlg6",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aa08001uPkmDQp2CWQZd8",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930aa2c001kESdkjD14b67Hb",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aa08001uPkmDQp2CWQZd8",
+            "type": "tool",
+            "callID": "fixture-call-6",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"IN_DOUBT\",\"receipt\":null,\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155546671,
+                "end": 1791155546817
+              }
+            }
+          },
+          {
+            "id": "prt_10930aac20016bemzpxkOCwnNx",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aa08001uPkmDQp2CWQZd8",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930aac5001jLxpxVDE5UZ2eh",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155546821,
+            "completed": 1791155546920
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930aad7001Ze4DYfpienoqNQ",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aac5001jLxpxVDE5UZ2eh",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930aad8001mSFAKw5vQPgfXt",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aac5001jLxpxVDE5UZ2eh",
+            "type": "tool",
+            "callID": "fixture-call-7",
+            "tool": "causalrun_verify",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155546843,
+                "end": 1791155546916
+              }
+            }
+          },
+          {
+            "id": "prt_10930ab26001O2Q4QotHDCSgn9",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930aac5001jLxpxVDE5UZ2eh",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930ab29001nPIUucRWIHl5Lh",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155546921,
+            "completed": 1791155547107
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930ab3d0016hyt7hLd7L2ap7",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ab29001nPIUucRWIHl5Lh",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930ab3e001ZoWNMWR0Iq65MR",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ab29001nPIUucRWIHl5Lh",
+            "type": "tool",
+            "callID": "fixture-call-8",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155546944,
+                "end": 1791155547103
+              }
+            }
+          },
+          {
+            "id": "prt_10930abe10016L2HMmpls8Iukb",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ab29001nPIUucRWIHl5Lh",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930abe5001gQYOk74wTHF2pK",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155547109,
+            "completed": 1791155547216
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930ac06001vLaLnaxRp3UMmI",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930abe5001gQYOk74wTHF2pK",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930ac07001KWQ3pb3nirWaVO",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930abe5001gQYOk74wTHF2pK",
+            "type": "tool",
+            "callID": "fixture-call-9",
+            "tool": "causalrun_result",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155547145,
+                "end": 1791155547213
+              }
+            }
+          },
+          {
+            "id": "prt_10930ac4e001low7zJx8yzjISW",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930abe5001gQYOk74wTHF2pK",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930ac51001BwoAQ3JcHgxFYS",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155547218,
+            "completed": 1791155547240
+          },
+          "parentID": "msg_10930a0b7001QYtRibaJkIFcFf",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "stop"
+        },
+        "parts": [
+          {
+            "id": "prt_10930ac63001bBLkIJK6L0qipI",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ac51001BwoAQ3JcHgxFYS",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930ac64001LcNdffxWGNcgSb",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ac51001BwoAQ3JcHgxFYS",
+            "type": "text",
+            "text": "Acceptance fixture complete.",
+            "time": {
+              "start": 1791155547236,
+              "end": 1791155547237
+            }
+          },
+          {
+            "id": "prt_10930ac66001JLt7HzFRpxIMKI",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930ac51001BwoAQ3JcHgxFYS",
+            "type": "step-finish",
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930b101001mH9Ff0NjvwQfOH",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "user",
+          "time": {
+            "created": 1791155548417
+          },
+          "summary": {
+            "diffs": []
+          },
+          "agent": "build",
+          "model": {
+            "providerID": "fixture",
+            "modelID": "scripted"
+          }
+        },
+        "parts": [
+          {
+            "id": "prt_10930b103001hSQlN763JTXsnX",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b101001mH9Ff0NjvwQfOH",
+            "type": "text",
+            "text": "Continue after the restart. Reuse the original action key and retrieve the durable result."
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930b27a001sR5XuJzpbBmFjg",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155548794,
+            "completed": 1791155549738
+          },
+          "parentID": "msg_10930b101001mH9Ff0NjvwQfOH",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930b590001TIre6XdbbApUCh",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b27a001sR5XuJzpbBmFjg",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930b592001U1gB6ULNO2tvUi",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b27a001sR5XuJzpbBmFjg",
+            "type": "tool",
+            "callID": "fixture-call-11",
+            "tool": "causalrun_write",
+            "state": {
+              "status": "completed",
+              "input": {
+                "operation": "controlled.value.create.v1",
+                "target": "http://127.0.0.1:60582",
+                "action_key": "opencode-acceptance-write",
+                "payload": {
+                  "value": "OpenCode durable value"
+                }
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155549591,
+                "end": 1791155549733
+              }
+            }
+          },
+          {
+            "id": "prt_10930b627001P1d6V59ZCaKGPn",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b27a001sR5XuJzpbBmFjg",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930b62c001N971NIVNk3gjDW",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155549740,
+            "completed": 1791155549834
+          },
+          "parentID": "msg_10930b101001mH9Ff0NjvwQfOH",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "tool-calls"
+        },
+        "parts": [
+          {
+            "id": "prt_10930b641001xeMVml4jya3vRd",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b62c001N971NIVNk3gjDW",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930b642001YpbGOutviKEGap",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b62c001N971NIVNk3gjDW",
+            "type": "tool",
+            "callID": "fixture-call-12",
+            "tool": "causalrun_result",
+            "state": {
+              "status": "completed",
+              "input": {
+                "action_id": "81353636-e9fc-4a88-a829-fb9b7fac5334"
+              },
+              "output": "{\"id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"connector_digest\":\"8f0817779f1944f8df637c4bf38c5b838a92bcc76fefd05a3bd41fa6457a2c2e\",\"action_key\":\"opencode-acceptance-write\",\"payload\":{\"value\":\"OpenCode durable value\"},\"state\":\"COMMITTED\",\"receipt\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"events\":[{\"sequence\":1,\"kind\":\"AUTHORIZED\",\"detail\":{\"target\":\"http://127.0.0.1:60582\"},\"recorded_at\":\"2026-10-04T23:12:26.811961+00:00\"},{\"sequence\":2,\"kind\":\"OUTCOME_UNCONFIRMED\",\"detail\":{\"reason\":\"No durable matching receipt\"},\"recorded_at\":\"2026-10-04T23:12:26.814727+00:00\"},{\"sequence\":3,\"kind\":\"VERIFIED_SUCCESS\",\"detail\":{\"action_id\":\"81353636-e9fc-4a88-a829-fb9b7fac5334\",\"payload_digest\":\"ee67cd1d189cc902f9c893199a10ae00e8e5831a41419d3d6ffe38e2f4bcda56\",\"result\":{\"value\":\"OpenCode durable value\"}},\"recorded_at\":\"2026-10-04T23:12:26.914449+00:00\"}]}",
+              "title": "",
+              "metadata": {
+                "truncated": false
+              },
+              "time": {
+                "start": 1791155549765,
+                "end": 1791155549830
+              }
+            }
+          },
+          {
+            "id": "prt_10930b688001hqsFqNT33tRmgw",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b62c001N971NIVNk3gjDW",
+            "type": "step-finish",
+            "reason": "tool-calls",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "info": {
+          "id": "msg_10930b68b001BtyZgGV9XYYjZi",
+          "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+          "role": "assistant",
+          "time": {
+            "created": 1791155549835,
+            "completed": 1791155549857
+          },
+          "parentID": "msg_10930b101001mH9Ff0NjvwQfOH",
+          "modelID": "scripted",
+          "providerID": "fixture",
+          "mode": "build",
+          "agent": "build",
+          "path": {
+            "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpb026pvgg/project",
+            "root": "/"
+          },
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "finish": "stop"
+        },
+        "parts": [
+          {
+            "id": "prt_10930b69b001uYGM74NFlcfXlB",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b68b001BtyZgGV9XYYjZi",
+            "type": "step-start"
+          },
+          {
+            "id": "prt_10930b69d0010JVk9ZClamolFY",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b68b001BtyZgGV9XYYjZi",
+            "type": "text",
+            "text": "Acceptance fixture complete.",
+            "time": {
+              "start": 1791155549853,
+              "end": 1791155549854
+            }
+          },
+          {
+            "id": "prt_10930b69f001r2CZPzebz2K3Uq",
+            "sessionID": "ses_ef6cf5f6dffeX47cF5TJJnYwnq",
+            "messageID": "msg_10930b68b001BtyZgGV9XYYjZi",
+            "type": "step-finish",
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+              "total": 2,
+              "input": 1,
+              "output": 1,
+              "reasoning": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "final_counts": {
+      "objects": 1,
+      "writes": 1
+    },
+    "workflow_elapsed_seconds": 8.772081833099946,
+    "scenario": "ambiguous",
+    "question_headers": [
+      "Result",
+      "Sandbox",
+      "Unknown"
+    ]
+  }
+]

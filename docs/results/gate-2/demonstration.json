@@ -1,0 +1,728 @@
+{
+  "passed": 5,
+  "failed": 0,
+  "cases": [
+    {
+      "phase": "lost_response",
+      "passed": true,
+      "interview": {
+        "questions_answered": 3,
+        "used_free_text": true
+      },
+      "contract_answers": {
+        "expected_behavior": "Exact matching value and the original action identity",
+        "sandbox": "Yes, only the disposable fixture",
+        "unknown_policy": "Keep blocked and check again later"
+      },
+      "connector_digest": "4f06748df98a2f8cf707282ca9d13f641a705a730a182d5e325fcf5d4c255cec",
+      "verifier_source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+      "validation": {
+        "connector_digest": "4f06748df98a2f8cf707282ca9d13f641a705a730a182d5e325fcf5d4c255cec",
+        "checked_at": "2026-10-04T19:47:36.367650+00:00",
+        "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+        "passed": 10,
+        "failed": 0,
+        "provider_objects": 3,
+        "provider_requests": 3,
+        "false_successes": 0,
+        "false_failures": 0,
+        "failure_conclusions_supported": false,
+        "cases": [
+          {
+            "name": "matching_receipt",
+            "passed": true,
+            "expected_confirmation": true,
+            "actual_confirmation": true,
+            "oracle_matched": true
+          },
+          {
+            "name": "missing_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "malformed_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_action",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_value",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "partial_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "lost_response",
+            "passed": true,
+            "schedule": "provider commit, disconnect response, GET receipt"
+          },
+          {
+            "name": "delayed_commit",
+            "passed": true,
+            "confirmed_before_commit": false,
+            "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+          },
+          {
+            "name": "verifier_unavailable",
+            "passed": true,
+            "actual_confirmation": false,
+            "schedule": "receipt GET returns 503; no conclusion"
+          }
+        ]
+      },
+      "client_lost_response": false,
+      "before_restart_actions": [
+        [
+          "7f78e6e4-da5c-4e0a-a593-9d81c354b8d7",
+          "IN_DOUBT"
+        ]
+      ],
+      "before_restart_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "action": {
+        "id": "7f78e6e4-da5c-4e0a-a593-9d81c354b8d7",
+        "connector_digest": "4f06748df98a2f8cf707282ca9d13f641a705a730a182d5e325fcf5d4c255cec",
+        "action_key": "generated-demo",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "7f78e6e4-da5c-4e0a-a593-9d81c354b8d7",
+          "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+          "result": {
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:61315"
+            },
+            "recorded_at": "2026-10-04T19:47:36.542322+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T19:47:36.545112+00:00"
+          },
+          {
+            "sequence": 3,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "7f78e6e4-da5c-4e0a-a593-9d81c354b8d7",
+              "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+              "result": {
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-04T19:47:36.627032+00:00"
+          }
+        ]
+      },
+      "provider_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "false_successes": 0,
+      "false_failures": 0,
+      "unsafe_repeats": 0
+    },
+    {
+      "phase": "before_authorization_commit",
+      "passed": true,
+      "interview": {
+        "questions_answered": 3,
+        "used_free_text": true
+      },
+      "contract_answers": {
+        "expected_behavior": "Exact matching value and the original action identity",
+        "sandbox": "Yes, only the disposable fixture",
+        "unknown_policy": "Keep blocked and check again later"
+      },
+      "connector_digest": "240c255447a7f71fa750578beb2c77d83ccfd68f0b3b959829235d86aff5e259",
+      "verifier_source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+      "validation": {
+        "connector_digest": "240c255447a7f71fa750578beb2c77d83ccfd68f0b3b959829235d86aff5e259",
+        "checked_at": "2026-10-04T19:47:37.521232+00:00",
+        "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+        "passed": 10,
+        "failed": 0,
+        "provider_objects": 3,
+        "provider_requests": 3,
+        "false_successes": 0,
+        "false_failures": 0,
+        "failure_conclusions_supported": false,
+        "cases": [
+          {
+            "name": "matching_receipt",
+            "passed": true,
+            "expected_confirmation": true,
+            "actual_confirmation": true,
+            "oracle_matched": true
+          },
+          {
+            "name": "missing_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "malformed_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_action",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_value",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "partial_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "lost_response",
+            "passed": true,
+            "schedule": "provider commit, disconnect response, GET receipt"
+          },
+          {
+            "name": "delayed_commit",
+            "passed": true,
+            "confirmed_before_commit": false,
+            "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+          },
+          {
+            "name": "verifier_unavailable",
+            "passed": true,
+            "actual_confirmation": false,
+            "schedule": "receipt GET returns 503; no conclusion"
+          }
+        ]
+      },
+      "client_lost_response": true,
+      "before_restart_actions": [],
+      "before_restart_counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "action": {
+        "id": "bd69814f-3941-411e-a189-0c3591da1792",
+        "connector_digest": "240c255447a7f71fa750578beb2c77d83ccfd68f0b3b959829235d86aff5e259",
+        "action_key": "generated-demo",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "bd69814f-3941-411e-a189-0c3591da1792",
+          "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+          "result": {
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:61353"
+            },
+            "recorded_at": "2026-10-04T19:47:37.766374+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "bd69814f-3941-411e-a189-0c3591da1792",
+              "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+              "result": {
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-04T19:47:37.770935+00:00"
+          }
+        ]
+      },
+      "provider_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "false_successes": 0,
+      "false_failures": 0,
+      "unsafe_repeats": 0
+    },
+    {
+      "phase": "after_authorization_commit",
+      "passed": true,
+      "interview": {
+        "questions_answered": 3,
+        "used_free_text": true
+      },
+      "contract_answers": {
+        "expected_behavior": "Exact matching value and the original action identity",
+        "sandbox": "Yes, only the disposable fixture",
+        "unknown_policy": "Keep blocked and check again later"
+      },
+      "connector_digest": "963d7e102f07363aae5a0e40bb12c01a3c4d8ced392fb5560c6966aeb7a7c16d",
+      "verifier_source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+      "validation": {
+        "connector_digest": "963d7e102f07363aae5a0e40bb12c01a3c4d8ced392fb5560c6966aeb7a7c16d",
+        "checked_at": "2026-10-04T19:47:38.648588+00:00",
+        "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+        "passed": 10,
+        "failed": 0,
+        "provider_objects": 3,
+        "provider_requests": 3,
+        "false_successes": 0,
+        "false_failures": 0,
+        "failure_conclusions_supported": false,
+        "cases": [
+          {
+            "name": "matching_receipt",
+            "passed": true,
+            "expected_confirmation": true,
+            "actual_confirmation": true,
+            "oracle_matched": true
+          },
+          {
+            "name": "missing_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "malformed_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_action",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_value",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "partial_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "lost_response",
+            "passed": true,
+            "schedule": "provider commit, disconnect response, GET receipt"
+          },
+          {
+            "name": "delayed_commit",
+            "passed": true,
+            "confirmed_before_commit": false,
+            "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+          },
+          {
+            "name": "verifier_unavailable",
+            "passed": true,
+            "actual_confirmation": false,
+            "schedule": "receipt GET returns 503; no conclusion"
+          }
+        ]
+      },
+      "client_lost_response": true,
+      "before_restart_actions": [
+        [
+          "0c657e43-8e4e-4e25-ab8e-1ce2d1ea6b3d",
+          "IN_DOUBT"
+        ]
+      ],
+      "before_restart_counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "action": {
+        "id": "0c657e43-8e4e-4e25-ab8e-1ce2d1ea6b3d",
+        "connector_digest": "963d7e102f07363aae5a0e40bb12c01a3c4d8ced392fb5560c6966aeb7a7c16d",
+        "action_key": "generated-demo",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:61390"
+            },
+            "recorded_at": "2026-10-04T19:47:38.794797+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T19:47:38.865790+00:00"
+          }
+        ]
+      },
+      "provider_counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "false_successes": 0,
+      "false_failures": 0,
+      "unsafe_repeats": 0
+    },
+    {
+      "phase": "after_provider_commit",
+      "passed": true,
+      "interview": {
+        "questions_answered": 3,
+        "used_free_text": true
+      },
+      "contract_answers": {
+        "expected_behavior": "Exact matching value and the original action identity",
+        "sandbox": "Yes, only the disposable fixture",
+        "unknown_policy": "Keep blocked and check again later"
+      },
+      "connector_digest": "5ba63e392983821482a61f068368a38206b9e101ba3fca4367bd60e80826e503",
+      "verifier_source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+      "validation": {
+        "connector_digest": "5ba63e392983821482a61f068368a38206b9e101ba3fca4367bd60e80826e503",
+        "checked_at": "2026-10-04T19:47:39.807638+00:00",
+        "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+        "passed": 10,
+        "failed": 0,
+        "provider_objects": 3,
+        "provider_requests": 3,
+        "false_successes": 0,
+        "false_failures": 0,
+        "failure_conclusions_supported": false,
+        "cases": [
+          {
+            "name": "matching_receipt",
+            "passed": true,
+            "expected_confirmation": true,
+            "actual_confirmation": true,
+            "oracle_matched": true
+          },
+          {
+            "name": "missing_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "malformed_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_action",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_value",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "partial_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "lost_response",
+            "passed": true,
+            "schedule": "provider commit, disconnect response, GET receipt"
+          },
+          {
+            "name": "delayed_commit",
+            "passed": true,
+            "confirmed_before_commit": false,
+            "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+          },
+          {
+            "name": "verifier_unavailable",
+            "passed": true,
+            "actual_confirmation": false,
+            "schedule": "receipt GET returns 503; no conclusion"
+          }
+        ]
+      },
+      "client_lost_response": true,
+      "before_restart_actions": [
+        [
+          "ee36aba9-0108-4afc-b0a1-a20b31853864",
+          "IN_DOUBT"
+        ]
+      ],
+      "before_restart_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "action": {
+        "id": "ee36aba9-0108-4afc-b0a1-a20b31853864",
+        "connector_digest": "5ba63e392983821482a61f068368a38206b9e101ba3fca4367bd60e80826e503",
+        "action_key": "generated-demo",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "ee36aba9-0108-4afc-b0a1-a20b31853864",
+          "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+          "result": {
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:61425"
+            },
+            "recorded_at": "2026-10-04T19:47:40.022742+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "ee36aba9-0108-4afc-b0a1-a20b31853864",
+              "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+              "result": {
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-04T19:47:40.103255+00:00"
+          }
+        ]
+      },
+      "provider_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "false_successes": 0,
+      "false_failures": 0,
+      "unsafe_repeats": 0
+    },
+    {
+      "phase": "after_receipt_commit",
+      "passed": true,
+      "interview": {
+        "questions_answered": 3,
+        "used_free_text": true
+      },
+      "contract_answers": {
+        "expected_behavior": "Exact matching value and the original action identity",
+        "sandbox": "Yes, only the disposable fixture",
+        "unknown_policy": "Keep blocked and check again later"
+      },
+      "connector_digest": "49a03e18b09b4d8ab1dde7ce1bae32268e0d5ab4c3dbfaba871a1f3d032a49e3",
+      "verifier_source": "# Host-agent-written verifier for examples/openapi.json.\n# digest is supplied by causalrun's restricted expression runner.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'value' in evidence['result']\n        and evidence['result']['value'] == payload['value']\n    )\n",
+      "validation": {
+        "connector_digest": "49a03e18b09b4d8ab1dde7ce1bae32268e0d5ab4c3dbfaba871a1f3d032a49e3",
+        "checked_at": "2026-10-04T19:47:41.033275+00:00",
+        "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+        "passed": 10,
+        "failed": 0,
+        "provider_objects": 3,
+        "provider_requests": 3,
+        "false_successes": 0,
+        "false_failures": 0,
+        "failure_conclusions_supported": false,
+        "cases": [
+          {
+            "name": "matching_receipt",
+            "passed": true,
+            "expected_confirmation": true,
+            "actual_confirmation": true,
+            "oracle_matched": true
+          },
+          {
+            "name": "missing_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "malformed_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_action",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "wrong_value",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "partial_receipt",
+            "passed": true,
+            "expected_confirmation": false,
+            "actual_confirmation": false
+          },
+          {
+            "name": "lost_response",
+            "passed": true,
+            "schedule": "provider commit, disconnect response, GET receipt"
+          },
+          {
+            "name": "delayed_commit",
+            "passed": true,
+            "confirmed_before_commit": false,
+            "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+          },
+          {
+            "name": "verifier_unavailable",
+            "passed": true,
+            "actual_confirmation": false,
+            "schedule": "receipt GET returns 503; no conclusion"
+          }
+        ]
+      },
+      "client_lost_response": true,
+      "before_restart_actions": [
+        [
+          "9b713234-c1cf-4c0c-925a-3b670c69dd86",
+          "COMMITTED"
+        ]
+      ],
+      "before_restart_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "action": {
+        "id": "9b713234-c1cf-4c0c-925a-3b670c69dd86",
+        "connector_digest": "49a03e18b09b4d8ab1dde7ce1bae32268e0d5ab4c3dbfaba871a1f3d032a49e3",
+        "action_key": "generated-demo",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "9b713234-c1cf-4c0c-925a-3b670c69dd86",
+          "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+          "result": {
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:61462"
+            },
+            "recorded_at": "2026-10-04T19:47:41.190240+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "9b713234-c1cf-4c0c-925a-3b670c69dd86",
+              "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+              "result": {
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-04T19:47:41.196017+00:00"
+          }
+        ]
+      },
+      "provider_counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "false_successes": 0,
+      "false_failures": 0,
+      "unsafe_repeats": 0
+    }
+  ],
+  "generator": "Codex host agent wrote examples/verify_value.py after inspecting examples/openapi.json. The build command only packages this source; no embedded model or remote model API is used.",
+  "interview": "Real CLI pseudo-terminal; scripted options and free-text answers, not a live OpenCode session.",
+  "schedule": "Provider and runtime are separate processes. Test harness exits runtime with code 71 at explicit SQL/provider boundaries. Provider response loss disconnects after actual commit.",
+  "scope": "Controlled receipt API only; actual runtime, SQLite, HTTP, operator CLI, and pinned source."
+}

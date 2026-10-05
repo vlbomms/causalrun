@@ -1,0 +1,156 @@
+[
+  {
+    "injected_source": "def verify(action_id, payload, evidence): return True\n",
+    "validation": {
+      "connector_digest": "1014a0532d001b5fbb21ae2056c50c7ad274afb1f6a6682171c5b4b328a70b22",
+      "checked_at": "2026-10-04T19:47:23.753060+00:00",
+      "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+      "passed": 2,
+      "failed": 8,
+      "provider_objects": 3,
+      "provider_requests": 3,
+      "false_successes": 8,
+      "false_failures": 0,
+      "failure_conclusions_supported": false,
+      "cases": [
+        {
+          "name": "matching_receipt",
+          "passed": true,
+          "expected_confirmation": true,
+          "actual_confirmation": true,
+          "oracle_matched": true
+        },
+        {
+          "name": "missing_receipt",
+          "passed": false,
+          "expected_confirmation": false,
+          "actual_confirmation": true
+        },
+        {
+          "name": "malformed_receipt",
+          "passed": false,
+          "expected_confirmation": false,
+          "actual_confirmation": true
+        },
+        {
+          "name": "wrong_action",
+          "passed": false,
+          "expected_confirmation": false,
+          "actual_confirmation": true
+        },
+        {
+          "name": "wrong_payload",
+          "passed": false,
+          "expected_confirmation": false,
+          "actual_confirmation": true
+        },
+        {
+          "name": "wrong_value",
+          "passed": false,
+          "expected_confirmation": false,
+          "actual_confirmation": true
+        },
+        {
+          "name": "partial_receipt",
+          "passed": false,
+          "expected_confirmation": false,
+          "actual_confirmation": true
+        },
+        {
+          "name": "lost_response",
+          "passed": true,
+          "schedule": "provider commit, disconnect response, GET receipt"
+        },
+        {
+          "name": "delayed_commit",
+          "passed": false,
+          "confirmed_before_commit": true,
+          "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+        },
+        {
+          "name": "verifier_unavailable",
+          "passed": false,
+          "actual_confirmation": true,
+          "schedule": "receipt GET returns 503; no conclusion"
+        }
+      ]
+    }
+  },
+  {
+    "injected_source": "def verify(action_id, payload, evidence): return False\n",
+    "validation": {
+      "connector_digest": "6b92668d0c6bc6ed6308d3fc14a1457d9145b38e75efc3b5a03def8642d454d0",
+      "checked_at": "2026-10-04T19:47:24.386907+00:00",
+      "scope": "Generated pure verifier; controlled fixture only, not a general API guarantee",
+      "passed": 7,
+      "failed": 3,
+      "provider_objects": 3,
+      "provider_requests": 3,
+      "false_successes": 0,
+      "false_failures": 0,
+      "failure_conclusions_supported": false,
+      "cases": [
+        {
+          "name": "matching_receipt",
+          "passed": false,
+          "expected_confirmation": true,
+          "actual_confirmation": false,
+          "oracle_matched": true
+        },
+        {
+          "name": "missing_receipt",
+          "passed": true,
+          "expected_confirmation": false,
+          "actual_confirmation": false
+        },
+        {
+          "name": "malformed_receipt",
+          "passed": true,
+          "expected_confirmation": false,
+          "actual_confirmation": false
+        },
+        {
+          "name": "wrong_action",
+          "passed": true,
+          "expected_confirmation": false,
+          "actual_confirmation": false
+        },
+        {
+          "name": "wrong_payload",
+          "passed": true,
+          "expected_confirmation": false,
+          "actual_confirmation": false
+        },
+        {
+          "name": "wrong_value",
+          "passed": true,
+          "expected_confirmation": false,
+          "actual_confirmation": false
+        },
+        {
+          "name": "partial_receipt",
+          "passed": true,
+          "expected_confirmation": false,
+          "actual_confirmation": false
+        },
+        {
+          "name": "lost_response",
+          "passed": false,
+          "schedule": "provider commit, disconnect response, GET receipt"
+        },
+        {
+          "name": "delayed_commit",
+          "passed": false,
+          "confirmed_before_commit": false,
+          "schedule": "hold POST before transaction, GET missing receipt, release commit, GET matching receipt"
+        },
+        {
+          "name": "verifier_unavailable",
+          "passed": true,
+          "actual_confirmation": false,
+          "schedule": "receipt GET returns 503; no conclusion"
+        }
+      ]
+    }
+  }
+]

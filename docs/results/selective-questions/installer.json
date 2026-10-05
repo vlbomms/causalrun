@@ -1,0 +1,8 @@
+{
+  "archive": ".local/dist/causalrun.pyz",
+  "bytes": 128884,
+  "sha256": "9516b38648ccdbd0d7268dba94ef4cfbbb64b9fd97d2cd78a34b9d140b16b87b",
+  "implementation_digest": "1f8a87300693117606320896493f897e8970a07cb6202bbe2d58e9a4114490b3",
+  "installed_config": ".local/opencode-manual-config",
+  "installed_state": ".local/opencode-manual-state"
+}

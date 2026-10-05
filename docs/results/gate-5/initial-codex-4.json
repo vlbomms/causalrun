@@ -1,0 +1,538 @@
+{
+  "codex": "codex-cli 0.159.0-alpha.12.1",
+  "model": "Local scripted Responses fixture, no model inference",
+  "config_overrides": {
+    "model_provider": "causalrun_fixture",
+    "model": "scripted-fixture",
+    "approval_policy": "never",
+    "model_providers.causalrun_fixture.name": "Local scripted test fixture",
+    "model_providers.causalrun_fixture.base_url": "http://127.0.0.1:58930/v1",
+    "model_providers.causalrun_fixture.env_key": "CAUSALRUN_TEST_MODEL_TOKEN",
+    "model_providers.causalrun_fixture.wire_api": "responses",
+    "model_providers.causalrun_fixture.requires_openai_auth": false,
+    "model_providers.causalrun_fixture.supports_websockets": false,
+    "model_providers.causalrun_fixture.request_max_retries": 0,
+    "model_providers.causalrun_fixture.stream_max_retries": 0,
+    "mcp_servers.causalrun.command": "/Library/Frameworks/Python.framework/Versions/3.10/bin/python3",
+    "mcp_servers.causalrun.args": [
+      "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/causalrun.pyz",
+      "--mcp",
+      "--state-dir",
+      "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/state"
+    ],
+    "mcp_servers.causalrun.startup_timeout_sec": 20,
+    "mcp_servers.causalrun.tool_timeout_sec": 30,
+    "mcp_servers.causalrun.required": true,
+    "features.apps": false,
+    "features.plugins": false,
+    "features.remote_plugin": false,
+    "features.shell_tool": false,
+    "features.shell_snapshot": false
+  },
+  "elapsed_seconds": 1.6945187500678003,
+  "returncode": 0,
+  "events": [
+    {
+      "type": "thread.started",
+      "thread_id": "01a108f8-1600-7241-9c4d-99c64aaae4d9"
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_0",
+        "type": "error",
+        "message": "Model metadata for `scripted-fixture` not found. Defaulting to fallback metadata; this can degrade performance and cause issues."
+      }
+    },
+    {
+      "type": "turn.started"
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_1",
+        "type": "mcp_tool_call",
+        "server": "causalrun",
+        "tool": "causalrun_write",
+        "arguments": {
+          "operation": "controlled.value.create.v1",
+          "target": "http://127.0.0.1:58709",
+          "action_key": "opencode-acceptance-write",
+          "payload": {
+            "value": "OpenCode durable value"
+          }
+        },
+        "result": null,
+        "error": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_1",
+        "type": "mcp_tool_call",
+        "server": "causalrun",
+        "tool": "causalrun_write",
+        "arguments": {
+          "operation": "controlled.value.create.v1",
+          "target": "http://127.0.0.1:58709",
+          "action_key": "opencode-acceptance-write",
+          "payload": {
+            "value": "OpenCode durable value"
+          }
+        },
+        "result": null,
+        "error": {
+          "message": "MCP tool call requires approval, but approval policy is never"
+        },
+        "status": "failed"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_2",
+        "type": "mcp_tool_call",
+        "server": "causalrun",
+        "tool": "causalrun_result",
+        "arguments": {
+          "action_id": "missing"
+        },
+        "result": null,
+        "error": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_2",
+        "type": "mcp_tool_call",
+        "server": "causalrun",
+        "tool": "causalrun_result",
+        "arguments": {
+          "action_id": "missing"
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Runtime rejected or could not confirm this request. Inspect the original action; do not invent a new key or repeat a provider write."
+            }
+          ],
+          "structured_content": null
+        },
+        "error": null,
+        "status": "failed"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_3",
+        "type": "mcp_tool_call",
+        "server": "causalrun",
+        "tool": "causalrun_verify",
+        "arguments": {
+          "action_id": "missing"
+        },
+        "result": null,
+        "error": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_3",
+        "type": "mcp_tool_call",
+        "server": "causalrun",
+        "tool": "causalrun_verify",
+        "arguments": {
+          "action_id": "missing"
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Runtime rejected or could not confirm this request. Inspect the original action; do not invent a new key or repeat a provider write."
+            }
+          ],
+          "structured_content": null
+        },
+        "error": null,
+        "status": "failed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_4",
+        "type": "agent_message",
+        "text": "Codex MCP acceptance fixture complete."
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 4,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4,
+        "reasoning_output_tokens": 0
+      }
+    }
+  ],
+  "stderr": "Reading additional input from stdin...\n2026-10-04T22:10:38.720281Z  WARN codex_models_manager::model_info: Unknown model scripted-fixture is used. This will use fallback model metadata.\n2026-10-04T22:10:38.854364Z  WARN codex_models_manager::model_info: Unknown model scripted-fixture is used. This will use fallback model metadata.\n",
+  "model_calls": [
+    {
+      "step": 0,
+      "tool": "causalrun_write",
+      "arguments": {
+        "operation": "controlled.value.create.v1",
+        "target": "http://127.0.0.1:58709",
+        "action_key": "opencode-acceptance-write",
+        "payload": {
+          "value": "OpenCode durable value"
+        }
+      }
+    },
+    {
+      "step": 1,
+      "tool": "causalrun_result",
+      "arguments": {
+        "action_id": "missing"
+      }
+    },
+    {
+      "step": 2,
+      "tool": "causalrun_verify",
+      "arguments": {
+        "action_id": "missing"
+      }
+    },
+    {
+      "step": 3,
+      "tool": null,
+      "arguments": null
+    }
+  ],
+  "advertised_tools": [
+    "list_mcp_resources",
+    "list_mcp_resource_templates",
+    "read_mcp_resource",
+    "request_user_input",
+    "view_image",
+    "multi_agent_v1.close_agent",
+    "multi_agent_v1.resume_agent",
+    "multi_agent_v1.send_input",
+    "multi_agent_v1.spawn_agent",
+    "multi_agent_v1.wait_agent",
+    "mcp__causalrun.causalrun_lookup",
+    "mcp__causalrun.causalrun_prepare",
+    "mcp__causalrun.causalrun_result",
+    "mcp__causalrun.causalrun_verify",
+    "mcp__causalrun.causalrun_write",
+    "get_goal",
+    "create_goal",
+    "update_goal",
+    ""
+  ],
+  "model_inputs": [
+    [
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-603ba869d969",
+        "role": "developer",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<skills_instructions>\n## Skills\nA skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.\n### Skill roots\n- `r0` = `/Users/vikasbommineni/.codex/skills/.system`\n### Available skills\n- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. (file: r0/imagegen/SKILL.md)\n- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex. (file: r0/openai-docs/SKILL.md)\n- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r0/skill-creator/SKILL.md)\n- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: r0/skill-installer/SKILL.md)\n</skills_instructions>"
+          },
+          {
+            "type": "input_text",
+            "text": "<permissions instructions>\nFilesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted.\nApproval policy is currently never. Do not provide the `sandbox_permissions` for any reason, commands will be rejected.\n</permissions instructions>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-6044b57be761",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<environment_context>\n  <cwd>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</cwd>\n  <shell>zsh</shell>\n  <current_date>2026-10-04</current_date>\n  <timezone>America/New_York</timezone>\n  <filesystem><workspace_roots><root>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</root></workspace_roots><permission_profile type=\"managed\"><file_system type=\"restricted\"><entry access=\"read\"><special>:root</special></entry></file_system></permission_profile></filesystem>\n</environment_context>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-17ad-7080-80f5-804bd0f2a497",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "Use the causalrun MCP tools to repeat the original action key and retrieve its durable result. Do not prepare another connector or send a direct write."
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-603ba869d969",
+        "role": "developer",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<skills_instructions>\n## Skills\nA skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.\n### Skill roots\n- `r0` = `/Users/vikasbommineni/.codex/skills/.system`\n### Available skills\n- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. (file: r0/imagegen/SKILL.md)\n- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex. (file: r0/openai-docs/SKILL.md)\n- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r0/skill-creator/SKILL.md)\n- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: r0/skill-installer/SKILL.md)\n</skills_instructions>"
+          },
+          {
+            "type": "input_text",
+            "text": "<permissions instructions>\nFilesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted.\nApproval policy is currently never. Do not provide the `sandbox_permissions` for any reason, commands will be rejected.\n</permissions instructions>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-6044b57be761",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<environment_context>\n  <cwd>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</cwd>\n  <shell>zsh</shell>\n  <current_date>2026-10-04</current_date>\n  <timezone>America/New_York</timezone>\n  <filesystem><workspace_roots><root>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</root></workspace_roots><permission_profile type=\"managed\"><file_system type=\"restricted\"><entry access=\"read\"><special>:root</special></entry></file_system></permission_profile></filesystem>\n</environment_context>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-17ad-7080-80f5-804bd0f2a497",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "Use the causalrun MCP tools to repeat the original action key and retrieve its durable result. Do not prepare another connector or send a direct write."
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "id": "fc_0",
+        "name": "causalrun_write",
+        "namespace": "mcp__causalrun",
+        "arguments": "{\"operation\": \"controlled.value.create.v1\", \"target\": \"http://127.0.0.1:58709\", \"action_key\": \"opencode-acceptance-write\", \"payload\": {\"value\": \"OpenCode durable value\"}}",
+        "call_id": "call_0"
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_01a108f8-17b8-7313-b28a-7843186445c8",
+        "call_id": "call_0",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "Wall time: 0.0035 seconds\nOutput:"
+          },
+          {
+            "type": "input_text",
+            "text": "MCP tool call requires approval, but approval policy is never"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-603ba869d969",
+        "role": "developer",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<skills_instructions>\n## Skills\nA skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.\n### Skill roots\n- `r0` = `/Users/vikasbommineni/.codex/skills/.system`\n### Available skills\n- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. (file: r0/imagegen/SKILL.md)\n- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex. (file: r0/openai-docs/SKILL.md)\n- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r0/skill-creator/SKILL.md)\n- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: r0/skill-installer/SKILL.md)\n</skills_instructions>"
+          },
+          {
+            "type": "input_text",
+            "text": "<permissions instructions>\nFilesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted.\nApproval policy is currently never. Do not provide the `sandbox_permissions` for any reason, commands will be rejected.\n</permissions instructions>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-6044b57be761",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<environment_context>\n  <cwd>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</cwd>\n  <shell>zsh</shell>\n  <current_date>2026-10-04</current_date>\n  <timezone>America/New_York</timezone>\n  <filesystem><workspace_roots><root>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</root></workspace_roots><permission_profile type=\"managed\"><file_system type=\"restricted\"><entry access=\"read\"><special>:root</special></entry></file_system></permission_profile></filesystem>\n</environment_context>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-17ad-7080-80f5-804bd0f2a497",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "Use the causalrun MCP tools to repeat the original action key and retrieve its durable result. Do not prepare another connector or send a direct write."
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "id": "fc_0",
+        "name": "causalrun_write",
+        "namespace": "mcp__causalrun",
+        "arguments": "{\"operation\": \"controlled.value.create.v1\", \"target\": \"http://127.0.0.1:58709\", \"action_key\": \"opencode-acceptance-write\", \"payload\": {\"value\": \"OpenCode durable value\"}}",
+        "call_id": "call_0"
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_01a108f8-17b8-7313-b28a-7843186445c8",
+        "call_id": "call_0",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "Wall time: 0.0035 seconds\nOutput:"
+          },
+          {
+            "type": "input_text",
+            "text": "MCP tool call requires approval, but approval policy is never"
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "id": "fc_1",
+        "name": "causalrun_result",
+        "namespace": "mcp__causalrun",
+        "arguments": "{\"action_id\": \"missing\"}",
+        "call_id": "call_1"
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_01a108f8-17ca-7b81-96ca-b937fa9998ec",
+        "call_id": "call_1",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "Wall time: 0.0134 seconds\nOutput:"
+          },
+          {
+            "type": "input_text",
+            "text": "Runtime rejected or could not confirm this request. Inspect the original action; do not invent a new key or repeat a provider write."
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-603ba869d969",
+        "role": "developer",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<skills_instructions>\n## Skills\nA skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.\n### Skill roots\n- `r0` = `/Users/vikasbommineni/.codex/skills/.system`\n### Available skills\n- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. (file: r0/imagegen/SKILL.md)\n- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge\u2014including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex\u2014and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex. (file: r0/openai-docs/SKILL.md)\n- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r0/skill-creator/SKILL.md)\n- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: r0/skill-installer/SKILL.md)\n</skills_instructions>"
+          },
+          {
+            "type": "input_text",
+            "text": "<permissions instructions>\nFilesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted.\nApproval policy is currently never. Do not provide the `sandbox_permissions` for any reason, commands will be rejected.\n</permissions instructions>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-179e-7bd0-b2cf-6044b57be761",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "<environment_context>\n  <cwd>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</cwd>\n  <shell>zsh</shell>\n  <current_date>2026-10-04</current_date>\n  <timezone>America/New_York</timezone>\n  <filesystem><workspace_roots><root>/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpveodjz37/project</root></workspace_roots><permission_profile type=\"managed\"><file_system type=\"restricted\"><entry access=\"read\"><special>:root</special></entry></file_system></permission_profile></filesystem>\n</environment_context>"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_01a108f8-17ad-7080-80f5-804bd0f2a497",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "Use the causalrun MCP tools to repeat the original action key and retrieve its durable result. Do not prepare another connector or send a direct write."
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "id": "fc_0",
+        "name": "causalrun_write",
+        "namespace": "mcp__causalrun",
+        "arguments": "{\"operation\": \"controlled.value.create.v1\", \"target\": \"http://127.0.0.1:58709\", \"action_key\": \"opencode-acceptance-write\", \"payload\": {\"value\": \"OpenCode durable value\"}}",
+        "call_id": "call_0"
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_01a108f8-17b8-7313-b28a-7843186445c8",
+        "call_id": "call_0",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "Wall time: 0.0035 seconds\nOutput:"
+          },
+          {
+            "type": "input_text",
+            "text": "MCP tool call requires approval, but approval policy is never"
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "id": "fc_1",
+        "name": "causalrun_result",
+        "namespace": "mcp__causalrun",
+        "arguments": "{\"action_id\": \"missing\"}",
+        "call_id": "call_1"
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_01a108f8-17ca-7b81-96ca-b937fa9998ec",
+        "call_id": "call_1",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "Wall time: 0.0134 seconds\nOutput:"
+          },
+          {
+            "type": "input_text",
+            "text": "Runtime rejected or could not confirm this request. Inspect the original action; do not invent a new key or repeat a provider write."
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "id": "fc_2",
+        "name": "causalrun_verify",
+        "namespace": "mcp__causalrun",
+        "arguments": "{\"action_id\": \"missing\"}",
+        "call_id": "call_2"
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_01a108f8-17d1-7562-b5e2-b32a2bbc9f8e",
+        "call_id": "call_2",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "Wall time: 0.0042 seconds\nOutput:"
+          },
+          {
+            "type": "input_text",
+            "text": "Runtime rejected or could not confirm this request. Inspect the original action; do not invent a new key or repeat a provider write."
+          }
+        ]
+      }
+    ]
+  ]
+}

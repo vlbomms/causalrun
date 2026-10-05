@@ -1,0 +1,509 @@
+{
+  "command": "python3 -m tests.demo_gate3_live --repository vlbomms/causalrun-connector-tests",
+  "recorded_at": "2026-10-04T20:40:02.666488+00:00",
+  "repository": "vlbomms/causalrun-connector-tests",
+  "author": "vlbomms",
+  "api_version": "2026-03-10",
+  "approval": "Scripted PTY test approval; user authorized this disposable repository in chat",
+  "response_loss": "Harness discards the real HTTPS response after provider creation; not a network outage",
+  "credential_scope": "Local gh credential reused for read-only recovery; it has write privileges",
+  "schedules": [
+    {
+      "phase": "normal",
+      "initial": {
+        "id": "a291bb6b-9746-46ce-8ec4-090662d71662",
+        "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+        "action_key": "059ebe75e0-normal",
+        "payload": {
+          "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+          "title": "[causalrun sandbox 059ebe75e0] normal"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "a291bb6b-9746-46ce-8ec4-090662d71662",
+          "payload_digest": "5b28b634225727f37aa9ec1e6b4630a1399cb8512437cd71ff5837a81d46a96c",
+          "result": {
+            "author": "vlbomms",
+            "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+            "issue_id": 5703104338,
+            "number": 13,
+            "repository": "vlbomms/causalrun-connector-tests",
+            "title": "[causalrun sandbox 059ebe75e0] normal",
+            "url": "https://api.github.com/repos/vlbomms/causalrun-connector-tests/issues/13"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "https://api.github.com"
+            },
+            "recorded_at": "2026-10-04T20:40:03.346747+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "a291bb6b-9746-46ce-8ec4-090662d71662",
+              "payload_digest": "5b28b634225727f37aa9ec1e6b4630a1399cb8512437cd71ff5837a81d46a96c",
+              "result": {
+                "author": "vlbomms",
+                "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+                "issue_id": 5703104338,
+                "number": 13,
+                "repository": "vlbomms/causalrun-connector-tests",
+                "title": "[causalrun sandbox 059ebe75e0] normal",
+                "url": "https://api.github.com/repos/vlbomms/causalrun-connector-tests/issues/13"
+              }
+            },
+            "recorded_at": "2026-10-04T20:40:04.006166+00:00"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "fault": "Recovery read after restore",
+          "check": 1,
+          "state": "COMMITTED"
+        }
+      ],
+      "oracle": {
+        "id": 5703104338,
+        "number": 13,
+        "html_url": "https://github.com/vlbomms/causalrun-connector-tests/issues/13",
+        "title": "[causalrun sandbox 059ebe75e0] normal",
+        "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.\n\n<!-- causalrun:a291bb6b-9746-46ce-8ec4-090662d71662:5b28b634225727f37aa9ec1e6b4630a1399cb8512437cd71ff5837a81d46a96c -->",
+        "state": "open"
+      },
+      "final": {
+        "id": "a291bb6b-9746-46ce-8ec4-090662d71662",
+        "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+        "action_key": "059ebe75e0-normal",
+        "payload": {
+          "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+          "title": "[causalrun sandbox 059ebe75e0] normal"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "a291bb6b-9746-46ce-8ec4-090662d71662",
+          "payload_digest": "5b28b634225727f37aa9ec1e6b4630a1399cb8512437cd71ff5837a81d46a96c",
+          "result": {
+            "author": "vlbomms",
+            "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+            "issue_id": 5703104338,
+            "number": 13,
+            "repository": "vlbomms/causalrun-connector-tests",
+            "title": "[causalrun sandbox 059ebe75e0] normal",
+            "url": "https://api.github.com/repos/vlbomms/causalrun-connector-tests/issues/13"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "https://api.github.com"
+            },
+            "recorded_at": "2026-10-04T20:40:03.346747+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "a291bb6b-9746-46ce-8ec4-090662d71662",
+              "payload_digest": "5b28b634225727f37aa9ec1e6b4630a1399cb8512437cd71ff5837a81d46a96c",
+              "result": {
+                "author": "vlbomms",
+                "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+                "issue_id": 5703104338,
+                "number": 13,
+                "repository": "vlbomms/causalrun-connector-tests",
+                "title": "[causalrun sandbox 059ebe75e0] normal",
+                "url": "https://api.github.com/repos/vlbomms/causalrun-connector-tests/issues/13"
+              }
+            },
+            "recorded_at": "2026-10-04T20:40:04.006166+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "lost-response",
+      "initial": {
+        "id": "a4e84917-ab6e-4f35-a49b-30ad1792122e",
+        "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+        "action_key": "059ebe75e0-lost-response",
+        "payload": {
+          "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+          "title": "[causalrun sandbox 059ebe75e0] lost-response"
+        },
+        "state": "IN_DOUBT",
+        "receipt": null,
+        "events": [
+          {
+            "sequence": 3,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "https://api.github.com"
+            },
+            "recorded_at": "2026-10-04T20:40:04.297636+00:00"
+          },
+          {
+            "sequence": 4,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T20:40:04.642341+00:00"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "fault": "Real marker removal",
+          "result": {
+            "id": "a4e84917-ab6e-4f35-a49b-30ad1792122e",
+            "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+            "action_key": "059ebe75e0-lost-response",
+            "payload": {
+              "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+              "title": "[causalrun sandbox 059ebe75e0] lost-response"
+            },
+            "state": "IN_DOUBT",
+            "receipt": null,
+            "events": [
+              {
+                "sequence": 3,
+                "kind": "AUTHORIZED",
+                "detail": {
+                  "target": "https://api.github.com"
+                },
+                "recorded_at": "2026-10-04T20:40:04.297636+00:00"
+              },
+              {
+                "sequence": 4,
+                "kind": "OUTCOME_UNCONFIRMED",
+                "detail": {
+                  "reason": "No durable matching receipt"
+                },
+                "recorded_at": "2026-10-04T20:40:04.642341+00:00"
+              },
+              {
+                "sequence": 5,
+                "kind": "VERIFICATION_UNKNOWN",
+                "detail": {
+                  "reason": "No matching authoritative receipt"
+                },
+                "recorded_at": "2026-10-04T20:40:06.140513+00:00"
+              }
+            ]
+          }
+        },
+        {
+          "fault": "Repeat while uncertain",
+          "result": {
+            "id": "a4e84917-ab6e-4f35-a49b-30ad1792122e",
+            "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+            "action_key": "059ebe75e0-lost-response",
+            "payload": {
+              "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+              "title": "[causalrun sandbox 059ebe75e0] lost-response"
+            },
+            "state": "IN_DOUBT",
+            "receipt": null,
+            "events": [
+              {
+                "sequence": 3,
+                "kind": "AUTHORIZED",
+                "detail": {
+                  "target": "https://api.github.com"
+                },
+                "recorded_at": "2026-10-04T20:40:04.297636+00:00"
+              },
+              {
+                "sequence": 4,
+                "kind": "OUTCOME_UNCONFIRMED",
+                "detail": {
+                  "reason": "No durable matching receipt"
+                },
+                "recorded_at": "2026-10-04T20:40:04.642341+00:00"
+              },
+              {
+                "sequence": 5,
+                "kind": "VERIFICATION_UNKNOWN",
+                "detail": {
+                  "reason": "No matching authoritative receipt"
+                },
+                "recorded_at": "2026-10-04T20:40:06.140513+00:00"
+              }
+            ]
+          },
+          "creation_posts": 2
+        },
+        {
+          "fault": "Recovery read after restore",
+          "check": 1,
+          "state": "IN_DOUBT"
+        },
+        {
+          "fault": "Recovery read after restore",
+          "check": 2,
+          "state": "IN_DOUBT"
+        },
+        {
+          "fault": "Recovery read after restore",
+          "check": 3,
+          "state": "IN_DOUBT"
+        },
+        {
+          "fault": "Recovery read after restore",
+          "check": 4,
+          "state": "COMMITTED"
+        }
+      ],
+      "oracle": {
+        "id": 5703104438,
+        "number": 14,
+        "html_url": "https://github.com/vlbomms/causalrun-connector-tests/issues/14",
+        "title": "[causalrun sandbox 059ebe75e0] lost-response",
+        "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.\n\n<!-- causalrun:a4e84917-ab6e-4f35-a49b-30ad1792122e:ee182785d49f8752eab1bb378b51b1058a1c08495d5f90353f12eee0b1d8ea0a -->",
+        "state": "open"
+      },
+      "final": {
+        "id": "a4e84917-ab6e-4f35-a49b-30ad1792122e",
+        "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+        "action_key": "059ebe75e0-lost-response",
+        "payload": {
+          "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+          "title": "[causalrun sandbox 059ebe75e0] lost-response"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "a4e84917-ab6e-4f35-a49b-30ad1792122e",
+          "payload_digest": "ee182785d49f8752eab1bb378b51b1058a1c08495d5f90353f12eee0b1d8ea0a",
+          "result": {
+            "author": "vlbomms",
+            "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+            "issue_id": 5703104438,
+            "number": 14,
+            "repository": "vlbomms/causalrun-connector-tests",
+            "title": "[causalrun sandbox 059ebe75e0] lost-response",
+            "url": "https://api.github.com/repos/vlbomms/causalrun-connector-tests/issues/14"
+          }
+        },
+        "events": [
+          {
+            "sequence": 3,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "https://api.github.com"
+            },
+            "recorded_at": "2026-10-04T20:40:04.297636+00:00"
+          },
+          {
+            "sequence": 4,
+            "kind": "OUTCOME_UNCONFIRMED",
+            "detail": {
+              "reason": "No durable matching receipt"
+            },
+            "recorded_at": "2026-10-04T20:40:04.642341+00:00"
+          },
+          {
+            "sequence": 5,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T20:40:06.140513+00:00"
+          },
+          {
+            "sequence": 6,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T20:40:07.441716+00:00"
+          },
+          {
+            "sequence": 7,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T20:40:09.353293+00:00"
+          },
+          {
+            "sequence": 8,
+            "kind": "VERIFICATION_UNKNOWN",
+            "detail": {
+              "reason": "No matching authoritative receipt"
+            },
+            "recorded_at": "2026-10-04T20:40:10.693280+00:00"
+          },
+          {
+            "sequence": 9,
+            "kind": "VERIFIED_SUCCESS",
+            "detail": {
+              "action_id": "a4e84917-ab6e-4f35-a49b-30ad1792122e",
+              "payload_digest": "ee182785d49f8752eab1bb378b51b1058a1c08495d5f90353f12eee0b1d8ea0a",
+              "result": {
+                "author": "vlbomms",
+                "body": "Authorized gate 3 connector acceptance test. This issue will be closed after the run.",
+                "issue_id": 5703104438,
+                "number": 14,
+                "repository": "vlbomms/causalrun-connector-tests",
+                "title": "[causalrun sandbox 059ebe75e0] lost-response",
+                "url": "https://api.github.com/repos/vlbomms/causalrun-connector-tests/issues/14"
+              }
+            },
+            "recorded_at": "2026-10-04T20:40:12.153665+00:00"
+          }
+        ]
+      }
+    }
+  ],
+  "created_issues": [
+    {
+      "number": 13,
+      "url": "https://github.com/vlbomms/causalrun-connector-tests/issues/13"
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/vlbomms/causalrun-connector-tests/issues/14"
+    }
+  ],
+  "cleanup": [
+    {
+      "number": 13,
+      "state": "closed",
+      "passed": true
+    },
+    {
+      "number": 14,
+      "state": "closed",
+      "passed": true
+    }
+  ],
+  "passed": 2,
+  "failed": 0,
+  "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+  "validation": {
+    "connector_digest": "fe2559c330ee2087024427775508441fe91b4fc20c6ba859cf953cce35b9f374",
+    "checked_at": "2026-10-04T20:40:03.221897+00:00",
+    "scope": "Controlled GitHub-shaped HTTP fixture; live provider guarantees require separate evidence",
+    "passed": 11,
+    "failed": 0,
+    "provider_posts": 2,
+    "provider_reads": 12,
+    "cases": [
+      {
+        "name": "matching_issue",
+        "passed": true,
+        "conclusion": "COMMITTED"
+      },
+      {
+        "name": "lost_response",
+        "passed": true,
+        "provider_posts": 2
+      },
+      {
+        "name": "pagination",
+        "passed": true,
+        "conclusion": "COMMITTED"
+      },
+      {
+        "name": "conflicting_markers",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "permission_failure",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "missing_issue",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "deleted_issue",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "altered_marker",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "wrong_author",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "wrong_fields",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      },
+      {
+        "name": "untrusted_next_page",
+        "passed": true,
+        "conclusion": "UNKNOWN"
+      }
+    ]
+  },
+  "artifact": {
+    "schema_version": 3,
+    "name": "github-issue",
+    "version": 1,
+    "target": "https://api.github.com",
+    "repository": "vlbomms/causalrun-connector-tests",
+    "author": "vlbomms",
+    "operation": "github.issue.create.v1",
+    "api_version": "2026-03-10",
+    "expected": {
+      "title_from": "payload.title",
+      "body_from": "payload.body",
+      "description": "Create one issue with the requested title and body under the approved author"
+    },
+    "verifier": {
+      "kind": "python.receipt.v1",
+      "source": "# Host-agent-written positive-evidence predicate. Target/author checks run in the adapter.\ndef verify(action_id, payload, evidence):\n    return (\n        isinstance(evidence, dict)\n        and 'action_id' in evidence\n        and evidence['action_id'] == action_id\n        and 'payload_digest' in evidence\n        and evidence['payload_digest'] == digest(payload)\n        and 'result' in evidence\n        and isinstance(evidence['result'], dict)\n        and 'title' in evidence['result']\n        and evidence['result']['title'] == payload['title']\n        and 'body' in evidence['result']\n        and evidence['result']['body'] == payload['body']\n    )\n"
+    },
+    "adapter": {
+      "kind": "github.issue.v1",
+      "page_limit": 10
+    },
+    "authentication": {
+      "type": "bearer",
+      "write_secret": "CAUSALRUN_PROVIDER_TOKEN",
+      "read_secret": "CAUSALRUN_RECEIPT_TOKEN"
+    },
+    "interview": {
+      "expected_behavior": "Create one issue with the requested title and body under the approved author",
+      "sandbox": "Dedicated repository: vlbomms/causalrun-connector-tests",
+      "unknown_policy": "Keep uncertain actions blocked",
+      "marker_assumption": "Accepted: no copied or edited markers during recovery"
+    },
+    "limitations": [
+      "Missing issue does not prove non-execution",
+      "Marker correlation assumes no copying or editing by the approved author during recovery",
+      "Pagination is bounded and not a snapshot; incomplete or conflicting evidence stays unknown"
+    ],
+    "sources": [
+      "https://docs.github.com/en/rest/issues/issues",
+      "https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api"
+    ],
+    "implementation": "22a78dd7a85db9a75393c8c7b91ac449dc8e5777800d67fafc159ff1c77d80d0"
+  },
+  "creation_posts": 2,
+  "versions": {
+    "python": "3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:19) [Clang 12.0.5 (clang-1205.0.22.11)]",
+    "sqlite": "3.35.5",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "gh": "gh version 2.66.0 (2025-01-30)"
+  },
+  "demonstration_source_sha256": "c1d51de06e14c0771e8d167e554e027c2029d36e9f05b7c056c62a1c01f818e3"
+}

@@ -1,0 +1,15 @@
+test_lost_response_reuses_action_and_durable_result (tests.test_gate5.AdapterRuntimeTests) ... ok
+test_missing_misleading_and_unavailable_evidence (tests.test_gate5.AdapterRuntimeTests) ... ok
+test_operator_review_requires_terminal (tests.test_gate5.AdapterRuntimeTests) ... ok
+test_packaged_mcp_prepare_operator_review_and_restart (tests.test_gate5.AdapterRuntimeTests) ... ok
+test_unapproved_and_bad_verifiers_never_send (tests.test_gate5.AdapterRuntimeTests) ... ok
+test_actual_stdio_handshake (tests.test_gate5.ProtocolTests) ... ok
+test_initialization_and_optional_tool_metadata (tests.test_gate5.ProtocolTests) ... ok
+test_invalid_frames_and_unknown_methods (tests.test_gate5.ProtocolTests) ... ok
+test_notifications_cannot_dispatch (tests.test_gate5.ProtocolTests) ... ok
+test_strict_tool_fields_and_secret_safe_errors (tests.test_gate5.ProtocolTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 7.698s
+
+OK

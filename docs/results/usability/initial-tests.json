@@ -1,0 +1,10 @@
+{
+  "command": "python3 -m unittest tests.test_usability -v",
+  "tests": 3,
+  "passed": 2,
+  "failed": 1,
+  "errors": 0,
+  "failure": "The custom-config test compared /var/folders with its canonical /private/var/folders path on macOS. The installer used the correct resolved path.",
+  "fix": "Compare resolved Path objects.",
+  "note": "Summary of the observed preliminary output; final raw output is saved separately."
+}

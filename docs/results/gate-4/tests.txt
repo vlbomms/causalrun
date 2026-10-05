@@ -1,0 +1,51 @@
+test_agent_cannot_approve_or_redirect_target (tests.test_gate1.GateTests) ... ok
+test_changed_implementation_invalidates_approval (tests.test_gate1.GateTests) ... ok
+test_changed_payload_rejected (tests.test_gate1.GateTests) ... ok
+test_changed_validation_invalidates_approval (tests.test_gate1.GateTests) ... ok
+test_concurrent_replays_send_once (tests.test_gate1.GateTests) ... ok
+test_connector_revision_cannot_replace_existing_action (tests.test_gate1.GateTests) ... ok
+test_corrupted_validation_is_rejected (tests.test_gate1.GateTests) ... ok
+test_failed_validation_cannot_be_approved (tests.test_gate1.GateTests) ... ok
+test_mismatched_receipt_remains_unknown (tests.test_gate1.GateTests) ... ok
+test_missing_approval_blocks_write (tests.test_gate1.GateTests) ... ok
+test_missing_validation_blocks_write (tests.test_gate1.GateTests) ... ok
+test_missing_verifier_rejects_registration_and_write (tests.test_gate1.GateTests) ... ok
+test_modified_artifact_and_target_invalidate_approval (tests.test_gate1.GateTests) ... ok
+test_noninteractive_and_wrong_confirmation_rejected (tests.test_gate1.GateTests) ... ok
+test_terminal_approval_and_receipt_survive_reopen (tests.test_gate1.GateTests) ... ok
+test_unconfirmed_write_is_not_resent (tests.test_gate1.GateTests) ... ok
+test_validation_changed_during_review_requires_new_approval (tests.test_gate1.GateTests) ... ok
+test_interview_accepts_free_text_and_no_discovery_report (tests.test_gate2.DiscoveryTests) ... ok
+test_no_sandbox_or_unsafe_repeat_policy_stops_preparation (tests.test_gate2.DiscoveryTests) ... ok
+test_openapi_facts_and_only_three_intent_questions (tests.test_gate2.DiscoveryTests) ... ok
+test_swagger_reference_and_wsdl_inspection (tests.test_gate2.DiscoveryTests) ... ok
+test_verifier_rejects_side_effects_and_unbounded_code (tests.test_gate2.DiscoveryTests) ... ok
+test_bad_generated_verifiers_fail_validation (tests.test_gate2.GeneratedTests) ... ok
+test_changed_verifier_rejected_before_dispatch (tests.test_gate2.GeneratedTests) ... ok
+test_delayed_commit_remains_unknown_until_commit (tests.test_gate2.GeneratedTests) ... ok
+test_generated_code_survives_source_file_removal_and_restart (tests.test_gate2.GeneratedTests) ... ok
+test_generated_verifier_handles_unicode_and_json_characters (tests.test_gate2.GeneratedTests) ... ok
+test_lost_response_recovered_without_second_write (tests.test_gate2.GeneratedTests) ... ok
+test_missing_and_misleading_evidence_block_then_recover (tests.test_gate2.GeneratedTests) ... ok
+test_receipt_credential_cannot_write (tests.test_gate2.GeneratedTests) ... ok
+test_conflict_and_altered_evidence_block (tests.test_gate3.GitHubTests) ... ok
+test_lost_response_recovers_without_repeat (tests.test_gate3.GitHubTests) ... ok
+test_pagination_budget_and_full_page_fail_closed (tests.test_gate3.GitHubTests) ... ok
+test_unapproved_and_reserved_marker_rejected (tests.test_gate3.GitHubTests) ... ok
+test_untrusted_pagination_never_receives_credentials (tests.test_gate3.GitHubTests) ... ok
+test_validation_cases_and_bad_verifier (tests.test_gate3.GitHubTests) ... ok
+test_jsonc_and_permission_shorthand_not_overwritten (tests.test_gate4.InstallationTests) ... ok
+test_preserve_settings_and_refuse_collision (tests.test_gate4.InstallationTests) ... ok
+test_bad_source_cannot_be_approved (tests.test_gate4.NativeTests) ... ok
+test_exact_review_and_scope_required_then_reuse (tests.test_gate4.NativeTests) ... ok
+test_first_use_preparation_does_not_send_and_agent_cannot_approve (tests.test_gate4.NativeTests) ... ok
+test_plugin_rejects_auto_approval_and_direct_writes (tests.test_gate4.NativeTests) ... ok
+test_provider_credential_profile_blocks_dispatch (tests.test_gate4.NativeTests) ... ok
+test_unknown_operation_and_target_override_rejected (tests.test_gate4.NativeTests) ... ok
+test_authenticated_lifecycle_and_private_permissions (tests.test_gate4_followup.FollowupTests) ... ok
+test_github_identity_change_requires_review_before_send (tests.test_gate4_followup.FollowupTests) ... ok
+
+----------------------------------------------------------------------
+Ran 46 tests in 58.237s
+
+OK

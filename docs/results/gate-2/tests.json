@@ -1,0 +1,41 @@
+{
+  "command": "python3 -m tests.run_gate2",
+  "recorded_at": "2026-10-04T19:47:35.435613+00:00",
+  "versions": {
+    "python": "3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:19) [Clang 12.0.5 (clang-1205.0.22.11)]",
+    "sqlite": "3.35.5",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "tests": 30,
+  "passed": 30,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 39.001038667047396,
+  "source_hashes": {
+    "causalrun/__init__.py": "c888232baa8b9b9eaff5dbb95ca831e0b72c7e585e76aadf4e9d64c32d63dabb",
+    "causalrun/__main__.py": "145cd051ebc7b95ef57f0d8fd223ff0bdad08fbf105885e30f17f3f4f95a858c",
+    "causalrun/contracts.py": "1db65e438fba58bd7f2457a6293d2a70fa8cf9b6c541726dcee99d43a068809f",
+    "causalrun/discovery.py": "2595503ec937e2bd5839cc4ffe8d149d700a21e6c48174a7c8ecf435d894e3cc",
+    "causalrun/generation.py": "c84e6db338aeeef7f0752e4b2ebf75117ef7e02fdb36144e7c7680e2a5c986b2",
+    "causalrun/runtime.py": "050395f547c99122de0b8272c47a8c14b036f98b6e41495775d5497725765212",
+    "causalrun/server.py": "3add3467a5dfa741feae48697a7e98ec4a2883eaed63b45b7ee0a8d68d51a928",
+    "causalrun/storage.py": "40b7ac67d4963f6c27c4ff00a5e43fec640e7ba3dcd0dc0271ebebfbf373490a",
+    "causalrun/transport.py": "73123892c31578e21baddc2d7adf90ef3412a696abb8f3b6a1bbe139e7d36508",
+    "causalrun/validation.py": "11bca11d777c58a201de64bcf5e1fe90ffe4ad8643b7c44010675d0cd4d366ea",
+    "causalrun/validation_generated.py": "df2e60e95eee40317f2bfc9a2a071ecc2fe704379f0965484aff48f964134721",
+    "causalrun/verifiers.py": "093e8e00ef8355def98b3a26fb66467e69e7096bae25caf934a15dc868b78173",
+    "examples/__init__.py": "99cf61d2644e8f0d19d18bc50c2ad39402ae4b4b8c111e902e1c7b291bdd1f70",
+    "examples/openapi.json": "c28c29d8bb31f73c3d336b14614d9e2080a6417b5cf13ab897a062b91a9d99cd",
+    "examples/provider.py": "b7a1a2e26c23967922205c24a9b40d88bdb25cd864ad07f730cceacd01954954",
+    "examples/verify_value.py": "2bea1851d37b9d2533144915401251df0032c4a33001850ed01f8b04dea71e36",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/crash_runtime.py": "136f86d397112c5f1448cfb4a1062686043caee14531386ab6c1f8d710fa17c2",
+    "tests/demo_gate1.py": "68997ae8c86acf9878acf56bbbeb210d865b083fd2c00736e7cf0de1e0fc4320",
+    "tests/demo_gate2.py": "ddb3d3d060fe509df8c373ef34092812d4218e202e5ce593f2e58e15a64fef73",
+    "tests/run_gate1.py": "d92a6641e4411f595139bac86b4638cc482bc0bacc76cedbd1266186671145f3",
+    "tests/run_gate2.py": "f1bfa22ae7b44aab606676b140f3404145a16677f643250cfefb154f1396c640",
+    "tests/test_gate1.py": "1774607eb22ada927d126b49e4131ee3a19282336d47f4d66a1c96082afe908b",
+    "tests/test_gate2.py": "bbb452e59325a6ee9458b81060fe0dd632073bb35ee8103361aa09c9f744ed82"
+  }
+}

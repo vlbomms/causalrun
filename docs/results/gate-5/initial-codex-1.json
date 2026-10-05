@@ -1,0 +1,38 @@
+{
+  "codex": "codex-cli 0.159.0-alpha.12.1",
+  "model": "Local scripted Responses fixture, no model inference",
+  "config_overrides": {
+    "model_provider": "causalrun_fixture",
+    "model": "scripted-fixture",
+    "approval_policy": "never",
+    "model_providers.causalrun_fixture.name": "Local scripted test fixture",
+    "model_providers.causalrun_fixture.base_url": "http://127.0.0.1:52897/v1",
+    "model_providers.causalrun_fixture.env_key": "CAUSALRUN_TEST_MODEL_TOKEN",
+    "model_providers.causalrun_fixture.wire_api": "responses",
+    "model_providers.causalrun_fixture.requires_openai_auth": false,
+    "model_providers.causalrun_fixture.supports_websockets": false,
+    "model_providers.causalrun_fixture.request_max_retries": 0,
+    "model_providers.causalrun_fixture.stream_max_retries": 0,
+    "mcp_servers.causalrun.command": "/Library/Frameworks/Python.framework/Versions/3.10/bin/python3",
+    "mcp_servers.causalrun.args": [
+      "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmp9pijmpxg/causalrun.pyz",
+      "--mcp",
+      "--state-dir",
+      "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmp9pijmpxg/state"
+    ],
+    "mcp_servers.causalrun.startup_timeout_sec": 20,
+    "mcp_servers.causalrun.tool_timeout_sec": 30,
+    "mcp_servers.causalrun.required": true,
+    "features.apps": false,
+    "features.plugins": false,
+    "features.remote_plugin": false,
+    "features.shell_tool": false,
+    "features.shell_snapshot": false
+  },
+  "elapsed_seconds": 1.4941539159044623,
+  "returncode": 1,
+  "events": [],
+  "stderr": "Reading additional input from stdin...\n2026-10-04T22:02:50.295097Z  WARN codex_models_manager::model_info: Unknown model scripted-fixture is used. This will use fallback model metadata.\n2026-10-04T22:02:50.469503Z  WARN codex_mcp::rmcp_client: MCP server startup failed server_name=\"causalrun\" error=Mcp error: -32602: This fixed tool list has no cursor\n2026-10-04T22:02:50.473626Z ERROR codex_core::session: Failed to create session: required MCP servers failed to initialize: causalrun: Mcp error: -32602: This fixed tool list has no cursor\nError: thread/start: thread/start failed: error creating thread: Fatal error: Failed to initialize session: required MCP servers failed to initialize: causalrun: Mcp error: -32602: This fixed tool list has no cursor (code -32603)\n",
+  "model_calls": [],
+  "advertised_tools": []
+}

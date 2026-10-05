@@ -1,0 +1,16 @@
+{
+  "compact_action_outputs": [
+    {
+      "tool": "causalrun_verify",
+      "bytes": 101,
+      "title": "The write is confirmed."
+    },
+    {
+      "tool": "causalrun_result",
+      "bytes": 101,
+      "title": "The write is confirmed."
+    }
+  ],
+  "approval_metadata_bytes": 714,
+  "full_review_bytes": 3423
+}

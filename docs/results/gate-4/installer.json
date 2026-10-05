@@ -1,0 +1,10 @@
+{
+  "command": "python3 -m causalrun.installer --build .local/dist/causalrun.pyz",
+  "artifact": ".local/dist/causalrun.pyz",
+  "bytes": 113325,
+  "sha256": "980576ea618c21b694a562482602deefb1d8ead3f0d6079dbb3b522d204a695f",
+  "implementation_digest": "7054c9b7cbde3644146d679de922f8e9cb542d9f9f4aeb46c1c29cd871fc7761",
+  "node": "v25.2.1",
+  "opencode": "1.18.34",
+  "distribution": "Local build; not published or pushed"
+}

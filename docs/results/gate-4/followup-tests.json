@@ -1,0 +1,8 @@
+{
+  "command": "python3 -m unittest tests.test_gate4_followup -v",
+  "tests": 8,
+  "passed": 8,
+  "failed": 0,
+  "errors": 0,
+  "elapsed_seconds": 12.399618291063234
+}

@@ -1,0 +1,14 @@
+{
+  "command": "python3 -m unittest -v tests.test_gate1",
+  "tests": 14,
+  "passed": 12,
+  "failed": 2,
+  "errors": 0,
+  "elapsed_seconds": 21.555,
+  "failures": [
+    "test_agent_cannot_approve_or_redirect_target",
+    "test_missing_verifier_rejects_registration_and_write"
+  ],
+  "cause": "The shared HTTP helper swallowed all 404 errors as missing receipts; tests expected API errors to propagate.",
+  "correction": "Only explicit verifier receipt lookups opt into allow_missing; other 404s propagate."
+}

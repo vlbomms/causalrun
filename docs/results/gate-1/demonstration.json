@@ -1,0 +1,197 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "steps": [
+    {
+      "step": "missing_verifier",
+      "status": 404,
+      "counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "error": "Connector not registered"
+    },
+    {
+      "step": "missing_validation",
+      "status": 409,
+      "counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "error": "Validated verifier required before write"
+    },
+    {
+      "step": "missing_approval",
+      "status": 409,
+      "counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "error": "Approval of this exact connector and validation is required"
+    },
+    {
+      "step": "interactive_operator_approval",
+      "connector_digest": "665e75544b332b3777d2ffccc446a54ec97ad9b35bc5ab70af6c59639455ee04"
+    },
+    {
+      "step": "changed_sources",
+      "status": 409,
+      "counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "error": "Validated verifier required before write"
+    },
+    {
+      "step": "changed_target",
+      "status": 409,
+      "counts": {
+        "objects": 0,
+        "writes": 0
+      },
+      "error": "Validated verifier required before write"
+    },
+    {
+      "step": "approved_write",
+      "counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "action": {
+        "id": "59d38e4c-170e-4389-b3fe-fe52c03184e9",
+        "connector_digest": "665e75544b332b3777d2ffccc446a54ec97ad9b35bc5ab70af6c59639455ee04",
+        "action_key": "demo-write",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "59d38e4c-170e-4389-b3fe-fe52c03184e9",
+          "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+          "result": {
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:60804"
+            },
+            "recorded_at": "2026-10-04T16:53:44.195976+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "59d38e4c-170e-4389-b3fe-fe52c03184e9",
+              "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+              "result": {
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-04T16:53:44.200960+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "step": "process_restart_durable_read_and_repeat",
+      "counts": {
+        "objects": 1,
+        "writes": 1
+      },
+      "action": {
+        "id": "59d38e4c-170e-4389-b3fe-fe52c03184e9",
+        "connector_digest": "665e75544b332b3777d2ffccc446a54ec97ad9b35bc5ab70af6c59639455ee04",
+        "action_key": "demo-write",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "action_id": "59d38e4c-170e-4389-b3fe-fe52c03184e9",
+          "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+          "result": {
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:60804"
+            },
+            "recorded_at": "2026-10-04T16:53:44.195976+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "action_id": "59d38e4c-170e-4389-b3fe-fe52c03184e9",
+              "payload_digest": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+              "result": {
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-04T16:53:44.200960+00:00"
+          }
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "connector_digest": "665e75544b332b3777d2ffccc446a54ec97ad9b35bc5ab70af6c59639455ee04",
+    "checked_at": "2026-10-04T16:53:43.968324+00:00",
+    "scope": "Fixed controlled receipt implementation in a disposable sandbox; not generated verifier validation or proof of arbitrary target behavior",
+    "passed": 4,
+    "failed": 0,
+    "provider_objects": 1,
+    "provider_requests": 2,
+    "cases": [
+      {
+        "name": "missing_receipt_is_unknown",
+        "passed": true
+      },
+      {
+        "name": "atomic_write_and_matching_receipt",
+        "passed": true
+      },
+      {
+        "name": "controlled_idempotent_repeat",
+        "passed": true
+      },
+      {
+        "name": "conflicting_receipt_rejected",
+        "passed": true
+      }
+    ]
+  },
+  "schedule": "Separate provider/runtime processes; preflight rejects; sandbox validation; PTY operator approval; changed-artifact rejects; one accepted write; runtime SIGTERM/restart; durable GET and repeated POST without provider resend.",
+  "artifact": {
+    "schema_version": 1,
+    "name": "controlled-value",
+    "version": 1,
+    "target": "http://127.0.0.1:60804",
+    "operation": "controlled.value.create.v1",
+    "expected": {
+      "value_from": "payload.value"
+    },
+    "verifier": {
+      "kind": "controlled.receipt.v1"
+    },
+    "limitations": [
+      "Missing receipt does not prove non-execution"
+    ],
+    "sources": [
+      "examples/provider.py: atomic value and receipt transaction"
+    ],
+    "implementation": "edabb47946f1c97df3805e66df859c9f53660b937c941d37428af7c0a54ad621"
+  },
+  "provider_counts": {
+    "objects": 1,
+    "writes": 1
+  }
+}

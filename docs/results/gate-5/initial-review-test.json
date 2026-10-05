@@ -1,0 +1,10 @@
+{
+  "command": "python3 -m unittest tests.test_gate5 -v",
+  "tests": 10,
+  "passed": 9,
+  "failed": 1,
+  "errors": 0,
+  "failure": "test_packaged_mcp_prepare_operator_review_and_restart: wrong digest was rejected by native.review, but the zipapp entry point discarded main()'s nonzero return status. The test observed exit code 0 and failed.",
+  "fix": "Use an explicit zipapp __main__.py with raise SystemExit(main()); print a concise native review error and exit 1.",
+  "note": "This is a summary of the observed tool output; a raw transcript of this preliminary run was not saved. Final full test output is in tests.txt."
+}

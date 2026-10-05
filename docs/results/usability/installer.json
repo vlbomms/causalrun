@@ -1,0 +1,10 @@
+{
+  "archive": ".local/dist/causalrun.pyz",
+  "bytes": 132767,
+  "sha256": "cef0aa27ee31a5c3ada5564963474584e5eae8b8f8992a6539d493f42aa8d32e",
+  "implementation_digest": "6df64408b751d75ae83a7252d580ceb32a55811b7b413b727713b4b05e2d4d45",
+  "installed_config": "/Users/vikasbommineni/.config/opencode",
+  "installed_state": "/Users/vikasbommineni/.local/share/causalrun",
+  "global_plugin_installed": true,
+  "published": false
+}

@@ -1,0 +1,22 @@
+test_agent_cannot_approve_or_redirect_target (tests.test_gate1.GateTests) ... ok
+test_changed_implementation_invalidates_approval (tests.test_gate1.GateTests) ... ok
+test_changed_payload_rejected (tests.test_gate1.GateTests) ... ok
+test_changed_validation_invalidates_approval (tests.test_gate1.GateTests) ... ok
+test_concurrent_replays_send_once (tests.test_gate1.GateTests) ... ok
+test_connector_revision_cannot_replace_existing_action (tests.test_gate1.GateTests) ... ok
+test_corrupted_validation_is_rejected (tests.test_gate1.GateTests) ... ok
+test_failed_validation_cannot_be_approved (tests.test_gate1.GateTests) ... ok
+test_mismatched_receipt_remains_unknown (tests.test_gate1.GateTests) ... ok
+test_missing_approval_blocks_write (tests.test_gate1.GateTests) ... ok
+test_missing_validation_blocks_write (tests.test_gate1.GateTests) ... ok
+test_missing_verifier_rejects_registration_and_write (tests.test_gate1.GateTests) ... ok
+test_modified_artifact_and_target_invalidate_approval (tests.test_gate1.GateTests) ... ok
+test_noninteractive_and_wrong_confirmation_rejected (tests.test_gate1.GateTests) ... ok
+test_terminal_approval_and_receipt_survive_reopen (tests.test_gate1.GateTests) ... ok
+test_unconfirmed_write_is_not_resent (tests.test_gate1.GateTests) ... ok
+test_validation_changed_during_review_requires_new_approval (tests.test_gate1.GateTests) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 26.748s
+
+OK

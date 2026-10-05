@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-04T21:27:44.077642+00:00",
+  "command": "python3 -m tests.demo_gate4",
+  "opencode": "1.18.34",
+  "model": "Scripted local OpenAI-compatible tool-call fixture, no paid/model inference",
+  "approval": "Harness replies to actual OpenCode question and permission HTTP requests; not a human usability test",
+  "questions": [],
+  "permissions": [],
+  "tool_calls": [],
+  "passed": 0,
+  "failed": 1,
+  "installation": {
+    "installed": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpownoelq5/config/plugins/causalrun.ts",
+    "runtime": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpownoelq5/state/runtime",
+    "state": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpownoelq5/state",
+    "next": "Restart OpenCode. The plugin starts the service automatically. Use local gh auth login for GitHub; no secrets in chat."
+  },
+  "failure_type": "AssertionError",
+  "failure_message": "OpenCode did not start: Warning: OPENCODE_SERVER_PASSWORD is not set; server is unsecured.\n",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/vikasbommineni/Documents/causalrun/tests/demo_gate4.py\", line 80, in demonstration\n    host, origin = start_host()\n  File \"/Users/vikasbommineni/Documents/causalrun/tests/demo_gate4.py\", line 78, in start_host\n    raise AssertionError('OpenCode did not start: ' + line)\nAssertionError: OpenCode did not start: Warning: OPENCODE_SERVER_PASSWORD is not set; server is unsecured.\n\n",
+  "opencode_log": "timestamp=2026-10-04T21:27:45.320Z level=INFO run=ec22dfd4 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpownoelq5/xdg-config/opencode/config.json\n"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "python3 -m tests.run_gate1",
+  "recorded_at": "2026-10-04T16:53:43.073344+00:00",
+  "versions": {
+    "python": "3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:19) [Clang 12.0.5 (clang-1205.0.22.11)]",
+    "sqlite": "3.35.5",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "tests": 17,
+  "passed": 17,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 26.78039470897056,
+  "source_hashes": {
+    "causalrun/__init__.py": "c888232baa8b9b9eaff5dbb95ca831e0b72c7e585e76aadf4e9d64c32d63dabb",
+    "causalrun/__main__.py": "17168c343407a19231d05905480e634c67dc43ea206e5c18c2d68f4f8ad3b508",
+    "causalrun/contracts.py": "81c53e985907ba70d1c1063f3e14e407cfd8922143c6bb228c8a43daf8af89e5",
+    "causalrun/runtime.py": "7f9fb5f2c138ba0fa0fb5efac0120d7a23f9683ef914fd2045a531eaaa1b24ae",
+    "causalrun/server.py": "fe440c2a63c8e3ebb7239ff583e4a51fdcd4f4f790ba3255db0994a45d681933",
+    "causalrun/storage.py": "40b7ac67d4963f6c27c4ff00a5e43fec640e7ba3dcd0dc0271ebebfbf373490a",
+    "causalrun/transport.py": "cbabc2fdcd08a26f37e1add942f431278790ae5435e27b1f8eb2a5a55e536828",
+    "causalrun/validation.py": "a778d310565b94d518bc2525244bf0423306370b7e334616e396e3ada871be50",
+    "examples/__init__.py": "99cf61d2644e8f0d19d18bc50c2ad39402ae4b4b8c111e902e1c7b291bdd1f70",
+    "examples/provider.py": "fffcb64bd95075fe94a8c2387ffcd43714a8951665eba1ddc9399a9642a6706f",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/demo_gate1.py": "68997ae8c86acf9878acf56bbbeb210d865b083fd2c00736e7cf0de1e0fc4320",
+    "tests/run_gate1.py": "d92a6641e4411f595139bac86b4638cc482bc0bacc76cedbd1266186671145f3",
+    "tests/test_gate1.py": "1774607eb22ada927d126b49e4131ee3a19282336d47f4d66a1c96082afe908b"
+  }
+}

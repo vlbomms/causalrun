@@ -1,0 +1,13 @@
+test_authenticated_lifecycle_and_private_permissions (tests.test_gate4_followup.FollowupTests) ... ok
+test_github_identity_change_requires_review_before_send (tests.test_gate4_followup.FollowupTests) ... ok
+test_bad_source_cannot_be_approved (tests.test_gate4.NativeTests) ... ok
+test_exact_review_and_scope_required_then_reuse (tests.test_gate4.NativeTests) ... ok
+test_first_use_preparation_does_not_send_and_agent_cannot_approve (tests.test_gate4.NativeTests) ... ok
+test_plugin_rejects_auto_approval_and_direct_writes (tests.test_gate4.NativeTests) ... ok
+test_provider_credential_profile_blocks_dispatch (tests.test_gate4.NativeTests) ... ok
+test_unknown_operation_and_target_override_rejected (tests.test_gate4.NativeTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 12.308s
+
+OK
