@@ -118,6 +118,11 @@ def execute(path, identifier, action_key, payload, provider_token):
             action_id = previous['id']
         else:
             action_id = str(uuid.uuid4())
+            if artifact['schema_version'] == 4:
+                from .http_json import prepare_request
+                # Check credentials and bindings before creating authorization.
+                prepare_request(artifact, 'write', action_id, payload)
+                prepare_request(artifact, 'read', action_id, payload)
             db.execute('INSERT INTO actions VALUES(?,?,?,?,?,?,NULL)',
                        (action_id, scope, identifier, action_key, canonical(payload), 'IN_DOUBT'))
             event(db, action_id, 'AUTHORIZED', {'target': artifact['target']})
@@ -125,7 +130,10 @@ def execute(path, identifier, action_key, payload, provider_token):
         # Even an IN_DOUBT record must not allocate a replacement attempt.
         return result(path, action_id)
     try:
-        if artifact['schema_version'] == 3:
+        if artifact['schema_version'] == 4:
+            from .http_json import call
+            receipt = call(artifact, 'write', action_id, payload)
+        elif artifact['schema_version'] == 3:
             from .github import write
             receipt = write(artifact, action_id, payload, provider_token)
         else:
@@ -149,7 +157,10 @@ def verify(path, action_id, receipt_token):
     with storage.connect(path) as db:
         artifact = preflight(db, action['connector_digest'])
     try:
-        if artifact['schema_version'] == 3:
+        if artifact['schema_version'] == 4:
+            from .http_json import call
+            receipt = call(artifact, 'read', action_id, action['payload'])
+        elif artifact['schema_version'] == 3:
             from .github import lookup
             receipt = lookup(artifact, action_id, action['payload'], receipt_token)
         else:

@@ -22,8 +22,10 @@ unknown result.
   Docker, a cloud service, or a second AI model.
 
 Works with OpenCode. Other agent tools can connect through
-[MCP](docs/install-mcp.md). Current support covers GitHub issue creation and a
-local test API. Protection applies to writes sent through causalrun.
+[MCP](docs/install-mcp.md). Built-in rules cover GitHub issue creation and a local
+test API. For other HTTP/JSON APIs, your agent can prepare a
+[custom write rule](docs/http-json.md). Protection applies to writes sent through
+causalrun.
 
 ## Install
 
@@ -79,8 +81,12 @@ receipt and timeline.
 
 ## Limits
 
-This is an early project. It does not yet support arbitrary APIs or restore an
+This is an early project. Custom rules support JSON writes and GET evidence reads,
+with bearer tokens, API-key headers, or no authentication. SOAP, file uploads,
+request signing, and OAuth refresh are not supported. It does not restore an
 agent's full task after a crash.
+
+Tests check supplied examples. They do not prove a third-party API's guarantees.
 
 Missing evidence leaves the result unknown (`IN_DOUBT`). It does not prove that
 the write failed. Recovery depends on the application's evidence and access to
@@ -99,6 +105,7 @@ rules, but full ASD-STE100 conformance of model replies is not certified.
 - [Try the local API](docs/test-opencode.md)
 - [Run the full functional test](docs/functional-test.md)
 - [Use MCP with another harness](docs/install-mcp.md)
+- [Set up another HTTP/JSON API](docs/http-json.md)
 - [Documentation and test evidence](docs/README.md)
 
 The installer copies its runtime outside the checkout. Your data stays in the

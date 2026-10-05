@@ -1,0 +1,7 @@
+{
+  "command": "python3 -m tests.demo_http_live --resume docs/results/http-gate-d/live-20261005T014720Z.json",
+  "result": "Driver failed before recovery",
+  "error": "Relative report path could not be compared with the absolute repository path",
+  "provider_requests": 0,
+  "fix": "Resolve the report path before checking its repository-relative location"
+}

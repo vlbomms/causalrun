@@ -28,7 +28,7 @@ def http(origin, path, body=None):
         return json.loads(data) if data else None
 
 
-def demonstration(after_restart=None, model_factory=create_model, global_config=False, new_session_probe=False):
+def demonstration(after_restart=None, model_factory=create_model, global_config=False, new_session_probe=False, generic=False):
     report = {'recorded_at': datetime.now(timezone.utc).isoformat(), 'command': 'python3 -m tests.demo_gate4',
               'opencode': subprocess.check_output([str(BINARY), '--version'], text=True).strip(),
               'model': 'Scripted local OpenAI-compatible tool-call fixture, no paid/model inference',
@@ -49,9 +49,20 @@ def demonstration(after_restart=None, model_factory=create_model, global_config=
         report['installation'] = json.loads(install.stdout)
         settings = json.loads((config / 'opencode.json').read_text())
         assert settings['username'] == 'acceptance-user'
-        provider = create_server(str(folder / 'provider.sqlite'), 0, 'gate4-provider-write-token', receipt_token='gate4-provider-read-token')
-        provider.fault_mode = 'drop_response'
-        provider_thread = threading.Thread(target=provider.serve_forever, daemon=True); provider_thread.start()
+        if generic:
+            from tests.test_http_json import provider as create_json_provider
+            provider, provider_thread = create_json_provider()
+            provider.fault = 'drop_response'
+        else:
+            provider = create_server(str(folder / 'provider.sqlite'), 0, 'gate4-provider-write-token', receipt_token='gate4-provider-read-token')
+            provider.fault_mode = 'drop_response'
+            provider_thread = threading.Thread(target=provider.serve_forever, daemon=True); provider_thread.start()
+        def oracle():
+            if generic:
+                return {'objects': len(provider.objects), 'writes': provider.writes}
+            with sqlite3.connect(folder / 'provider.sqlite') as db:
+                return {'objects': db.execute('SELECT count(*) FROM values_and_receipts').fetchone()[0],
+                        'writes': db.execute('SELECT count(*) FROM requests').fetchone()[0]}
         target = 'http://127.0.0.1:' + str(provider.server_port)
         model = model_factory(target)
         workflow_started = time.monotonic()
@@ -68,6 +79,8 @@ export default async () => ({tool:{http_request:tool({description:"Test direct w
                    XDG_DATA_HOME=str(folder / 'xdg-data'), XDG_CACHE_HOME=str(folder / 'xdg-cache'),
                    XDG_STATE_HOME=str(folder / 'xdg-state'), OPENCODE_DISABLE_MODELS_FETCH='true',
                    CAUSALRUN_PROVIDER_TOKEN='gate4-provider-write-token', CAUSALRUN_RECEIPT_TOKEN='gate4-provider-read-token')
+        if generic:
+            env.update(TEST_WRITE_TOKEN='disposable-write-secret', TEST_READ_TOKEN='disposable-read-secret')
         if global_config:
             env.pop('OPENCODE_CONFIG_DIR', None)
         processes = []
@@ -138,12 +151,10 @@ export default async () => ({tool:{http_request:tool({description:"Test direct w
                                   {'step': 'provider commit, response lost', 'state': writes[1]['state'], 'action_id': writes[1]['id']},
                                   {'step': 'read recovery and repeated key', 'state': writes[2]['state'], 'action_id': writes[2]['id']}]
             service = json.loads((state / 'service.json').read_text()); service_pid = service['pid']
-            with sqlite3.connect(folder / 'provider.sqlite') as db:
-                counts = {'objects': db.execute('SELECT count(*) FROM values_and_receipts').fetchone()[0],
-                          'writes': db.execute('SELECT count(*) FROM requests').fetchone()[0]}
+            counts = oracle()
             report['first_counts'] = counts
             assert counts == {'objects': 1, 'writes': 1}, counts
-            assert len(report['questions']) == 1 and len(report['permissions']) == 1
+            assert len(report['questions']) == (0 if generic else 1) and len(report['permissions']) == 1
             with sqlite3.connect(state / 'runtime.sqlite') as db:
                 action = db.execute('SELECT id,state,receipt FROM actions').fetchone()
                 approvals = db.execute('SELECT count(*) FROM approvals').fetchone()[0]
@@ -160,9 +171,7 @@ export default async () => ({tool:{http_request:tool({description:"Test direct w
             service = json.loads((state / 'service.json').read_text()); service_pid = service['pid']
             report['restart_schedule']['after'] = service
             assert service['instance'] != report['restart_schedule']['before']['instance']
-            with sqlite3.connect(folder / 'provider.sqlite') as db:
-                final = {'objects': db.execute('SELECT count(*) FROM values_and_receipts').fetchone()[0],
-                         'writes': db.execute('SELECT count(*) FROM requests').fetchone()[0]}
+            final = oracle()
             report['final_counts'] = final
             assert final == counts
             assert len(report['permissions']) == 1
@@ -185,12 +194,12 @@ export default async () => ({tool:{http_request:tool({description:"Test direct w
                 service_pid = restarted['pid']
                 report['new_session_startup'] = {'session_id': new_session['id'], 'started_without_tool_call': True,
                                                 'instance': restarted['instance'], 'pid': service_pid}
-                with sqlite3.connect(folder / 'provider.sqlite') as db:
-                    assert db.execute('SELECT count(*) FROM requests').fetchone()[0] == 1
+                assert oracle()['writes'] == 1
                 report['passed'] += 1
             report['workflow_elapsed_seconds'] = time.monotonic() - workflow_started
             if after_restart is not None:
                 report['second_harness'] = after_restart(folder, state, target, action, env)
+                assert oracle() == final
                 report['passed'] += 1
         except Exception as error:
             report['failed'] += 1

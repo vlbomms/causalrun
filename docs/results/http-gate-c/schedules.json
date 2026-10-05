@@ -1,0 +1,236 @@
+[
+  {
+    "schedule": "before_authorization_commit",
+    "process_exit": 71,
+    "action": {
+      "id": "12ae03a4-9981-449b-953d-94d2916874b6",
+      "connector_digest": "2f63191f9e7b5342ba486fcf82fa2da28c7ac4984234f18e8bf5e6fb4f9c0951",
+      "action_key": "before_authorization_commit",
+      "payload": {
+        "value": "hello"
+      },
+      "state": "COMMITTED",
+      "receipt": {
+        "entry": {
+          "client_id": "12ae03a4-9981-449b-953d-94d2916874b6",
+          "value": "hello"
+        }
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "kind": "AUTHORIZED",
+          "detail": {
+            "target": "http://127.0.0.1:60926"
+          },
+          "recorded_at": "2026-10-05T01:39:09.962627+00:00"
+        },
+        {
+          "sequence": 2,
+          "kind": "RECEIPT_RECORDED",
+          "detail": {
+            "entry": {
+              "client_id": "12ae03a4-9981-449b-953d-94d2916874b6",
+              "value": "hello"
+            }
+          },
+          "recorded_at": "2026-10-05T01:39:09.966402+00:00"
+        }
+      ]
+    },
+    "writes_after_schedule": 1,
+    "objects_total": 1
+  },
+  {
+    "schedule": "after_authorization_commit",
+    "process_exit": 71,
+    "action": {
+      "id": "24aff09d-4d2d-491a-af3c-b6eb322f0f7c",
+      "connector_digest": "80bab9c821575a1aa1bb82884bc01ad4ff61204035895a19598cb2004cd79cd1",
+      "action_key": "after_authorization_commit",
+      "payload": {
+        "value": "hello"
+      },
+      "state": "IN_DOUBT",
+      "receipt": null,
+      "events": [
+        {
+          "sequence": 3,
+          "kind": "AUTHORIZED",
+          "detail": {
+            "target": "http://127.0.0.1:60926"
+          },
+          "recorded_at": "2026-10-05T01:39:10.036343+00:00"
+        },
+        {
+          "sequence": 4,
+          "kind": "VERIFICATION_UNKNOWN",
+          "detail": {
+            "reason": "No matching authoritative receipt"
+          },
+          "recorded_at": "2026-10-05T01:39:10.044299+00:00"
+        }
+      ]
+    },
+    "writes_after_schedule": 0,
+    "objects_total": 1
+  },
+  {
+    "schedule": "after_provider_commit",
+    "process_exit": 71,
+    "action": {
+      "id": "0ade02cb-ec14-481a-b728-0f463ae4e4d2",
+      "connector_digest": "80ae2458b075a8915a4093a059fd8ae96edd0f4d090b8eeff70c89916fb83afe",
+      "action_key": "after_provider_commit",
+      "payload": {
+        "value": "hello"
+      },
+      "state": "COMMITTED",
+      "receipt": {
+        "entry": {
+          "client_id": "0ade02cb-ec14-481a-b728-0f463ae4e4d2",
+          "value": "hello"
+        }
+      },
+      "events": [
+        {
+          "sequence": 5,
+          "kind": "AUTHORIZED",
+          "detail": {
+            "target": "http://127.0.0.1:60926"
+          },
+          "recorded_at": "2026-10-05T01:39:10.112482+00:00"
+        },
+        {
+          "sequence": 6,
+          "kind": "VERIFIED_SUCCESS",
+          "detail": {
+            "entry": {
+              "client_id": "0ade02cb-ec14-481a-b728-0f463ae4e4d2",
+              "value": "hello"
+            }
+          },
+          "recorded_at": "2026-10-05T01:39:10.123620+00:00"
+        }
+      ]
+    },
+    "writes_after_schedule": 1,
+    "objects_total": 2
+  },
+  {
+    "schedule": "after_receipt_commit",
+    "process_exit": 71,
+    "action": {
+      "id": "1c934684-bfa3-4dcd-bad2-ef5b4e54d6cc",
+      "connector_digest": "03a76f8fc0cbf66f7c32a3bcad904752f7b0fc5a3c86aea2c306fd51f6e2dad3",
+      "action_key": "after_receipt_commit",
+      "payload": {
+        "value": "hello"
+      },
+      "state": "COMMITTED",
+      "receipt": {
+        "entry": {
+          "client_id": "1c934684-bfa3-4dcd-bad2-ef5b4e54d6cc",
+          "value": "hello"
+        }
+      },
+      "events": [
+        {
+          "sequence": 7,
+          "kind": "AUTHORIZED",
+          "detail": {
+            "target": "http://127.0.0.1:60926"
+          },
+          "recorded_at": "2026-10-05T01:39:10.191484+00:00"
+        },
+        {
+          "sequence": 8,
+          "kind": "RECEIPT_RECORDED",
+          "detail": {
+            "entry": {
+              "client_id": "1c934684-bfa3-4dcd-bad2-ef5b4e54d6cc",
+              "value": "hello"
+            }
+          },
+          "recorded_at": "2026-10-05T01:39:10.195103+00:00"
+        }
+      ]
+    },
+    "writes_after_schedule": 1,
+    "objects_total": 3
+  },
+  {
+    "schedule": "commit/drop response; missing/wrong/unavailable evidence; visible evidence",
+    "action": {
+      "id": "9a9ecf27-49fd-4101-8fb1-aa8fcc2f2b72",
+      "connector_digest": "2c307a2efcd3c88c8ff8966d08367166de12ae7cd0803fedc3a4623a075e98e1",
+      "action_key": "lost",
+      "payload": {
+        "value": "hello"
+      },
+      "state": "COMMITTED",
+      "receipt": {
+        "entry": {
+          "client_id": "9a9ecf27-49fd-4101-8fb1-aa8fcc2f2b72",
+          "value": "hello"
+        }
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "kind": "AUTHORIZED",
+          "detail": {
+            "target": "http://127.0.0.1:60950"
+          },
+          "recorded_at": "2026-10-05T01:39:10.732695+00:00"
+        },
+        {
+          "sequence": 2,
+          "kind": "OUTCOME_UNCONFIRMED",
+          "detail": {
+            "reason": "No durable matching receipt"
+          },
+          "recorded_at": "2026-10-05T01:39:10.735705+00:00"
+        },
+        {
+          "sequence": 3,
+          "kind": "VERIFICATION_UNKNOWN",
+          "detail": {
+            "reason": "No matching authoritative receipt"
+          },
+          "recorded_at": "2026-10-05T01:39:10.743861+00:00"
+        },
+        {
+          "sequence": 4,
+          "kind": "VERIFICATION_UNKNOWN",
+          "detail": {
+            "reason": "No matching authoritative receipt"
+          },
+          "recorded_at": "2026-10-05T01:39:10.758040+00:00"
+        },
+        {
+          "sequence": 5,
+          "kind": "VERIFICATION_UNKNOWN",
+          "detail": {
+            "reason": "No matching authoritative receipt"
+          },
+          "recorded_at": "2026-10-05T01:39:10.767455+00:00"
+        },
+        {
+          "sequence": 6,
+          "kind": "VERIFIED_SUCCESS",
+          "detail": {
+            "entry": {
+              "client_id": "9a9ecf27-49fd-4101-8fb1-aa8fcc2f2b72",
+              "value": "hello"
+            }
+          },
+          "recorded_at": "2026-10-05T01:39:10.778676+00:00"
+        }
+      ]
+    },
+    "writes": 1,
+    "objects": 1,
+    "reads": 4
+  }
+]

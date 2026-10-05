@@ -16,6 +16,10 @@ Check the request fields, authentication, permissions, and result checks. Use sa
 Use the docs and the user's request to find the required result.
 Do not ask what success means when it is clear.
 Omit answers.expected_behavior to use documented_success.
+For http.json.write.v1, infer expected behavior from the request and docs, then put it in contract.expected.
+Use a stable name and exact target origin. Send the declarative contract with causalrun_prepare.
+Use environment secret names. Never put secret values in the contract or chat.
+Declare correlation and its limits. Do not infer failed execution from missing evidence.
 If the required result is unclear, set needs_success_clarification=true. Ask one question and supply the user's answer.
 Ask only for missing consent or intent. Use consent already given in this conversation.
 Write a pure Python verify(action_id, payload, evidence) expression. Do not use imports, network calls, or side effects.
@@ -47,9 +51,9 @@ function reviewSummary(review) {
   return {
     connector_digest: review.connector_digest, report_digest: review.report_digest,
     write: artifact.operation, target: artifact.repository || artifact.target,
-    result: artifact.expected.description,
+    result: typeof artifact.expected === "string" ? artifact.expected : artifact.expected.description,
     tests: `${review.validation.passed} passed. ${review.validation.failed} failed.`,
-    limits: artifact.schema_version === 3
+    limits: artifact.schema_version === 4 ? artifact.limitations.join(". ") : artifact.schema_version === 3
       ? "A copied or changed marker can give incorrect evidence. The search has a limit. Missing evidence does not prove failure."
       : "Missing evidence does not prove failure.",
     review_file: review.review_file,
@@ -81,9 +85,10 @@ export async function createPlugin(ctx, tool, installation) {
   }
 
   const scopeArgs = {
-    operation: tool.schema.enum(["github.issue.create.v1", "controlled.value.create.v1"]),
+    operation: tool.schema.enum(["github.issue.create.v1", "controlled.value.create.v1", "http.json.write.v1"]),
+    name: tool.schema.string().optional().describe("Stable operation name for a generic HTTP/JSON API"),
     repository: tool.schema.string().optional().describe("GitHub owner/repository; never a URL override"),
-    target: tool.schema.string().optional().describe("Controlled fixture loopback origin only"),
+    target: tool.schema.string().optional().describe("Exact HTTPS origin or controlled loopback HTTP origin"),
     needs_success_clarification: tool.schema.boolean().optional().describe("True only when the existing request and API docs leave a material success ambiguity; resolve it before preparation"),
   };
 
@@ -108,13 +113,14 @@ export async function createPlugin(ctx, tool, installation) {
     },
     tool: {
       causalrun_write: tool({
-        description: "Create a GitHub issue or controlled value through a durable approved connector. First use returns preparation instructions without sending. Never create a new key to retry uncertainty.",
-        args: { ...scopeArgs, action_key: tool.schema.string(), payload: tool.schema.record(tool.schema.string(), tool.schema.string()) },
+        description: "Send an approved HTTP/JSON API write, GitHub issue, or controlled value. First use returns preparation instructions without sending. Never create a new key to retry uncertainty.",
+        args: { ...scopeArgs, action_key: tool.schema.string(), payload: tool.schema.record(tool.schema.string(), tool.schema.unknown()) },
         async execute(args) {
           const prepared = await api("/native/lookup", args);
           if (!prepared.ready) return display({ status: "PREPARATION_REQUIRED", message: messages.PREPARATION_REQUIRED,
             scope: prepared.scope, discovery_sources: prepared.discovery_sources, authentication: prepared.authentication,
             questions: prepared.questions, documented_success: prepared.documented_success,
+            contract_format: prepared.contract_format,
             verifier_contract: prepared.verifier_contract });
           return display(actionSummary(await api("/v1/actions", { connector_digest: prepared.connector_digest,
             action_key: args.action_key, payload: args.payload })));
@@ -122,7 +128,8 @@ export async function createPlugin(ctx, tool, installation) {
       }),
       causalrun_prepare: tool({
         description: "Package host-agent-written verifier and unresolved-question answers. Omit expected_behavior when documented success is clear. Validate in a disposable fixture and request exact review; never send to the configured target.",
-        args: { ...scopeArgs, source: tool.schema.string(), answers: tool.schema.record(tool.schema.string(), tool.schema.string()), api_version: tool.schema.string().optional() },
+        args: { ...scopeArgs, source: tool.schema.string(), answers: tool.schema.record(tool.schema.string(), tool.schema.string()), api_version: tool.schema.string().optional(),
+          contract: tool.schema.record(tool.schema.string(), tool.schema.unknown()).optional().describe("Declarative HTTP contract from discovery; required for http.json.write.v1") },
         async execute(args, context) {
           const review = await api("/native/prepare", args);
           const summary = reviewSummary(review);

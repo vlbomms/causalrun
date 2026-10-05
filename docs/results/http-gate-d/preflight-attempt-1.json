@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-05T01:41:35.820110+00:00",
+  "command": "Build generic GitHub contract; evaluate object, list, conflicting-match fixtures",
+  "result": "Rejected before fixture evaluation",
+  "error": "Invalid bounded page-number pagination",
+  "cause": "Header-name syntax was incorrectly applied to per_page query parameter",
+  "provider_requests": 0,
+  "provider_writes": 0,
+  "fix": "Validate pagination names as bounded query names, not HTTP header names"
+}

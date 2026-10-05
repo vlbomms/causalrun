@@ -1,5 +1,10 @@
 # Generated recovery connector implementation gates
 
+The [HTTP/JSON API expansion](generic-api.md) passes gates A–D within their declared
+scope: generic requests, recovery, shared harness use, and one live sandbox issue.
+See [final evidence](results/http-gate-d/README.md), including failed checks and
+read-only resumption. The five original gates below describe the initial implementation.
+
 This is the sole active roadmap. The previous code and results were removed from
 the checkout at the user's request; Git history retains them. Gate 1 evidence is
 recorded in [gate-1.md](gate-1.md): 17 tests and 8 demonstration steps passed;

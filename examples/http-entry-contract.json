@@ -1,0 +1,29 @@
+{
+  "name": "create-entry",
+  "target": "http://127.0.0.1:8081",
+  "api_version": "fixture-1",
+  "expected": "An entry exists with this action's client ID and exact requested value",
+  "adapter": {
+    "write": {
+      "method": "POST", "path": ["entries"], "query": {}, "headers": {}, "statuses": [201],
+      "body": {"client_id": {"$bind": "action_id"}, "value": {"$bind": "payload", "path": ["value"]}}
+    },
+    "read": {
+      "method": "GET", "path": ["entries", {"$bind": "action_id"}], "query": {}, "headers": {}, "statuses": [200]
+    }
+  },
+  "authentication": {
+    "write": {"type": "bearer", "secret": "CAUSALRUN_HTTP_WRITE_TOKEN"},
+    "read": {"type": "api_key", "secret": "CAUSALRUN_HTTP_READ_TOKEN", "header": "X-Read-Key"}
+  },
+  "fixture": {
+    "payload": {"value": "hello"},
+    "different_payload": {"value": "other"},
+    "evidence": {"entry": {"client_id": {"$bind": "action_id"}, "value": "hello"}}
+  },
+  "limitations": [
+    "Missing evidence does not prove non-execution",
+    "Fixture checks do not prove provider guarantees"
+  ],
+  "sources": ["Official API documentation must describe this client ID and lookup behavior; replace this example with your API's source"]
+}

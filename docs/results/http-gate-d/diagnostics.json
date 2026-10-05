@@ -1,0 +1,16 @@
+{
+  "purpose": "Inspect the initial failed listing assertion without sending another write",
+  "successful_read_commands": [
+    "gh api repos/vlbomms/tempo/issues/3 --jq {number,title,body,author:.user.login,repository_url}",
+    "gh api --paginate --slurp repos/vlbomms/tempo/issues?state=all&per_page=100 (parsed in Python)"
+  ],
+  "provider_reads": 2,
+  "observation": "Issue 3 existed with the original exact marker and creator; a later listing contained it once",
+  "invalid_cli_attempt": {
+    "command": "gh api --paginate --slurp ... --jq ...",
+    "error": "--slurp does not support --jq in gh 2.66.0",
+    "provider_requests": 0
+  },
+  "initial_repository_and_user_configuration_reads": 2,
+  "scope": "These reads are separate from the live connector/oracle counters"
+}

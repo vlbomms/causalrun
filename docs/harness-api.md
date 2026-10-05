@@ -18,14 +18,17 @@ metadata is accepted. Resources, prompts, streaming HTTP, and pagination are abs
 | Tool | Inputs | Behavior |
 | --- | --- | --- |
 | `causalrun_lookup` | `operation`, `target` or `repository` | Approved binding or discovery/authentication/interview guidance |
-| `causalrun_prepare` | Scope, `source`, `answers`, controlled `api_version` | Persist and validate source in disposable fixtures; return full review and validation report |
+| `causalrun_prepare` | Scope, `source`, `answers`, controlled `api_version` or generic `contract` | Persist and validate source in disposable fixtures; return full review and validation report |
 | `causalrun_write` | Scope, `action_key`, `payload` | Hold first use or execute exact approved connector; duplicate keys never resend |
 | `causalrun_verify` | `action_id` | Read provider evidence for the original obligation; persist a supported positive result |
 | `causalrun_result` | `action_id` | Read saved action, receipt, and journal without a provider request |
 
-Operations: `controlled.value.create.v1` with loopback `target`, or
-`github.issue.create.v1` with `owner/repository`. `answers` and `payload` are string-valued
-objects. The controlled payload has `value`; GitHub has `title` and `body`.
+Operations: `controlled.value.create.v1` with loopback `target`,
+`github.issue.create.v1` with `owner/repository`, or `http.json.write.v1` with exact
+`target` origin and stable `name`. `answers` is a string-valued object. `payload`
+is a JSON object; built-in profiles still require string `value` or `title`/`body`.
+Generic preparation adds a declarative `contract`; see [HTTP/JSON rules](http-json.md).
+Generic scope includes `name`, so keep it stable across harnesses and sessions.
 Omit `answers.expected_behavior` when the request and documentation establish the
 profile's success predicate. `needs_success_clarification=true` adds the success
 question and requires its answer before preparation; resolve it before sending a
@@ -34,7 +37,9 @@ Sandbox/marker authorization must still be supplied from actual user consent.
 
 `source` is `def verify(action_id, payload, evidence)` with one pure boolean return
 expression; the preparation guidance lists supported fields and language limits.
-The agent must discover the actual API and obtain actual user answers before preparing.
+The agent must discover the actual API and obtain actual answers for unresolved questions before preparing.
+Generic rules store inferred success in `contract.expected`. A flagged ambiguity
+requires `answers.expected_behavior`. Pure fixture validation sends no remote requests.
 
 Tools have no approval operation. Preparation returns `REVIEW_REQUIRED` or
 `VALIDATION_FAILED`. A write without approval returns `PREPARATION_REQUIRED`.

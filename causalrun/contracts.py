@@ -25,7 +25,7 @@ def implementation_digest():
     sources = {name: (directory / name).read_text()
                for name in ('contracts.py', 'runtime.py', 'transport.py',
                             'validation.py', 'storage.py', 'server.py', '__main__.py',
-                            'discovery.py', 'generation.py', 'verifiers.py', 'validation_generated.py', 'github.py', 'validation_github.py', 'native.py', 'installer.py', 'mcp.py')}
+                            'discovery.py', 'generation.py', 'verifiers.py', 'validation_generated.py', 'github.py', 'validation_github.py', 'native.py', 'installer.py', 'mcp.py', 'http_json.py', 'validation_http.py')}
     sources['examples/provider.py'] = (directory.parent / 'examples/provider.py').read_text()
     sources['examples/openapi.json'] = (directory.parent / 'examples/openapi.json').read_text()
     sources['adapters/opencode/plugin.mjs'] = (directory.parent / 'adapters/opencode/plugin.mjs').read_text()
@@ -40,12 +40,23 @@ def check_artifact(artifact):
         required |= {'adapter', 'authentication', 'interview', 'api_version'}
     if isinstance(artifact, dict) and artifact.get('schema_version') == 3:
         required |= {'repository', 'author'}
+    if isinstance(artifact, dict) and artifact.get('schema_version') == 4:
+        required |= {'adapter', 'authentication', 'api_version', 'fixture'}
     if not isinstance(artifact, dict) or set(artifact) != required:
         raise Rejected('Connector requires exactly the documented fields', 400)
-    if artifact['schema_version'] not in (1, 2, 3) or artifact['version'] != 1:
+    if artifact['schema_version'] not in (1, 2, 3, 4) or artifact['version'] != 1:
         raise Rejected('Unsupported contract version', 400)
     if not isinstance(artifact['name'], str) or not artifact['name'].strip():
         raise Rejected('Connector name required', 400)
+    if artifact['schema_version'] == 4:
+        from .http_json import check_metadata
+        check_metadata(artifact)
+        if not isinstance(artifact['sources'], list) or not artifact['sources']:
+            raise Rejected('Evidence sources required', 400)
+        if artifact['implementation'] != implementation_digest():
+            raise Rejected('Implementation changed; regenerate, validate, and approve')
+        canonical(artifact)
+        return
     if artifact['schema_version'] == 3:
         check_github_artifact(artifact)
         return
@@ -93,6 +104,14 @@ def check_artifact(artifact):
 
 
 def check_payload(payload, artifact=None):
+    if artifact is not None and artifact['schema_version'] == 4:
+        if not isinstance(payload, dict) or len(canonical(payload).encode()) > 65536:
+            raise Rejected('Generic payload must be a JSON object at most 64 KiB', 400)
+        from .http_json import route, binding
+        for kind in ('write', 'read'):
+            route(artifact['adapter'][kind], 'preflight-action', payload)
+        binding(artifact['adapter']['write']['body'], 'preflight-action', payload)
+        return
     if artifact is not None and artifact['schema_version'] == 3:
         from .github import check_payload as check_issue_payload
         return check_issue_payload(payload)
@@ -102,7 +121,7 @@ def check_payload(payload, artifact=None):
 
 
 def check_receipt(receipt, action_id, payload, artifact=None):
-    if artifact is not None and artifact['schema_version'] in (2, 3):
+    if artifact is not None and artifact['schema_version'] in (2, 3, 4):
         from .verifiers import confirms
         if not confirms(artifact['verifier']['source'], action_id, payload, receipt):
             raise Rejected('Generated verifier could not confirm the expected result')
@@ -127,6 +146,9 @@ def example_artifact(target):
 
 
 def validation_case_names(artifact):
+    if artifact['schema_version'] == 4:
+        from .http_json import CASE_NAMES
+        return CASE_NAMES
     if artifact['schema_version'] == 3:
         from .github import CASE_NAMES
         return CASE_NAMES

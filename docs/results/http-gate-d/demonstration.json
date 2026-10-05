@@ -1,0 +1,157 @@
+{
+  "schedule": "register, fixture validation, explicit test approval, write, repeat for each shape",
+  "approval": "Test harness invokes operator function; no human or OpenCode approval demonstration",
+  "actions": [
+    {
+      "shape": "entry",
+      "method": "POST",
+      "validation": {
+        "connector_digest": "76b116da7f54610bcc435dd6790b054e33a16eb82fc0ecdbc2c3df7f479196d8",
+        "checked_at": "2026-10-05T01:46:48.528957+00:00",
+        "scope": "Supplied pure fixtures only; no remote requests or provider guarantee proof",
+        "passed": 4,
+        "failed": 0,
+        "provider_requests": 0,
+        "cases": [
+          {
+            "name": "matching_evidence",
+            "passed": true
+          },
+          {
+            "name": "missing_evidence",
+            "passed": true
+          },
+          {
+            "name": "wrong_action",
+            "passed": true
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true
+          }
+        ]
+      },
+      "action": {
+        "id": "733d0c32-54a1-4cc2-84f3-b08ecb5d7d8f",
+        "connector_digest": "76b116da7f54610bcc435dd6790b054e33a16eb82fc0ecdbc2c3df7f479196d8",
+        "action_key": "demo/entry",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "entry": {
+            "client_id": "733d0c32-54a1-4cc2-84f3-b08ecb5d7d8f",
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:51123"
+            },
+            "recorded_at": "2026-10-05T01:46:48.535705+00:00"
+          },
+          {
+            "sequence": 2,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "entry": {
+                "client_id": "733d0c32-54a1-4cc2-84f3-b08ecb5d7d8f",
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-05T01:46:48.539555+00:00"
+          }
+        ]
+      },
+      "repeated_action_id": "733d0c32-54a1-4cc2-84f3-b08ecb5d7d8f"
+    },
+    {
+      "shape": "record",
+      "method": "PUT",
+      "validation": {
+        "connector_digest": "36ba1a8ebcb18b238ed5e1c3627724572375129a4ca0d95391a880b9f2cfd9bf",
+        "checked_at": "2026-10-05T01:46:48.547990+00:00",
+        "scope": "Supplied pure fixtures only; no remote requests or provider guarantee proof",
+        "passed": 4,
+        "failed": 0,
+        "provider_requests": 0,
+        "cases": [
+          {
+            "name": "matching_evidence",
+            "passed": true
+          },
+          {
+            "name": "missing_evidence",
+            "passed": true
+          },
+          {
+            "name": "wrong_action",
+            "passed": true
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true
+          }
+        ]
+      },
+      "action": {
+        "id": "3a0da83b-12ba-4f2e-a9b6-9ab8858e6eac",
+        "connector_digest": "36ba1a8ebcb18b238ed5e1c3627724572375129a4ca0d95391a880b9f2cfd9bf",
+        "action_key": "demo/record",
+        "payload": {
+          "value": "hello"
+        },
+        "state": "COMMITTED",
+        "receipt": {
+          "record": {
+            "client_id": "3a0da83b-12ba-4f2e-a9b6-9ab8858e6eac",
+            "value": "hello"
+          }
+        },
+        "events": [
+          {
+            "sequence": 3,
+            "kind": "AUTHORIZED",
+            "detail": {
+              "target": "http://127.0.0.1:51123"
+            },
+            "recorded_at": "2026-10-05T01:46:48.553739+00:00"
+          },
+          {
+            "sequence": 4,
+            "kind": "RECEIPT_RECORDED",
+            "detail": {
+              "record": {
+                "client_id": "3a0da83b-12ba-4f2e-a9b6-9ab8858e6eac",
+                "value": "hello"
+              }
+            },
+            "recorded_at": "2026-10-05T01:46:48.557547+00:00"
+          }
+        ]
+      },
+      "repeated_action_id": "3a0da83b-12ba-4f2e-a9b6-9ab8858e6eac"
+    }
+  ],
+  "oracle": {
+    "write_requests": 2,
+    "read_requests": 0,
+    "objects": 2,
+    "stored_values": [
+      {
+        "client_id": "733d0c32-54a1-4cc2-84f3-b08ecb5d7d8f",
+        "value": "hello"
+      },
+      {
+        "client_id": "3a0da83b-12ba-4f2e-a9b6-9ab8858e6eac",
+        "value": "hello"
+      }
+    ]
+  },
+  "passed": 2,
+  "failed": 0
+}

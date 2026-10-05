@@ -6,8 +6,19 @@ ALLOWED = (
     ast.Expression, ast.BoolOp, ast.And, ast.Or, ast.UnaryOp, ast.Not,
     ast.Compare, ast.Eq, ast.NotEq, ast.In, ast.NotIn,
     ast.Name, ast.Load, ast.Constant, ast.Subscript, ast.Call,
+    ast.BinOp, ast.Add,
 )
-NAMES = {'action_id', 'payload', 'evidence', 'isinstance', 'dict', 'digest'}
+NAMES = {'action_id', 'payload', 'evidence', 'isinstance', 'dict', 'digest', 'unique_match'}
+
+
+def unique_match(items, field, value):
+    """Return one exact field match; missing or conflicting evidence stays unknown."""
+    if isinstance(items, dict):
+        items = [items]
+    if not isinstance(items, list) or len(items) > 1000 or not isinstance(field, str):
+        return None
+    matches = [item for item in items if isinstance(item, dict) and item.get(field) == value]
+    return matches[0] if len(matches) == 1 else None
 
 
 def compile_verifier(source):
@@ -49,10 +60,13 @@ def compile_verifier(source):
                 raise Rejected('Verifier calls must use the supported helpers', 400)
             if node.func.id == 'digest' and len(node.args) == 1:
                 continue
+            if (node.func.id == 'unique_match' and len(node.args) == 3
+                    and isinstance(node.args[1], ast.Constant) and isinstance(node.args[1].value, str)):
+                continue
             if (node.func.id == 'isinstance' and len(node.args) == 2
                     and isinstance(node.args[1], ast.Name) and node.args[1].id == 'dict'):
                 continue
-            raise Rejected('Only digest(value) and isinstance(value, dict) are permitted', 400)
+            raise Rejected('Only digest, unique_match, and isinstance(value, dict) are permitted', 400)
     # This compiles only the whitelisted expression, never the supplied module.
     return compile(ast.fix_missing_locations(expression), '<approved-verifier>', 'eval')
 
@@ -63,6 +77,7 @@ def confirms(source, action_id, payload, evidence):
         answer = eval(expression, {'__builtins__': {}}, {
             'action_id': action_id, 'payload': payload, 'evidence': evidence,
             'isinstance': isinstance, 'dict': dict, 'digest': digest,
+            'unique_match': unique_match,
         })
         # Truthy objects are insufficient, and false never means non-execution.
         return answer is True

@@ -9,19 +9,21 @@ from .contracts import Rejected, canonical
 from .transport import request
 
 VERSIONS = ('2024-11-05', '2025-03-26', '2025-06-18', '2025-11-25')
-SCOPE = {'operation': {'type': 'string', 'enum': ['controlled.value.create.v1', 'github.issue.create.v1']},
+SCOPE = {'operation': {'type': 'string', 'enum': ['controlled.value.create.v1', 'github.issue.create.v1', 'http.json.write.v1']},
+         'name': {'type': 'string', 'description': 'Stable operation name for a generic HTTP connector'},
          'needs_success_clarification': {'type': 'boolean', 'description': 'True when API docs and user request leave material success ambiguity; resolve before prepare'},
-         'target': {'type': 'string', 'description': 'Controlled loopback origin only'},
+         'target': {'type': 'string', 'description': 'Exact HTTPS origin; loopback HTTP for controlled tests'},
          'repository': {'type': 'string', 'description': 'GitHub owner/repository'}}
 STRINGS = {'type': 'object', 'additionalProperties': {'type': 'string'}}
+JSON_OBJECT = {'type': 'object', 'additionalProperties': True}
 TOOLS = [
     {'name': 'causalrun_lookup', 'description': 'Inspect approval or receive API discovery and user-question guidance. No write.',
      'properties': SCOPE, 'required': ['operation'], 'read_only': True},
     {'name': 'causalrun_prepare', 'description': 'Package host-agent-written pure verifier and actual user answers; validate only in disposable fixtures. Returns an exact review for operator approval. No approval tool exists.',
-     'properties': dict(SCOPE, source={'type': 'string'}, answers=STRINGS, api_version={'type': 'string'}),
+     'properties': dict(SCOPE, source={'type': 'string'}, answers=STRINGS, api_version={'type': 'string'}, contract=JSON_OBJECT),
      'required': ['operation', 'source', 'answers'], 'read_only': False},
     {'name': 'causalrun_write', 'description': 'Dispatch only an approved connector. Reuse the same action_key and payload across retries and harnesses. IN_DOUBT never resends.',
-     'properties': dict(SCOPE, action_key={'type': 'string'}, payload=STRINGS),
+     'properties': dict(SCOPE, action_key={'type': 'string'}, payload=JSON_OBJECT),
      'required': ['operation', 'action_key', 'payload'], 'read_only': False},
     {'name': 'causalrun_verify', 'description': 'Read-only evidence check for the original action. Missing evidence means unknown, never failure.',
      'properties': {'action_id': {'type': 'string'}}, 'required': ['action_id'], 'read_only': True},
@@ -60,9 +62,11 @@ class Adapter:
                 raise ProtocolError(-32602, 'Expected string field')
             if schema['type'] == 'boolean' and type(value) is not bool:
                 raise ProtocolError(-32602, 'Expected boolean field')
-            if schema['type'] == 'object' and (not isinstance(value, dict) or
-                                               not all(isinstance(k, str) and isinstance(v, str) for k, v in value.items())):
-                raise ProtocolError(-32602, 'Expected string-valued object')
+            if schema['type'] == 'object':
+                if not isinstance(value, dict):
+                    raise ProtocolError(-32602, 'Expected object')
+                if schema.get('additionalProperties') == {'type': 'string'} and not all(isinstance(v, str) for v in value.values()):
+                    raise ProtocolError(-32602, 'Expected string-valued object')
             if 'enum' in schema and value not in schema['enum']:
                 raise ProtocolError(-32602, 'Unsupported operation')
         try:

@@ -16,6 +16,9 @@ from .transport import request
 def validate(path, identifier):
     with storage.connect(path) as db:
         artifact = load_connector(db, identifier)
+    if artifact['schema_version'] == 4:
+        from .validation_http import validate_http
+        return validate_http(path, identifier, artifact)
     if artifact['schema_version'] == 3:
         from .validation_github import validate_github
         return validate_github(path, identifier, artifact)

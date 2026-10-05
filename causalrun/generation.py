@@ -3,6 +3,17 @@ from .contracts import Rejected, check_artifact, implementation_digest
 from .discovery import inspect_api, questions
 
 
+def build_http_contract(contract, source):
+    """Bind an agent's declarative HTTP contract to the executing code."""
+    if not isinstance(contract, dict):
+        raise Rejected('Provide an HTTP contract object', 400)
+    artifact = dict(contract, schema_version=4, version=1,
+                    operation='http.json.write.v1', implementation=implementation_digest(),
+                    verifier={'kind': 'python.receipt.v1', 'source': source})
+    check_artifact(artifact)
+    return artifact
+
+
 def build_contract(interview, verifier_source):
     if set(interview) != {'target', 'source', 'operation_id', 'api_version', 'answers'}:
         raise Rejected('Use the completed interview contract', 400)

@@ -19,6 +19,16 @@ BINDINGS = 'CREATE TABLE IF NOT EXISTS native_bindings (scope TEXT PRIMARY KEY, 
 
 def scope(inputs):
     operation = inputs.get('operation')
+    if operation == 'http.json.write.v1':
+        target, name = inputs.get('target'), inputs.get('name')
+        if not isinstance(target, str) or not isinstance(name, str) or not name.strip():
+            raise Rejected('Provide an exact API origin and stable operation name', 400)
+        url = urlsplit(target)
+        if (not url.hostname or url.username or url.password or url.path or url.query or url.fragment
+                or url.scheme not in ('https', 'http')
+                or (url.scheme == 'http' and (url.hostname != '127.0.0.1' or not url.port))):
+            raise Rejected('Use an exact HTTPS origin or loopback HTTP origin', 400)
+        return {'operation': operation, 'target': target, 'name': name}
     if operation == 'github.issue.create.v1':
         repository = inputs.get('repository')
         if not isinstance(repository, str) or not repository:
@@ -56,6 +66,28 @@ def binding(path, inputs, author=None):
 
 def preparation_guide(fields, author, clarify_success=False):
     """Return actionable contract inputs, not a saved discovery report."""
+    if fields['operation'] == 'http.json.write.v1':
+        question = {'id': 'expected_behavior', 'title': 'What observable application result should count as success?',
+                    'options': ['Describe the required observable change'], 'free_text': True}
+        return {'next': 'Read official docs; define the JSON write, evidence GET, correlation, fixtures, and pure result check; prepare for user review',
+                'discovery_sources': [fields['target'] + '/openapi.json'],
+                'authentication': 'Local environment references: bearer, API-key header, or none. Never put secret values in the contract.',
+                'questions': [question] if clarify_success else [],
+                'documented_success': None, 'success_clarification': question,
+                'contract_format': {'required': ['name', 'target', 'api_version', 'expected', 'adapter',
+                                               'authentication', 'fixture', 'limitations', 'sources'],
+                                    'requests': 'write: method, path segments, query, headers, statuses, body; read: method GET, path, query, headers, statuses; optional pagination',
+                                    'bindings': '{"$bind":"action_id"} or {"$bind":"payload","path":["field"]}; string concatenation: {"$text":[literal, binding]}',
+                                    'authentication': 'write/read each: {type:none}, {type:bearer,secret:ENV_NAME}, or {type:api_key,secret:ENV_NAME,header:X-Key}',
+                                    'fixture': 'payload, different_payload, evidence template for that exact expected result',
+                                    'pagination': 'page-number lists only: {page:query_name,size:query_name,page_size:1..100,limit:1..10}',
+                                    'limitations': ['Missing evidence does not prove non-execution', 'Fixture checks do not prove provider guarantees'],
+                                    'scope_rule': 'name and target must equal the lookup scope. Declare marker or provider-specific assumptions in limitations.'},
+                'verifier_contract': {'signature': 'def verify(action_id, payload, evidence)',
+                                      'helpers': 'digest, isinstance(value, dict), unique_match(items, literal_field, value)',
+                                      'language': 'One pure boolean return expression; string addition, dictionary subscripts, membership, comparisons; no network or imports',
+                                      'false_means': 'Unknown, never failure'},
+                'intent_rule': 'Infer success from the request and docs. Ask only unresolved intent. Approval covers the exact target, correlation, credentials, and limitations. Validation runs only pure supplied fixtures; live probes need separate user authorization.'}
     if fields['operation'] == 'controlled.value.create.v1':
         from .discovery import questions
         prompts = questions()
@@ -107,6 +139,21 @@ def prepare(path, inputs, author):
     if type(clarify_success) is not bool:
         raise Rejected('needs_success_clarification must be a boolean', 400)
     answers = dict(answers)
+    if fields['operation'] == 'http.json.write.v1':
+        contract = inputs.get('contract')
+        if not isinstance(contract, dict) or contract.get('name') != fields['name'] or contract.get('target') != fields['target']:
+            raise Rejected('HTTP contract must match the requested name and origin', 400)
+        contract = dict(contract)
+        if clarify_success:
+            answer = answers.get('expected_behavior')
+            if not isinstance(answer, str) or not answer.strip():
+                raise Rejected('Resolve the success ambiguity before preparation', 400)
+            contract['expected'] = answer
+        artifact = generation.build_http_contract(contract, source)
+        identifier = runtime.register(path, artifact)
+        report = validation.validate(path, identifier)
+        return {'scope': fields, 'connector_digest': identifier, 'report_digest': digest(report),
+                'artifact': artifact, 'validation': report, 'ready': False}
     if 'expected_behavior' not in answers:
         if clarify_success:
             raise Rejected('Resolve the success ambiguity before preparation', 400)
@@ -129,7 +176,7 @@ def prepare(path, inputs, author):
 class NativeHandler(RuntimeHandler):
     def check_scope(self, inputs):
         fields = scope(inputs)
-        if fields['operation'] != self.server.credential_operation:
+        if fields['operation'] != 'http.json.write.v1' and fields['operation'] != self.server.credential_operation:
             raise Rejected('Configured credentials are for another provider profile', 400)
         return fields
 
@@ -149,11 +196,7 @@ class NativeHandler(RuntimeHandler):
             fields = self.check_scope(body['scope'])
             with storage.connect(self.server.db_path) as db:
                 artifact = runtime.load_connector(db, identifier)
-            actual = {'operation': artifact['operation']}
-            if artifact['schema_version'] == 3:
-                actual['repository'] = artifact['repository']
-            else:
-                actual['target'] = artifact['target']
+            actual = scope(artifact)
             if actual != fields:
                 raise Rejected('Approval scope does not match artifact', 400)
             runtime.approve(self.server.db_path, identifier, identifier, body['report_digest'])
@@ -209,6 +252,8 @@ def serve(state):
             author = user['login']
         except Exception:
             pass
+    if author:
+        os.environ.setdefault('CAUSALRUN_GITHUB_TOKEN', provider)
     db_path = str(state / 'runtime.sqlite')
     storage.initialize(db_path)
     with storage.connect(db_path) as db:
@@ -303,8 +348,7 @@ def review(state, identifier):
     confirmation = input('Type the full connector digest to approve: ').strip()
     if confirmation != identifier:
         raise Rejected('Approval confirmation must match the exact connector digest')
-    fields = {'operation': artifact['operation']}
-    fields['repository' if artifact['schema_version'] == 3 else 'target'] = artifact.get('repository', artifact['target'])
+    fields = scope(artifact)
     _, approved = request(service['url'], '/native/approve', service['operator_token'], {
         'connector_digest': identifier, 'report_digest': record['report_digest'], 'scope': fields})
     return approved

@@ -31,6 +31,10 @@ def main():
     github_build.add_argument('--interview', required=True)
     github_build.add_argument('--verifier', required=True)
     github_build.add_argument('--output', required=True)
+    http_build = commands.add_parser('http-build', help='Bind a declarative HTTP/JSON contract to a pure verifier')
+    http_build.add_argument('--contract', required=True)
+    http_build.add_argument('--verifier', required=True)
+    http_build.add_argument('--output', required=True)
     register = commands.add_parser('register')
     register.add_argument('file')
     for command in ('validate', 'approve'):
@@ -63,6 +67,12 @@ def main():
             artifact = generation.build_github_contract(
                 args.repository, args.author, Path(args.verifier).read_text(),
                 json.loads(Path(args.interview).read_text()))
+            Path(args.output).write_text(json.dumps(artifact, indent=2) + '\n')
+            print(json.dumps({'connector_digest': runtime.digest(artifact), 'artifact': args.output}))
+            return 0
+        if args.command == 'http-build':
+            artifact = generation.build_http_contract(json.loads(Path(args.contract).read_text()),
+                                                      Path(args.verifier).read_text())
             Path(args.output).write_text(json.dumps(artifact, indent=2) + '\n')
             print(json.dumps({'connector_digest': runtime.digest(artifact), 'artifact': args.output}))
             return 0

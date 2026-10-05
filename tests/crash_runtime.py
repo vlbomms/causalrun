@@ -27,6 +27,14 @@ def main():
             original(*positional, **keywords)
             os._exit(71)
         runtime.request = crash_request
+        from causalrun import http_json
+        original_json = http_json.call
+        def crash_json(*positional, **keywords):
+            if args.phase == 'after_authorization_commit':
+                os._exit(71)
+            original_json(*positional, **keywords)
+            os._exit(71)
+        http_json.call = crash_json
     else:
         original = runtime.commit_receipt
         def crash_receipt(*positional, **keywords):

@@ -1,6 +1,6 @@
 # causalrun: generated recovery connectors
 
-Version 0.9 — short output and automatic session startup — October 4, 2026
+Version 0.10 — generic HTTP/JSON write rules — October 4, 2026
 
 ## Problem and solution
 
@@ -17,6 +17,17 @@ Gate 3 adds a GitHub issue connector under explicit marker assumptions; see [gat
 Gate 5 adds a standard-library MCP adapter and shared connector reuse with Codex,
 plus a recorded mechanical setup comparison; see [gate 5 evidence](docs/gate-5.md).
 Human development time and live model generation quality remain unmeasured.
+
+The [HTTP/JSON expansion](docs/generic-api.md) now passes gates A–D within their
+declared scope. Schema version 4 declares a mutation request, GET evidence request,
+bindings, environment credential references, pure verifier, fixture examples,
+limitations, and API sources. OpenCode and MCP share these rules and action records.
+See [usage](docs/http-json.md) and [final evidence](docs/results/http-gate-d/README.md).
+96 tests, four actual host checks, two controlled API shapes, and one live GitHub
+issue passed. Failed preflight, listing, and resume-driver checks are retained.
+The live write was confirmed through read-only resumption without another POST.
+SOAP, uploads, request signing, OAuth refresh, and arbitrary shell interception
+remain unsupported. Insufficient evidence still leaves an action unknown.
 
 ## Decisions agreed with the user
 
@@ -100,6 +111,12 @@ Each artifact includes:
 - Executable content digest, validation report digest, and approval record.
 
 Schema version 3 adds the GitHub repository, creator, bounded issue adapter, and explicit marker assumptions.
+Schema version 4 adds declarative HTTP/JSON requests, pure fixture validation,
+bearer/API-key/no-auth policies, bounded page-number reads, and exact origin scope.
+The generated verifier may use string addition and a bounded `unique_match` helper.
+No generated code performs network requests. Fixture checks do not prove the
+target application's guarantees. Existing authorization and receipt transactions
+remain unchanged, and the first version still permits at most one authorized send.
 Schema version 1 holds the fixed connector; version 2 embeds generated source,
 adapter/authentication metadata, API version, and completed interview answers. Free-form
 model judgments or confidence scores are not sufficient evidence for dispatch.

@@ -7,7 +7,7 @@ from pathlib import Path
 SOURCE = (Path(__file__).resolve().parents[1] / 'examples/verify_value.py').read_text()
 
 
-def create_model(target, repair=False, selective=False, ambiguous=False):
+def create_model(target, repair=False, selective=False, ambiguous=False, generic=False):
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
             pass
@@ -70,6 +70,31 @@ def create_model(target, repair=False, selective=False, ambiguous=False):
                     call = ('causalrun_write', write)
                 elif step == 11:
                     call = ('causalrun_result', {'action_id': server.action_id})
+                if generic:
+                    from tests.test_http_json import artifact
+                    contract = artifact(target)
+                    common = {'operation': 'http.json.write.v1', 'target': target, 'name': contract['name']}
+                    write = dict(common, action_key='opencode-acceptance-write', payload={'value': 'OpenCode durable value'})
+                    if step == 0:
+                        call = ('http_request', {'method': 'POST', 'url': target + '/entries'})
+                    elif step == 1:
+                        call = ('causalrun_write', write)
+                    elif step == 2:
+                        call = ('webfetch', {'url': target + '/openapi.json', 'format': 'text'})
+                    elif step == 3:
+                        call = ('causalrun_prepare', dict(common, source=contract['verifier']['source'], answers={}, contract=contract))
+                    elif step in (4, 6, 9):
+                        call = ('causalrun_write', write)
+                    elif step == 5:
+                        identifiers = re.findall(r'"id"\s*:\s*"([0-9a-f-]{36})"', json.dumps(body['messages']).replace('\\"', '"'))
+                        if not identifiers:
+                            raise AssertionError('No generic durable action identity')
+                        server.action_id = identifiers[-1]
+                        call = ('causalrun_verify', {'action_id': server.action_id})
+                    elif step in (7, 10):
+                        call = ('causalrun_result', {'action_id': server.action_id})
+                    else:
+                        call = None
                 server.calls.append({'step': step, 'tool': call[0] if call else None})
             message = {'role': 'assistant', 'content': 'Acceptance fixture complete.' if call is None else None}
             if call:
