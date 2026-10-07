@@ -1,0 +1,1062 @@
+{
+  "recorded_at": "2026-10-07T03:15:12.544620+00:00",
+  "command": "python3 -m tests.run_skill (ordinary request and skill loading)",
+  "opencode": "1.18.34",
+  "model": "Scripted local OpenAI-compatible tool-call fixture, no paid/model inference",
+  "approval": "Harness replies to actual OpenCode question and permission HTTP requests; not a human usability test",
+  "questions": [],
+  "permissions": [
+    {
+      "id": "per_1145bd0cb001eyqsfAX1kCFshr",
+      "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+      "permission": "causalrun_approve",
+      "patterns": [
+        "0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd"
+      ],
+      "metadata": {
+        "connector_digest": "0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd",
+        "report_digest": "5d0fefacb34291c6f4f61743ac322135f90c8fd6763c58303a86bcaa3213e5d7",
+        "write": "http.json.write.v1",
+        "target": "http://127.0.0.1:59219",
+        "result": "A record with this client ID and exact value exists",
+        "tests": "4 passed. 0 failed.",
+        "limits": "Missing evidence does not prove non-execution. Fixture checks do not prove provider guarantees",
+        "review_file": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/state/reviews/0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd-5d0fefacb34291c6f4f61743ac322135f90c8fd6763c58303a86bcaa3213e5d7.json",
+        "instruction": "Read the full review file before you allow this write rule."
+      },
+      "always": [],
+      "tool": {
+        "messageID": "msg_1145bd039001Qw2WgaazLZbm3p",
+        "callID": "fixture-call-5"
+      }
+    }
+  ],
+  "review_files": [
+    {
+      "artifact": {
+        "adapter": {
+          "read": {
+            "headers": {},
+            "method": "GET",
+            "path": [
+              "entries",
+              {
+                "$bind": "action_id"
+              }
+            ],
+            "query": {},
+            "statuses": [
+              200
+            ]
+          },
+          "write": {
+            "body": {
+              "client_id": {
+                "$bind": "action_id"
+              },
+              "value": {
+                "$bind": "payload",
+                "path": [
+                  "value"
+                ]
+              }
+            },
+            "headers": {},
+            "method": "POST",
+            "path": [
+              "entries"
+            ],
+            "query": {},
+            "statuses": [
+              201
+            ]
+          }
+        },
+        "api_version": "fixture-1",
+        "authentication": {
+          "read": {
+            "header": "X-Read-Key",
+            "secret": "TEST_READ_TOKEN",
+            "type": "api_key"
+          },
+          "write": {
+            "secret": "TEST_WRITE_TOKEN",
+            "type": "bearer"
+          }
+        },
+        "expected": "A record with this client ID and exact value exists",
+        "fixture": {
+          "different_payload": {
+            "value": "other"
+          },
+          "evidence": {
+            "entry": {
+              "client_id": {
+                "$bind": "action_id"
+              },
+              "value": "hello"
+            }
+          },
+          "payload": {
+            "value": "hello"
+          }
+        },
+        "implementation": "18d4ab923de318084b246b7c54ce3f2143325db1804968ec514299988798731d",
+        "limitations": [
+          "Missing evidence does not prove non-execution",
+          "Fixture checks do not prove provider guarantees"
+        ],
+        "name": "fixture-entry",
+        "operation": "http.json.write.v1",
+        "schema_version": 4,
+        "sources": [
+          "tests/test_http_json.py: controlled application contract"
+        ],
+        "target": "http://127.0.0.1:59219",
+        "verifier": {
+          "kind": "python.receipt.v1",
+          "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n"
+        },
+        "version": 1
+      },
+      "connector_digest": "0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd",
+      "ready": false,
+      "report_digest": "5d0fefacb34291c6f4f61743ac322135f90c8fd6763c58303a86bcaa3213e5d7",
+      "scope": {
+        "name": "fixture-entry",
+        "operation": "http.json.write.v1",
+        "target": "http://127.0.0.1:59219"
+      },
+      "validation": {
+        "cases": [
+          {
+            "name": "matching_evidence",
+            "passed": true
+          },
+          {
+            "name": "missing_evidence",
+            "passed": true
+          },
+          {
+            "name": "wrong_action",
+            "passed": true
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true
+          }
+        ],
+        "checked_at": "2026-10-07T03:15:23.971819+00:00",
+        "connector_digest": "0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd",
+        "failed": 0,
+        "passed": 4,
+        "provider_requests": 0,
+        "scope": "Supplied pure fixtures only; no remote requests or provider guarantee proof"
+      }
+    }
+  ],
+  "tool_calls": [
+    {
+      "step": 0,
+      "tool": "http_request"
+    },
+    {
+      "step": 1,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 2,
+      "tool": "webfetch"
+    },
+    {
+      "step": 3,
+      "tool": "causalrun_prepare"
+    },
+    {
+      "step": 4,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 5,
+      "tool": "causalrun_verify"
+    },
+    {
+      "step": 6,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 7,
+      "tool": "causalrun_result"
+    },
+    {
+      "step": 8,
+      "tool": null
+    }
+  ],
+  "passed": 0,
+  "failed": 1,
+  "installation": {
+    "installed": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/plugins/causalrun.ts",
+    "skill": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/skills/causalrun/SKILL.md",
+    "runtime": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/state/runtime",
+    "state": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/state",
+    "next": "Restart OpenCode. The plugin starts the service automatically. Use local gh auth login for GitHub; no secrets in chat."
+  },
+  "session_id": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+  "first_session_messages": [
+    {
+      "info": {
+        "id": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "user",
+        "time": {
+          "created": 1791342919179
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "scripted"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1145bbe14001NAqRqmWze0tOvs",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+          "type": "text",
+          "text": "Create one entry with value \"OpenCode durable value\" at http://127.0.0.1:59219."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bc01d0019uQ7Uo0b43Zh7g",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342919709,
+          "completed": 1791342923540
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bcee1001ieDfNHzGWlbOYr",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bc01d0019uQ7Uo0b43Zh7g",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bceee001iYaAfOkiqn7UdZ",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bc01d0019uQ7Uo0b43Zh7g",
+          "type": "tool",
+          "callID": "fixture-call-2",
+          "tool": "http_request",
+          "state": {
+            "status": "error",
+            "input": {
+              "method": "POST",
+              "url": "http://127.0.0.1:59219/entries"
+            },
+            "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+            "time": {
+              "start": 1791342923510,
+              "end": 1791342923519
+            }
+          }
+        },
+        {
+          "id": "prt_1145bcf0b0018TLz9Tcz4BHjRQ",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bc01d0019uQ7Uo0b43Zh7g",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bcf1a001dLMwEQRJ4imf6o",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342923546,
+          "completed": 1791342923795
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bcf5600145FsaI3LLJDtbi",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bcf1a001dLMwEQRJ4imf6o",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bcf58001HwtfrqFs1epcj5",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bcf1a001dLMwEQRJ4imf6o",
+          "type": "tool",
+          "callID": "fixture-call-3",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:59219",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"status\":\"PREPARATION_REQUIRED\",\"message\":\"The write is blocked. Set up a result check first.\",\"scope\":{\"operation\":\"http.json.write.v1\",\"target\":\"http://127.0.0.1:59219\",\"name\":\"fixture-entry\"},\"discovery_sources\":[\"http://127.0.0.1:59219/openapi.json\"],\"authentication\":\"Local environment references: bearer, API-key header, or none. Never put secret values in the contract.\",\"questions\":[],\"documented_success\":null,\"contract_format\":{\"required\":[\"name\",\"target\",\"api_version\",\"expected\",\"adapter\",\"authentication\",\"fixture\",\"limitations\",\"sources\"],\"requests\":\"write: method, path segments, query, headers, statuses, body; read: method GET, path, query, headers, statuses; optional pagination\",\"bindings\":\"{\\\"$bind\\\":\\\"action_id\\\"} or {\\\"$bind\\\":\\\"payload\\\",\\\"path\\\":[\\\"field\\\"]}; string concatenation: {\\\"$text\\\":[literal, binding]}\",\"authentication\":\"write/read each: {type:none}, {type:bearer,secret:ENV_NAME}, or {type:api_key,secret:ENV_NAME,header:X-Key}\",\"fixture\":\"payload, different_payload, evidence template for that exact expected result\",\"pagination\":\"page-number lists only: {page:query_name,size:query_name,page_size:1..100,limit:1..10}\",\"limitations\":[\"Missing evidence does not prove non-execution\",\"Fixture checks do not prove provider guarantees\"],\"scope_rule\":\"name and target must equal the lookup scope. Declare marker or provider-specific assumptions in limitations.\"},\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"helpers\":\"digest, isinstance(value, dict), unique_match(items, literal_field, value)\",\"language\":\"One pure boolean return expression; string addition, dictionary subscripts, membership, comparisons; no network or imports\",\"false_means\":\"Unknown, never failure\"}}",
+            "title": "The write is blocked. Set up a result check first.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342923616,
+              "end": 1791342923792
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd011001B68hrbUmi9hVE9",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bcf1a001dLMwEQRJ4imf6o",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd014001OHY5Tp0WoYTnHI",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342923796,
+          "completed": 1791342923830
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd029001US1YUPpbVufNHd",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd014001OHY5Tp0WoYTnHI",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd02b001LExUPuGn29bKJb",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd014001OHY5Tp0WoYTnHI",
+          "type": "tool",
+          "callID": "fixture-call-4",
+          "tool": "webfetch",
+          "state": {
+            "status": "completed",
+            "input": {
+              "url": "http://127.0.0.1:59219/openapi.json",
+              "format": "text"
+            },
+            "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Generic entry fixture\", \"version\": \"fixture-1\"}, \"paths\": {\"/entries\": {\"post\": {\"operationId\": \"createEntry\", \"description\": \"Create one entry with client_id and value. GET /entries/{client_id} returns the entry.\", \"responses\": {\"201\": {\"description\": \"JSON entry with the exact client_id and value\"}}}}, \"/entries/{client_id}\": {\"get\": {\"operationId\": \"getEntry\", \"responses\": {\"200\": {\"description\": \"JSON entry\"}, \"404\": {\"description\": \"No visible entry; not proof of failed write\"}}}}}}",
+            "title": "http://127.0.0.1:59219/openapi.json (application/json)",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342923824,
+              "end": 1791342923827
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd034001fdYBB4yUYL5nji",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd014001OHY5Tp0WoYTnHI",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd039001Qw2WgaazLZbm3p",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342923833,
+          "completed": 1791342924164
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd051001VbHA2u041ioidr",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd039001Qw2WgaazLZbm3p",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd053001VRWtNNs5x3L7oe",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd039001Qw2WgaazLZbm3p",
+          "type": "tool",
+          "callID": "fixture-call-5",
+          "tool": "causalrun_prepare",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:59219",
+              "name": "fixture-entry",
+              "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n",
+              "answers": {},
+              "contract": {
+                "schema_version": 4,
+                "name": "fixture-entry",
+                "version": 1,
+                "target": "http://127.0.0.1:59219",
+                "operation": "http.json.write.v1",
+                "api_version": "fixture-1",
+                "expected": "A record with this client ID and exact value exists",
+                "verifier": {
+                  "kind": "python.receipt.v1",
+                  "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n"
+                },
+                "adapter": {
+                  "write": {
+                    "method": "POST",
+                    "path": [
+                      "entries"
+                    ],
+                    "query": {},
+                    "headers": {},
+                    "statuses": [
+                      201
+                    ],
+                    "body": {
+                      "client_id": {
+                        "$bind": "action_id"
+                      },
+                      "value": {
+                        "$bind": "payload",
+                        "path": [
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "read": {
+                    "method": "GET",
+                    "path": [
+                      "entries",
+                      {
+                        "$bind": "action_id"
+                      }
+                    ],
+                    "query": {},
+                    "headers": {},
+                    "statuses": [
+                      200
+                    ]
+                  }
+                },
+                "authentication": {
+                  "write": {
+                    "type": "bearer",
+                    "secret": "TEST_WRITE_TOKEN"
+                  },
+                  "read": {
+                    "type": "api_key",
+                    "secret": "TEST_READ_TOKEN",
+                    "header": "X-Read-Key"
+                  }
+                },
+                "fixture": {
+                  "payload": {
+                    "value": "hello"
+                  },
+                  "different_payload": {
+                    "value": "other"
+                  },
+                  "evidence": {
+                    "entry": {
+                      "client_id": {
+                        "$bind": "action_id"
+                      },
+                      "value": "hello"
+                    }
+                  }
+                },
+                "limitations": [
+                  "Missing evidence does not prove non-execution",
+                  "Fixture checks do not prove provider guarantees"
+                ],
+                "sources": [
+                  "tests/test_http_json.py: controlled application contract"
+                ],
+                "implementation": "18d4ab923de318084b246b7c54ce3f2143325db1804968ec514299988798731d"
+              }
+            },
+            "output": "{\"status\":\"APPROVED\",\"message\":\"The write rule is approved.\",\"ready\":true,\"connector_digest\":\"0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd\",\"review_file\":\"/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/state/reviews/0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd-5d0fefacb34291c6f4f61743ac322135f90c8fd6763c58303a86bcaa3213e5d7.json\"}",
+            "title": "The write rule is approved.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342923862,
+              "end": 1791342924153
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd17b001Ym055s2kf60wz2",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd039001Qw2WgaazLZbm3p",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd18a001aXkixclzIi4mf8",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342924170,
+          "completed": 1791342924436
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd1a30013EUT3cgRborwTp",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd18a001aXkixclzIi4mf8",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd1a50017LDQAWaoG4feGP",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd18a001aXkixclzIi4mf8",
+          "type": "tool",
+          "callID": "fixture-call-6",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:59219",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"9aad2f4b-ece8-45c6-9ce2-dd0e80db5365\",\"state\":\"IN_DOUBT\",\"message\":\"The result is unknown. Do not send the write again.\"}",
+            "title": "The result is unknown. Do not send the write again.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342924200,
+              "end": 1791342924425
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd2910011leVVFnPoDqTjI",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd18a001aXkixclzIi4mf8",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd298001C188QnJ3ct9I4A",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342924440,
+          "completed": 1791342924574
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd2bf001fC3FieVOMfKj4R",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd298001C188QnJ3ct9I4A",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd2c10017gxryRcs3gfYwD",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd298001C188QnJ3ct9I4A",
+          "type": "tool",
+          "callID": "fixture-call-7",
+          "tool": "causalrun_verify",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "9aad2f4b-ece8-45c6-9ce2-dd0e80db5365"
+            },
+            "output": "{\"id\":\"9aad2f4b-ece8-45c6-9ce2-dd0e80db5365\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342924485,
+              "end": 1791342924570
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd31c0016TvVSZWlbLHtlR",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd298001C188QnJ3ct9I4A",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd320001UR3rO62yQSQqUM",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342924576,
+          "completed": 1791342924757
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd334001wdKwCgziJp2iZo",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd320001UR3rO62yQSQqUM",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd335001aejX3SbS9mbT3P",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd320001UR3rO62yQSQqUM",
+          "type": "tool",
+          "callID": "fixture-call-8",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:59219",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"9aad2f4b-ece8-45c6-9ce2-dd0e80db5365\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342924599,
+              "end": 1791342924753
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd3d2001S6wFRGWlqZvurj",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd320001UR3rO62yQSQqUM",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd3d7001HaG0mS3n0fHGby",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342924759,
+          "completed": 1791342924856
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd3e80016jBDmQgOTJRKz5",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd3d7001HaG0mS3n0fHGby",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd3e9001wGEwGKkQt2jCxF",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd3d7001HaG0mS3n0fHGby",
+          "type": "tool",
+          "callID": "fixture-call-9",
+          "tool": "causalrun_result",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "9aad2f4b-ece8-45c6-9ce2-dd0e80db5365"
+            },
+            "output": "{\"id\":\"9aad2f4b-ece8-45c6-9ce2-dd0e80db5365\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791342924780,
+              "end": 1791342924853
+            }
+          }
+        },
+        {
+          "id": "prt_1145bd437001CqjlCLCJYO5muf",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd3d7001HaG0mS3n0fHGby",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1145bd43a001Zj8spQgpfZvlJt",
+        "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+        "role": "assistant",
+        "time": {
+          "created": 1791342924858,
+          "completed": 1791342924884
+        },
+        "parentID": "msg_1145bbe0a0015oTfAK5b6BAqiG",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_1145bd44e001TLN223MJBCxCaV",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd43a001Zj8spQgpfZvlJt",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1145bd44f001j7eSSGzM31bZIE",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd43a001Zj8spQgpfZvlJt",
+          "type": "text",
+          "text": "Acceptance fixture complete.",
+          "time": {
+            "start": 1791342924879,
+            "end": 1791342924880
+          }
+        },
+        {
+          "id": "prt_1145bd452001KFdhbKvAjdofyF",
+          "sessionID": "ses_eeba44242ffeeA7P0MlLF5yTLB",
+          "messageID": "msg_1145bd43a001Zj8spQgpfZvlJt",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "failure_type": "AssertionError",
+  "failure_message": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/vikasbommineni/Documents/causalrun/tests/demo_gate4.py\", line 147, in demonstration\n    assert tools[0]['tool'] == 'skill' and tools[0]['state']['status'] == 'completed'\nAssertionError\n",
+  "opencode_log": "timestamp=2026-10-07T03:15:14.031Z level=INFO run=840ef5f6 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/config.json\ntimestamp=2026-10-07T03:15:14.035Z level=INFO run=840ef5f6 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/opencode.json\ntimestamp=2026-10-07T03:15:14.045Z level=INFO run=840ef5f6 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/opencode.jsonc\ntimestamp=2026-10-07T03:15:14.213Z level=INFO run=840ef5f6 message=\"creating instance\" directory=/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project\ntimestamp=2026-10-07T03:15:14.214Z level=INFO run=840ef5f6 message=fromDirectory directory=/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project\ntimestamp=2026-10-07T03:15:14.221Z level=INFO run=840ef5f6 message=bootstrapping directory=/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project\ntimestamp=2026-10-07T03:15:14.231Z level=INFO run=840ef5f6 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/config.json\ntimestamp=2026-10-07T03:15:14.232Z level=INFO run=840ef5f6 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/opencode.json\ntimestamp=2026-10-07T03:15:14.233Z level=INFO run=840ef5f6 message=loading path=/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/xdg-config/opencode/opencode.jsonc\ntimestamp=2026-10-07T03:15:19.095Z level=INFO run=840ef5f6 message=\"all LSPs are disabled\"\ntimestamp=2026-10-07T03:15:19.097Z level=INFO run=840ef5f6 message=\"all formatters are disabled\"\ntimestamp=2026-10-07T03:15:19.097Z level=INFO run=840ef5f6 message=init\ntimestamp=2026-10-07T03:15:19.102Z level=INFO run=840ef5f6 message=created id=ses_eeba44242ffeeA7P0MlLF5yTLB slug=shiny-squid version=1.18.34 projectID=global directory=/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project path=private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project workspaceID=undefined parentID=undefined title=\"New session - 2026-10-07T03:15:19.102Z\" agent=undefined model=undefined metadata=undefined permission=undefined cost=0 tokens.input=0 tokens.output=0 tokens.reasoning=0 tokens.cache.read=0 tokens.cache.write=0 time.created=1791342919102 time.updated=1791342919102\ntimestamp=2026-10-07T03:15:19.705Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=0\ntimestamp=2026-10-07T03:15:19.720Z level=INFO run=840ef5f6 message=\"shell tool using shell\" shell=/bin/zsh\ntimestamp=2026-10-07T03:15:19.745Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=true agent=title mode=primary\ntimestamp=2026-10-07T03:15:19.760Z level=INFO run=840ef5f6 message=init count=2\ntimestamp=2026-10-07T03:15:19.772Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:20.531Z level=INFO run=840ef5f6 message=\"watcher backend\" directory=/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project platform=darwin backend=fs-events\ntimestamp=2026-10-07T03:15:20.577Z level=INFO run=840ef5f6 message=\"project copy refresh started\" projectID=global\ntimestamp=2026-10-07T03:15:20.584Z level=INFO run=840ef5f6 message=\"project copy refresh done\" projectID=global updated=[] removed=[]\ntimestamp=2026-10-07T03:15:20.625Z level=INFO run=840ef5f6 message=\"booting location services\" directory=/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpi_r3d1ab/project workspaceID=undefined\ntimestamp=2026-10-07T03:15:21.087Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bc01d0019uQ7Uo0b43Zh7g\ntimestamp=2026-10-07T03:15:21.097Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:21.109Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:21.143Z level=ERROR run=840ef5f6 message=\"stream error\" providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary error.error=\"AI_APICallError: Cannot connect to API: The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch() (cause: Error: The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch())\"\ntimestamp=2026-10-07T03:15:23.468Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:23.471Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:23.544Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=1\ntimestamp=2026-10-07T03:15:23.582Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bcf1a001dLMwEQRJ4imf6o\ntimestamp=2026-10-07T03:15:23.582Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:23.583Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:23.796Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=2\ntimestamp=2026-10-07T03:15:23.809Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd014001OHY5Tp0WoYTnHI\ntimestamp=2026-10-07T03:15:23.810Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:23.810Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:23.822Z level=INFO run=840ef5f6 message=evaluated permission=webfetch pattern=http://127.0.0.1:59219/openapi.json action.permission=* action.action=allow action.pattern=*\ntimestamp=2026-10-07T03:15:23.831Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=3\ntimestamp=2026-10-07T03:15:23.849Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd039001Qw2WgaazLZbm3p\ntimestamp=2026-10-07T03:15:23.849Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:23.850Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:23.978Z level=INFO run=840ef5f6 message=evaluated permission=causalrun_approve pattern=0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd action.permission=causalrun_approve action.action=ask action.pattern=*\ntimestamp=2026-10-07T03:15:23.979Z level=INFO run=840ef5f6 message=asking id=per_1145bd0cb001eyqsfAX1kCFshr permission=causalrun_approve patterns=\"[\\\"0a7bf990971cd08ed69838132bea299587ccd4928bdd9b9caa357e10e6afd4cd\\\"]\"\ntimestamp=2026-10-07T03:15:24.167Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=4\ntimestamp=2026-10-07T03:15:24.188Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd18a001aXkixclzIi4mf8\ntimestamp=2026-10-07T03:15:24.188Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:24.189Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:24.438Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=5\ntimestamp=2026-10-07T03:15:24.462Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd298001C188QnJ3ct9I4A\ntimestamp=2026-10-07T03:15:24.462Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:24.463Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:24.575Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=6\ntimestamp=2026-10-07T03:15:24.588Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd320001UR3rO62yQSQqUM\ntimestamp=2026-10-07T03:15:24.589Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:24.589Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:24.758Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=7\ntimestamp=2026-10-07T03:15:24.770Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd3d7001HaG0mS3n0fHGby\ntimestamp=2026-10-07T03:15:24.770Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:24.771Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:24.857Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=8\ntimestamp=2026-10-07T03:15:24.863Z level=INFO run=840ef5f6 message=process session.id=ses_eeba44242ffeeA7P0MlLF5yTLB messageID=msg_1145bd43a001Zj8spQgpfZvlJt\ntimestamp=2026-10-07T03:15:24.864Z level=INFO run=840ef5f6 message=stream providerID=fixture modelID=scripted session.id=ses_eeba44242ffeeA7P0MlLF5yTLB small=false agent=build mode=primary\ntimestamp=2026-10-07T03:15:24.872Z level=INFO run=840ef5f6 message=\"llm runtime selected\" llm.runtime=ai-sdk llm.provider=fixture llm.model=scripted\ntimestamp=2026-10-07T03:15:24.885Z level=INFO run=840ef5f6 message=loop session.id=ses_eeba44242ffeeA7P0MlLF5yTLB step=9\ntimestamp=2026-10-07T03:15:24.885Z level=INFO run=840ef5f6 message=\"exiting loop\" session.id=ses_eeba44242ffeeA7P0MlLF5yTLB\n"
+}

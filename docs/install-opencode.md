@@ -14,7 +14,8 @@ python3 install.py
 Then open a new OpenCode session. Use your normal model and project.
 You do not need Docker, a model inside causalrun, or a service start command.
 
-The installer adds `~/.config/opencode/plugins/causalrun.ts` and sets the rule
+The installer adds `~/.config/opencode/plugins/causalrun.ts`, installs
+`~/.config/opencode/skills/causalrun/SKILL.md`, and sets the rule
 approval permission to `ask`. OpenCode loads global plugins at startup.
 The plugin starts the service and checks it again for each new session.
 See [OpenCode's plugin documentation](https://opencode.ai/docs/plugins/).
@@ -41,8 +42,12 @@ A running service keeps its provider profile. Stop it before changing credential
 
 ## Use
 
-> Create an issue in OWNER/REPO with the title and body I supplied. Use causalrun.
-> Read the API docs. Ask only for missing intent or consent.
+> Create an issue in OWNER/REPO with the title and body I supplied.
+
+The installed skill guides the agent to causalrun without requiring its name in
+the prompt. Skill selection depends on the model and host configuration. If the
+agent chooses a direct write, explicitly ask it to use causalrun. See
+[skill installation and a plain-request check](install-skill.md).
 
 The agent reads the docs and sets up a result check. Clear success conditions do
 not need a question. Missing intent or consent does. Validation runs in a temporary
@@ -81,13 +86,15 @@ No public release has been published.
 
 Quit OpenCode and stop the service with `python3 install.py --stop`.
 Remove only the managed `causalrun.ts` file from your plugin directory.
+Remove the managed `skills/causalrun/SKILL.md` file if you no longer need the skill.
 Remove its `causalrun_approve` entry from your JSON permission settings.
 Keep or back up the state directory if you need the saved actions and reviews.
 Do not replace your whole OpenCode config with an old backup.
 
 ## Limits
 
-The plugin handles GitHub issue creation and the local test value API.
+The plugin handles GitHub issue creation, the local test value API, and approved
+generic HTTP/JSON rules. The skill supplies instructions; it is not an enforcement boundary.
 It holds known structured write tools. Other tools, shell scripts, and network
 calls can bypass it. It is not a network firewall.
 

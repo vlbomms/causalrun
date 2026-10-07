@@ -1,0 +1,7 @@
+{
+  "recorded_at": "2026-10-07T03:19:20.985907+00:00",
+  "command": "python3 /Users/vikasbommineni/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/causalrun",
+  "result": "Rejected top-level compatibility field by shared skill validator",
+  "fix": "Moved compatibility to the metadata map; OpenCode permits the original field but the shared validator does not",
+  "provider_writes": 0
+}

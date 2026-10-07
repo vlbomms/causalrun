@@ -48,11 +48,22 @@ OpenCode 1.18.34 is the tested version.
 
 Ask your agent:
 
+> Create an issue in OWNER/REPO titled "Test issue" with body "Test from OpenCode."
+
+Replace `OWNER/REPO` with a repository you can use for tests.
+
+The installer adds a `causalrun` skill. It guides the agent to use causalrun and
+choose the action key. You do not need to name the tool. Skills guide the agent;
+they do not intercept shell commands.
+
+For explicit routing, use:
+
 > Use causalrun_write to create an issue in OWNER/REPO titled "Test issue" with
 > body "Test from OpenCode." Use action key "test/issue-001". Do not use gh or
 > shell commands to create it.
 
-Replace `OWNER/REPO` with a repository you can use for tests.
+Check that the agent calls causalrun tools. If a direct write already occurred,
+inspect its result before starting another action.
 
 The agent reads the API docs and prepares a result check. It asks what success
 means only when the request and docs leave that unclear. For GitHub tests, it
@@ -106,6 +117,7 @@ rules, but full ASD-STE100 conformance of model replies is not certified.
 - [Run the full functional test](docs/functional-test.md)
 - [Use MCP with another harness](docs/install-mcp.md)
 - [Set up another HTTP/JSON API](docs/http-json.md)
+- [Install the skill in an existing setup](docs/install-skill.md)
 - [Documentation and test evidence](docs/README.md)
 
 The installer copies its runtime outside the checkout. Your data stays in the

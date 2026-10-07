@@ -3,6 +3,8 @@ import { promisify } from "node:util";
 const run = promisify(execFile);
 
 const workflow = `Use ASD-STE100 writing rules for user-facing explanations.
+For external API writes, load the causalrun skill when available and use causalrun tools.
+The user does not need to mention causalrun. Do not use gh, curl, or shell commands for these writes.
 Use short sentences, active voice, and one term for each item.
 Use no more than 20 words in an instruction. Use no more than 25 words in a description.
 Give the result first. Then give the next step, if one is necessary.

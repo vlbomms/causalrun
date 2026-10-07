@@ -28,7 +28,7 @@ def http(origin, path, body=None):
         return json.loads(data) if data else None
 
 
-def demonstration(after_restart=None, model_factory=create_model, global_config=False, new_session_probe=False, generic=False):
+def demonstration(after_restart=None, model_factory=create_model, global_config=False, new_session_probe=False, generic=False, load_skill=False):
     report = {'recorded_at': datetime.now(timezone.utc).isoformat(), 'command': 'python3 -m tests.demo_gate4',
               'opencode': subprocess.check_output([str(BINARY), '--version'], text=True).strip(),
               'model': 'Scripted local OpenAI-compatible tool-call fixture, no paid/model inference',
@@ -139,9 +139,16 @@ export default async () => ({tool:{http_request:tool({description:"Test direct w
                     time.sleep(0.2)
                 raise AssertionError('OpenCode prompt did not finish within 90 seconds')
 
-            messages = run_prompt('Run the controlled API acceptance workflow. Never send a direct unapproved write.')
+            messages = run_prompt('Create one entry with value "OpenCode durable value" at ' + target + '.' if load_skill
+                                  else 'Run the controlled API acceptance workflow. Never send a direct unapproved write.')
             report['first_session_messages'] = messages
             tools = [part for message in messages for part in message.get('parts', []) if part.get('type') == 'tool']
+            if load_skill:
+                assert tools[0]['tool'] == 'skill' and tools[0]['state']['status'] == 'completed'
+                assert model.skill_advertised
+                report['skill'] = {'advertised': True, 'loaded': True, 'ordinary_request': True,
+                                   'selection': 'Scripted fixture chooses the skill; not evidence of live-model automatic selection'}
+                tools = tools[1:]
             assert tools[0]['tool'] == 'http_request' and tools[0]['state']['status'] == 'error'
             writes = [json.loads(part['state']['output']) for part in tools if part['tool'] == 'causalrun_write']
             assert writes[0]['status'] == 'PREPARATION_REQUIRED'
@@ -221,6 +228,8 @@ export default async () => ({tool:{http_request:tool({description:"Test direct w
             model.shutdown(); model.server_close(); model_thread.join(5)
             log.close()
             report['tool_calls'] = model.calls
+            if load_skill:
+                report['skill_diagnostics'] = model.skill_diagnostics
     return report
 
 

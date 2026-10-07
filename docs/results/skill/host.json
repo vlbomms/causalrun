@@ -1,0 +1,2460 @@
+{
+  "recorded_at": "2026-10-07T03:20:04.867631+00:00",
+  "command": "python3 -m tests.run_skill (ordinary request and skill loading)",
+  "opencode": "1.18.34",
+  "model": "Scripted local OpenAI-compatible tool-call fixture, no paid/model inference",
+  "approval": "Harness replies to actual OpenCode question and permission HTTP requests; not a human usability test",
+  "questions": [],
+  "permissions": [
+    {
+      "id": "per_114602b39001qohcwyOLR2lWuo",
+      "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+      "permission": "causalrun_approve",
+      "patterns": [
+        "d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9"
+      ],
+      "metadata": {
+        "connector_digest": "d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9",
+        "report_digest": "2854f5dac4e863406a63f51a8fc5a8b6109261f563c1a9d4f6840ba8fd94cee7",
+        "write": "http.json.write.v1",
+        "target": "http://127.0.0.1:64099",
+        "result": "A record with this client ID and exact value exists",
+        "tests": "4 passed. 0 failed.",
+        "limits": "Missing evidence does not prove non-execution. Fixture checks do not prove provider guarantees",
+        "review_file": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/state/reviews/d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9-2854f5dac4e863406a63f51a8fc5a8b6109261f563c1a9d4f6840ba8fd94cee7.json",
+        "instruction": "Read the full review file before you allow this write rule."
+      },
+      "always": [],
+      "tool": {
+        "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+        "callID": "fixture-call-5"
+      }
+    }
+  ],
+  "review_files": [
+    {
+      "artifact": {
+        "adapter": {
+          "read": {
+            "headers": {},
+            "method": "GET",
+            "path": [
+              "entries",
+              {
+                "$bind": "action_id"
+              }
+            ],
+            "query": {},
+            "statuses": [
+              200
+            ]
+          },
+          "write": {
+            "body": {
+              "client_id": {
+                "$bind": "action_id"
+              },
+              "value": {
+                "$bind": "payload",
+                "path": [
+                  "value"
+                ]
+              }
+            },
+            "headers": {},
+            "method": "POST",
+            "path": [
+              "entries"
+            ],
+            "query": {},
+            "statuses": [
+              201
+            ]
+          }
+        },
+        "api_version": "fixture-1",
+        "authentication": {
+          "read": {
+            "header": "X-Read-Key",
+            "secret": "TEST_READ_TOKEN",
+            "type": "api_key"
+          },
+          "write": {
+            "secret": "TEST_WRITE_TOKEN",
+            "type": "bearer"
+          }
+        },
+        "expected": "A record with this client ID and exact value exists",
+        "fixture": {
+          "different_payload": {
+            "value": "other"
+          },
+          "evidence": {
+            "entry": {
+              "client_id": {
+                "$bind": "action_id"
+              },
+              "value": "hello"
+            }
+          },
+          "payload": {
+            "value": "hello"
+          }
+        },
+        "implementation": "d6e05e851f1bfea32d828a0f66c7ed2d3ca790b35adfced86a848ed4f70aa1b9",
+        "limitations": [
+          "Missing evidence does not prove non-execution",
+          "Fixture checks do not prove provider guarantees"
+        ],
+        "name": "fixture-entry",
+        "operation": "http.json.write.v1",
+        "schema_version": 4,
+        "sources": [
+          "tests/test_http_json.py: controlled application contract"
+        ],
+        "target": "http://127.0.0.1:64099",
+        "verifier": {
+          "kind": "python.receipt.v1",
+          "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n"
+        },
+        "version": 1
+      },
+      "connector_digest": "d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9",
+      "ready": false,
+      "report_digest": "2854f5dac4e863406a63f51a8fc5a8b6109261f563c1a9d4f6840ba8fd94cee7",
+      "scope": {
+        "name": "fixture-entry",
+        "operation": "http.json.write.v1",
+        "target": "http://127.0.0.1:64099"
+      },
+      "validation": {
+        "cases": [
+          {
+            "name": "matching_evidence",
+            "passed": true
+          },
+          {
+            "name": "missing_evidence",
+            "passed": true
+          },
+          {
+            "name": "wrong_action",
+            "passed": true
+          },
+          {
+            "name": "wrong_payload",
+            "passed": true
+          }
+        ],
+        "checked_at": "2026-10-07T03:20:09.269664+00:00",
+        "connector_digest": "d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9",
+        "failed": 0,
+        "passed": 4,
+        "provider_requests": 0,
+        "scope": "Supplied pure fixtures only; no remote requests or provider guarantee proof"
+      }
+    }
+  ],
+  "tool_calls": [
+    {
+      "step": -1,
+      "tool": "skill"
+    },
+    {
+      "step": 0,
+      "tool": "http_request"
+    },
+    {
+      "step": 1,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 2,
+      "tool": "webfetch"
+    },
+    {
+      "step": 3,
+      "tool": "causalrun_prepare"
+    },
+    {
+      "step": 4,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 5,
+      "tool": "causalrun_verify"
+    },
+    {
+      "step": 6,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 7,
+      "tool": "causalrun_result"
+    },
+    {
+      "step": 8,
+      "tool": null
+    },
+    {
+      "step": 9,
+      "tool": "causalrun_write"
+    },
+    {
+      "step": 10,
+      "tool": "causalrun_result"
+    },
+    {
+      "step": 11,
+      "tool": null
+    }
+  ],
+  "passed": 3,
+  "failed": 0,
+  "installation": {
+    "installed": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/xdg-config/opencode/plugins/causalrun.ts",
+    "skill": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/xdg-config/opencode/skills/causalrun/SKILL.md",
+    "runtime": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/state/runtime",
+    "state": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/state",
+    "next": "Restart OpenCode. The plugin starts the service automatically. Use local gh auth login for GitHub; no secrets in chat."
+  },
+  "session_id": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+  "first_session_messages": [
+    {
+      "info": {
+        "id": "msg_11460250a001cHlveGTM2uWWHc",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "user",
+        "time": {
+          "created": 1791343207690
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "scripted"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_114602510001vkNOpjmH4q6YFK",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_11460250a001cHlveGTM2uWWHc",
+          "type": "text",
+          "text": "Create one entry with value \"OpenCode durable value\" at http://127.0.0.1:64099."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1146026cc001iiKCsa2CZLeju3",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343208140,
+          "completed": 1791343208991
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1146029f9001aBrHS3XtSLftpG",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146026cc001iiKCsa2CZLeju3",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1146029fb001bfrBqTFRt8vIzS",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146026cc001iiKCsa2CZLeju3",
+          "type": "tool",
+          "callID": "fixture-call-1",
+          "tool": "skill",
+          "state": {
+            "status": "completed",
+            "input": {
+              "name": "causalrun"
+            },
+            "output": "<skill_content name=\"causalrun\">\n# Skill: causalrun\n\n# External API writes\n\nRoute external API writes through causalrun without asking the user to name this\nskill, choose a durability mode, or supply protocol fields. This skill guides tool\nselection. The plugin and runtime supply approval checks and saved action records.\n\nIf causalrun tools are unavailable, explain that the runtime integration is needed\nbefore you can protect the write. Do not claim protection from this skill alone.\nDo not use a shell command or another tool as a fallback for a blocked write.\n\n## Choose and keep the action\n\nUse the built-in GitHub issue or controlled value profile when it fits. Otherwise,\nuse `http.json.write.v1` with a stable operation name and the exact API origin.\nSupported custom rules use JSON mutations and GET evidence. Unsupported transport\nor insufficient recovery evidence needs a short explanation before proceeding.\n\nChoose the action key yourself for each new logical write. Keep the operation,\nrule name, target, key, and original payload in the tool results and session context.\nAfter an interruption, reuse that identity. A similar title or payload alone does\nnot prove that two requests are the same action. Ask whether it is a new action\nonly when the user's intent is unclear. Never invent a replacement key to get past\nan unknown result or an invalidated approval.\nRecover the original action ID from prior tool results. If that reference is\nunavailable, ask for it before attempting a continuation.\n\n## Prepare only when needed\n\nUse `causalrun_lookup` when available, or `causalrun_write` to obtain preparation\nguidance without sending an unapproved write. Reuse an approved matching rule.\n\nFor a new rule, read official API docs or OpenAPI/Swagger specifications first.\nCheck authentication, permissions, request fields, completion semantics, and a\nread-only evidence lookup. Use safe reads to fill gaps. Live mutation probes need\nseparate authorization for a disposable target.\n\nInfer success from the user's task and the docs. Ask a short question only when a\nmaterial ambiguity remains. Reuse consent already given. Never fabricate answers,\nmarker consent, target authorization, or provider guarantees.\n\nWrite the pure `verify(action_id, payload, evidence)` result check. Follow the\npreparation guidance for supported helpers, bindings, and contract fields.\nFor generic APIs, supply the declarative `contract` and store inferred success in\n`contract.expected`. Credentials are local environment references, never values\nin the contract or chat. Declare marker assumptions and evidence limits.\n\nCall `causalrun_prepare`. Failed validation blocks dispatch. The user must review\nand approve the exact rule before its first write. In OpenCode, use its rule review\nprompt. With MCP, provide the separate operator review command. Never approve your\nown rule, run that operator command yourself, or weaken approval permissions.\n\n## Send and recover\n\nCall `causalrun_write` with the saved identity and payload. `COMMITTED` means the\napproved result check accepted evidence. `IN_DOUBT` means the outcome is unknown.\nUse `causalrun_verify` for read-only recovery. Use `causalrun_result` to retrieve\na recorded outcome without another provider call. Missing evidence does not prove\nfailure. A repeat of the same action returns its record and does not resend it.\n\nGive the user the result first, in at most three short sentences. Include the\ncreated object's link when available. Keep keys, schemas, source, hashes, and test\nlogs out of normal replies. Show them when the user asks for details. If the result\nis unknown, state the next safe step: check again or review the saved action.\n\nBase directory for this skill: /var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/xdg-config/opencode/skills/causalrun\nRelative paths in this skill (e.g., scripts/, reference/) are relative to this base directory.\nNote: file list is sampled.\n\n<skill_files>\n\n</skill_files>\n</skill_content>",
+            "title": "Loaded skill: causalrun",
+            "metadata": {
+              "name": "causalrun",
+              "dir": "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/xdg-config/opencode/skills/causalrun",
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343208961,
+              "end": 1791343208986
+            }
+          }
+        },
+        {
+          "id": "prt_114602a1c001WJei4w1BQsK667",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146026cc001iiKCsa2CZLeju3",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602a21001YN6sU1hImASekR",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343208994,
+          "completed": 1791343209026
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602a3700103fR2vxO4Dm9mw",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a21001YN6sU1hImASekR",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602a38001L4P4huK4vLftnW",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a21001YN6sU1hImASekR",
+          "type": "tool",
+          "callID": "fixture-call-2",
+          "tool": "http_request",
+          "state": {
+            "status": "error",
+            "input": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64099/entries"
+            },
+            "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+            "time": {
+              "start": 1791343209021,
+              "end": 1791343209023
+            }
+          }
+        },
+        {
+          "id": "prt_114602a40001cLHTAx6KcBAdOH",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a21001YN6sU1hImASekR",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602a44001xEz9XZfI6ognFD",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209028,
+          "completed": 1791343209127
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602a58001Uh9cGEqAIFvhTW",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a44001xEz9XZfI6ognFD",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602a5a001rpR7TgtGpefEkl",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a44001xEz9XZfI6ognFD",
+          "type": "tool",
+          "callID": "fixture-call-3",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"status\":\"PREPARATION_REQUIRED\",\"message\":\"The write is blocked. Set up a result check first.\",\"scope\":{\"operation\":\"http.json.write.v1\",\"target\":\"http://127.0.0.1:64099\",\"name\":\"fixture-entry\"},\"discovery_sources\":[\"http://127.0.0.1:64099/openapi.json\"],\"authentication\":\"Local environment references: bearer, API-key header, or none. Never put secret values in the contract.\",\"questions\":[],\"documented_success\":null,\"contract_format\":{\"required\":[\"name\",\"target\",\"api_version\",\"expected\",\"adapter\",\"authentication\",\"fixture\",\"limitations\",\"sources\"],\"requests\":\"write: method, path segments, query, headers, statuses, body; read: method GET, path, query, headers, statuses; optional pagination\",\"bindings\":\"{\\\"$bind\\\":\\\"action_id\\\"} or {\\\"$bind\\\":\\\"payload\\\",\\\"path\\\":[\\\"field\\\"]}; string concatenation: {\\\"$text\\\":[literal, binding]}\",\"authentication\":\"write/read each: {type:none}, {type:bearer,secret:ENV_NAME}, or {type:api_key,secret:ENV_NAME,header:X-Key}\",\"fixture\":\"payload, different_payload, evidence template for that exact expected result\",\"pagination\":\"page-number lists only: {page:query_name,size:query_name,page_size:1..100,limit:1..10}\",\"limitations\":[\"Missing evidence does not prove non-execution\",\"Fixture checks do not prove provider guarantees\"],\"scope_rule\":\"name and target must equal the lookup scope. Declare marker or provider-specific assumptions in limitations.\"},\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"helpers\":\"digest, isinstance(value, dict), unique_match(items, literal_field, value)\",\"language\":\"One pure boolean return expression; string addition, dictionary subscripts, membership, comparisons; no network or imports\",\"false_means\":\"Unknown, never failure\"}}",
+            "title": "The write is blocked. Set up a result check first.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209053,
+              "end": 1791343209123
+            }
+          }
+        },
+        {
+          "id": "prt_114602aa5001EHaktJQ8kY9g8L",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a44001xEz9XZfI6ognFD",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602aa8001GfvRK7Dc7N6qoo",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209128,
+          "completed": 1791343209157
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602abb001gjh6ICtQ8e6bAV",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602aa8001GfvRK7Dc7N6qoo",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602abd001FctHxXqinBW8la",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602aa8001GfvRK7Dc7N6qoo",
+          "type": "tool",
+          "callID": "fixture-call-4",
+          "tool": "webfetch",
+          "state": {
+            "status": "completed",
+            "input": {
+              "url": "http://127.0.0.1:64099/openapi.json",
+              "format": "text"
+            },
+            "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Generic entry fixture\", \"version\": \"fixture-1\"}, \"paths\": {\"/entries\": {\"post\": {\"operationId\": \"createEntry\", \"description\": \"Create one entry with client_id and value. GET /entries/{client_id} returns the entry.\", \"responses\": {\"201\": {\"description\": \"JSON entry with the exact client_id and value\"}}}}, \"/entries/{client_id}\": {\"get\": {\"operationId\": \"getEntry\", \"responses\": {\"200\": {\"description\": \"JSON entry\"}, \"404\": {\"description\": \"No visible entry; not proof of failed write\"}}}}}}",
+            "title": "http://127.0.0.1:64099/openapi.json (application/json)",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209153,
+              "end": 1791343209155
+            }
+          }
+        },
+        {
+          "id": "prt_114602ac40018pKHUowUFtpygI",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602aa8001GfvRK7Dc7N6qoo",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602ac7001TbAMMONAoS0c90",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209159,
+          "completed": 1791343209467
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602adc001oB7M73CVuTzFuj",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602add001V4qglg5QYdhwIC",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+          "type": "tool",
+          "callID": "fixture-call-5",
+          "tool": "causalrun_prepare",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n",
+              "answers": {},
+              "contract": {
+                "schema_version": 4,
+                "name": "fixture-entry",
+                "version": 1,
+                "target": "http://127.0.0.1:64099",
+                "operation": "http.json.write.v1",
+                "api_version": "fixture-1",
+                "expected": "A record with this client ID and exact value exists",
+                "verifier": {
+                  "kind": "python.receipt.v1",
+                  "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n"
+                },
+                "adapter": {
+                  "write": {
+                    "method": "POST",
+                    "path": [
+                      "entries"
+                    ],
+                    "query": {},
+                    "headers": {},
+                    "statuses": [
+                      201
+                    ],
+                    "body": {
+                      "client_id": {
+                        "$bind": "action_id"
+                      },
+                      "value": {
+                        "$bind": "payload",
+                        "path": [
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "read": {
+                    "method": "GET",
+                    "path": [
+                      "entries",
+                      {
+                        "$bind": "action_id"
+                      }
+                    ],
+                    "query": {},
+                    "headers": {},
+                    "statuses": [
+                      200
+                    ]
+                  }
+                },
+                "authentication": {
+                  "write": {
+                    "type": "bearer",
+                    "secret": "TEST_WRITE_TOKEN"
+                  },
+                  "read": {
+                    "type": "api_key",
+                    "secret": "TEST_READ_TOKEN",
+                    "header": "X-Read-Key"
+                  }
+                },
+                "fixture": {
+                  "payload": {
+                    "value": "hello"
+                  },
+                  "different_payload": {
+                    "value": "other"
+                  },
+                  "evidence": {
+                    "entry": {
+                      "client_id": {
+                        "$bind": "action_id"
+                      },
+                      "value": "hello"
+                    }
+                  }
+                },
+                "limitations": [
+                  "Missing evidence does not prove non-execution",
+                  "Fixture checks do not prove provider guarantees"
+                ],
+                "sources": [
+                  "tests/test_http_json.py: controlled application contract"
+                ],
+                "implementation": "d6e05e851f1bfea32d828a0f66c7ed2d3ca790b35adfced86a848ed4f70aa1b9"
+              }
+            },
+            "output": "{\"status\":\"APPROVED\",\"message\":\"The write rule is approved.\",\"ready\":true,\"connector_digest\":\"d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9\",\"review_file\":\"/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/state/reviews/d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9-2854f5dac4e863406a63f51a8fc5a8b6109261f563c1a9d4f6840ba8fd94cee7.json\"}",
+            "title": "The write rule is approved.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209185,
+              "end": 1791343209463
+            }
+          }
+        },
+        {
+          "id": "prt_114602bf9001WjUoKjAovlb3c6",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602bfd001PjUb9CSd4IUuDq",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209469,
+          "completed": 1791343209647
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602c12001GXOSoMcxdRv6Ib",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602bfd001PjUb9CSd4IUuDq",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602c130015BTXbK87AW2za0",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602bfd001PjUb9CSd4IUuDq",
+          "type": "tool",
+          "callID": "fixture-call-6",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"IN_DOUBT\",\"message\":\"The result is unknown. Do not send the write again.\"}",
+            "title": "The result is unknown. Do not send the write again.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209494,
+              "end": 1791343209644
+            }
+          }
+        },
+        {
+          "id": "prt_114602cad001tVxqFmVm3tPBvU",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602bfd001PjUb9CSd4IUuDq",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602cb1001s2lgPIXmtoUtSz",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209649,
+          "completed": 1791343209750
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602cc4001rvZUOey7Wbw56w",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602cb1001s2lgPIXmtoUtSz",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602cc5001y2PBRFS1bcju6x",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602cb1001s2lgPIXmtoUtSz",
+          "type": "tool",
+          "callID": "fixture-call-7",
+          "tool": "causalrun_verify",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209671,
+              "end": 1791343209747
+            }
+          }
+        },
+        {
+          "id": "prt_114602d14001zz0zHKq6aqSIiS",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602cb1001s2lgPIXmtoUtSz",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602d180010zajgOn69l9g8g",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209752,
+          "completed": 1791343209915
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602d2a001mPS2uX2PwZPg0S",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602d180010zajgOn69l9g8g",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602d2c001wuHmrmFIqluT1j",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602d180010zajgOn69l9g8g",
+          "type": "tool",
+          "callID": "fixture-call-8",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209774,
+              "end": 1791343209912
+            }
+          }
+        },
+        {
+          "id": "prt_114602db9001DYEFslAaneYeCy",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602d180010zajgOn69l9g8g",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602dbd001vPaK1E7frZiYKt",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209917,
+          "completed": 1791343210007
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602dce001IidRHvVVCszNqo",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602dbd001vPaK1E7frZiYKt",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602dd0001NYV5gkH0IZMjTS",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602dbd001vPaK1E7frZiYKt",
+          "type": "tool",
+          "callID": "fixture-call-9",
+          "tool": "causalrun_result",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209938,
+              "end": 1791343210004
+            }
+          }
+        },
+        {
+          "id": "prt_114602e15001vkqJX7HEpsvZQv",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602dbd001vPaK1E7frZiYKt",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602e18001TNIBvy1mLZdztr",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343210008,
+          "completed": 1791343210033
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_114602e2c001fIA2T2aBdgrf1w",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602e18001TNIBvy1mLZdztr",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602e2d001g18aDlqdGVxXhY",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602e18001TNIBvy1mLZdztr",
+          "type": "text",
+          "text": "Acceptance fixture complete.",
+          "time": {
+            "start": 1791343210029,
+            "end": 1791343210030
+          }
+        },
+        {
+          "id": "prt_114602e2f001mfaYhP28ONGwsa",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602e18001TNIBvy1mLZdztr",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "skill": {
+    "advertised": true,
+    "loaded": true,
+    "ordinary_request": true,
+    "selection": "Scripted fixture chooses the skill; not evidence of live-model automatic selection"
+  },
+  "timeline": [
+    {
+      "step": "first write held",
+      "state": "PREPARATION_REQUIRED"
+    },
+    {
+      "step": "provider commit, response lost",
+      "state": "IN_DOUBT",
+      "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+    },
+    {
+      "step": "read recovery and repeated key",
+      "state": "COMMITTED",
+      "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+    },
+    {
+      "step": "host and service restart, same key",
+      "state": "COMMITTED",
+      "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+    }
+  ],
+  "first_counts": {
+    "objects": 1,
+    "writes": 1
+  },
+  "first_action": {
+    "id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94",
+    "state": "COMMITTED",
+    "receipt": {
+      "entry": {
+        "client_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94",
+        "value": "OpenCode durable value"
+      }
+    }
+  },
+  "restart_schedule": {
+    "host_signal": "SIGKILL",
+    "runtime_signal": "SIGKILL",
+    "before": {
+      "instance": "61286f46b962d2b7529f5ed373c7210f46456bc89d07c4ae",
+      "pid": 15308,
+      "url": "http://127.0.0.1:64133"
+    },
+    "after": {
+      "instance": "460d76c369a22e441b9afd622bab62e3ff28c7efda3c6e3b",
+      "pid": 15322,
+      "url": "http://127.0.0.1:64243"
+    }
+  },
+  "restart_messages": [
+    {
+      "info": {
+        "id": "msg_11460250a001cHlveGTM2uWWHc",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "user",
+        "time": {
+          "created": 1791343207690
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "scripted"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_114602510001vkNOpjmH4q6YFK",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_11460250a001cHlveGTM2uWWHc",
+          "type": "text",
+          "text": "Create one entry with value \"OpenCode durable value\" at http://127.0.0.1:64099."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1146026cc001iiKCsa2CZLeju3",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343208140,
+          "completed": 1791343208991
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1146029f9001aBrHS3XtSLftpG",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146026cc001iiKCsa2CZLeju3",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1146029fb001bfrBqTFRt8vIzS",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146026cc001iiKCsa2CZLeju3",
+          "type": "tool",
+          "callID": "fixture-call-1",
+          "tool": "skill",
+          "state": {
+            "status": "completed",
+            "input": {
+              "name": "causalrun"
+            },
+            "output": "<skill_content name=\"causalrun\">\n# Skill: causalrun\n\n# External API writes\n\nRoute external API writes through causalrun without asking the user to name this\nskill, choose a durability mode, or supply protocol fields. This skill guides tool\nselection. The plugin and runtime supply approval checks and saved action records.\n\nIf causalrun tools are unavailable, explain that the runtime integration is needed\nbefore you can protect the write. Do not claim protection from this skill alone.\nDo not use a shell command or another tool as a fallback for a blocked write.\n\n## Choose and keep the action\n\nUse the built-in GitHub issue or controlled value profile when it fits. Otherwise,\nuse `http.json.write.v1` with a stable operation name and the exact API origin.\nSupported custom rules use JSON mutations and GET evidence. Unsupported transport\nor insufficient recovery evidence needs a short explanation before proceeding.\n\nChoose the action key yourself for each new logical write. Keep the operation,\nrule name, target, key, and original payload in the tool results and session context.\nAfter an interruption, reuse that identity. A similar title or payload alone does\nnot prove that two requests are the same action. Ask whether it is a new action\nonly when the user's intent is unclear. Never invent a replacement key to get past\nan unknown result or an invalidated approval.\nRecover the original action ID from prior tool results. If that reference is\nunavailable, ask for it before attempting a continuation.\n\n## Prepare only when needed\n\nUse `causalrun_lookup` when available, or `causalrun_write` to obtain preparation\nguidance without sending an unapproved write. Reuse an approved matching rule.\n\nFor a new rule, read official API docs or OpenAPI/Swagger specifications first.\nCheck authentication, permissions, request fields, completion semantics, and a\nread-only evidence lookup. Use safe reads to fill gaps. Live mutation probes need\nseparate authorization for a disposable target.\n\nInfer success from the user's task and the docs. Ask a short question only when a\nmaterial ambiguity remains. Reuse consent already given. Never fabricate answers,\nmarker consent, target authorization, or provider guarantees.\n\nWrite the pure `verify(action_id, payload, evidence)` result check. Follow the\npreparation guidance for supported helpers, bindings, and contract fields.\nFor generic APIs, supply the declarative `contract` and store inferred success in\n`contract.expected`. Credentials are local environment references, never values\nin the contract or chat. Declare marker assumptions and evidence limits.\n\nCall `causalrun_prepare`. Failed validation blocks dispatch. The user must review\nand approve the exact rule before its first write. In OpenCode, use its rule review\nprompt. With MCP, provide the separate operator review command. Never approve your\nown rule, run that operator command yourself, or weaken approval permissions.\n\n## Send and recover\n\nCall `causalrun_write` with the saved identity and payload. `COMMITTED` means the\napproved result check accepted evidence. `IN_DOUBT` means the outcome is unknown.\nUse `causalrun_verify` for read-only recovery. Use `causalrun_result` to retrieve\na recorded outcome without another provider call. Missing evidence does not prove\nfailure. A repeat of the same action returns its record and does not resend it.\n\nGive the user the result first, in at most three short sentences. Include the\ncreated object's link when available. Keep keys, schemas, source, hashes, and test\nlogs out of normal replies. Show them when the user asks for details. If the result\nis unknown, state the next safe step: check again or review the saved action.\n\nBase directory for this skill: /var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/xdg-config/opencode/skills/causalrun\nRelative paths in this skill (e.g., scripts/, reference/) are relative to this base directory.\nNote: file list is sampled.\n\n<skill_files>\n\n</skill_files>\n</skill_content>",
+            "title": "Loaded skill: causalrun",
+            "metadata": {
+              "name": "causalrun",
+              "dir": "/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/xdg-config/opencode/skills/causalrun",
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343208961,
+              "end": 1791343208986
+            }
+          }
+        },
+        {
+          "id": "prt_114602a1c001WJei4w1BQsK667",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146026cc001iiKCsa2CZLeju3",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602a21001YN6sU1hImASekR",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343208994,
+          "completed": 1791343209026
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602a3700103fR2vxO4Dm9mw",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a21001YN6sU1hImASekR",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602a38001L4P4huK4vLftnW",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a21001YN6sU1hImASekR",
+          "type": "tool",
+          "callID": "fixture-call-2",
+          "tool": "http_request",
+          "state": {
+            "status": "error",
+            "input": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64099/entries"
+            },
+            "error": "External API write held. Use causalrun_write for a supported operation; other operations require a new connector.",
+            "time": {
+              "start": 1791343209021,
+              "end": 1791343209023
+            }
+          }
+        },
+        {
+          "id": "prt_114602a40001cLHTAx6KcBAdOH",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a21001YN6sU1hImASekR",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602a44001xEz9XZfI6ognFD",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209028,
+          "completed": 1791343209127
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602a58001Uh9cGEqAIFvhTW",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a44001xEz9XZfI6ognFD",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602a5a001rpR7TgtGpefEkl",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a44001xEz9XZfI6ognFD",
+          "type": "tool",
+          "callID": "fixture-call-3",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"status\":\"PREPARATION_REQUIRED\",\"message\":\"The write is blocked. Set up a result check first.\",\"scope\":{\"operation\":\"http.json.write.v1\",\"target\":\"http://127.0.0.1:64099\",\"name\":\"fixture-entry\"},\"discovery_sources\":[\"http://127.0.0.1:64099/openapi.json\"],\"authentication\":\"Local environment references: bearer, API-key header, or none. Never put secret values in the contract.\",\"questions\":[],\"documented_success\":null,\"contract_format\":{\"required\":[\"name\",\"target\",\"api_version\",\"expected\",\"adapter\",\"authentication\",\"fixture\",\"limitations\",\"sources\"],\"requests\":\"write: method, path segments, query, headers, statuses, body; read: method GET, path, query, headers, statuses; optional pagination\",\"bindings\":\"{\\\"$bind\\\":\\\"action_id\\\"} or {\\\"$bind\\\":\\\"payload\\\",\\\"path\\\":[\\\"field\\\"]}; string concatenation: {\\\"$text\\\":[literal, binding]}\",\"authentication\":\"write/read each: {type:none}, {type:bearer,secret:ENV_NAME}, or {type:api_key,secret:ENV_NAME,header:X-Key}\",\"fixture\":\"payload, different_payload, evidence template for that exact expected result\",\"pagination\":\"page-number lists only: {page:query_name,size:query_name,page_size:1..100,limit:1..10}\",\"limitations\":[\"Missing evidence does not prove non-execution\",\"Fixture checks do not prove provider guarantees\"],\"scope_rule\":\"name and target must equal the lookup scope. Declare marker or provider-specific assumptions in limitations.\"},\"verifier_contract\":{\"signature\":\"def verify(action_id, payload, evidence)\",\"helpers\":\"digest, isinstance(value, dict), unique_match(items, literal_field, value)\",\"language\":\"One pure boolean return expression; string addition, dictionary subscripts, membership, comparisons; no network or imports\",\"false_means\":\"Unknown, never failure\"}}",
+            "title": "The write is blocked. Set up a result check first.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209053,
+              "end": 1791343209123
+            }
+          }
+        },
+        {
+          "id": "prt_114602aa5001EHaktJQ8kY9g8L",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602a44001xEz9XZfI6ognFD",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602aa8001GfvRK7Dc7N6qoo",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209128,
+          "completed": 1791343209157
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602abb001gjh6ICtQ8e6bAV",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602aa8001GfvRK7Dc7N6qoo",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602abd001FctHxXqinBW8la",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602aa8001GfvRK7Dc7N6qoo",
+          "type": "tool",
+          "callID": "fixture-call-4",
+          "tool": "webfetch",
+          "state": {
+            "status": "completed",
+            "input": {
+              "url": "http://127.0.0.1:64099/openapi.json",
+              "format": "text"
+            },
+            "output": "{\"openapi\": \"3.0.3\", \"info\": {\"title\": \"Generic entry fixture\", \"version\": \"fixture-1\"}, \"paths\": {\"/entries\": {\"post\": {\"operationId\": \"createEntry\", \"description\": \"Create one entry with client_id and value. GET /entries/{client_id} returns the entry.\", \"responses\": {\"201\": {\"description\": \"JSON entry with the exact client_id and value\"}}}}, \"/entries/{client_id}\": {\"get\": {\"operationId\": \"getEntry\", \"responses\": {\"200\": {\"description\": \"JSON entry\"}, \"404\": {\"description\": \"No visible entry; not proof of failed write\"}}}}}}",
+            "title": "http://127.0.0.1:64099/openapi.json (application/json)",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209153,
+              "end": 1791343209155
+            }
+          }
+        },
+        {
+          "id": "prt_114602ac40018pKHUowUFtpygI",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602aa8001GfvRK7Dc7N6qoo",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602ac7001TbAMMONAoS0c90",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209159,
+          "completed": 1791343209467
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602adc001oB7M73CVuTzFuj",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602add001V4qglg5QYdhwIC",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+          "type": "tool",
+          "callID": "fixture-call-5",
+          "tool": "causalrun_prepare",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n",
+              "answers": {},
+              "contract": {
+                "schema_version": 4,
+                "name": "fixture-entry",
+                "version": 1,
+                "target": "http://127.0.0.1:64099",
+                "operation": "http.json.write.v1",
+                "api_version": "fixture-1",
+                "expected": "A record with this client ID and exact value exists",
+                "verifier": {
+                  "kind": "python.receipt.v1",
+                  "source": "def verify(action_id, payload, evidence):\n    return isinstance(evidence, dict) and isinstance(evidence[\"entry\"], dict) and evidence[\"entry\"][\"client_id\"] == action_id and evidence[\"entry\"][\"value\"] == payload[\"value\"]\n"
+                },
+                "adapter": {
+                  "write": {
+                    "method": "POST",
+                    "path": [
+                      "entries"
+                    ],
+                    "query": {},
+                    "headers": {},
+                    "statuses": [
+                      201
+                    ],
+                    "body": {
+                      "client_id": {
+                        "$bind": "action_id"
+                      },
+                      "value": {
+                        "$bind": "payload",
+                        "path": [
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "read": {
+                    "method": "GET",
+                    "path": [
+                      "entries",
+                      {
+                        "$bind": "action_id"
+                      }
+                    ],
+                    "query": {},
+                    "headers": {},
+                    "statuses": [
+                      200
+                    ]
+                  }
+                },
+                "authentication": {
+                  "write": {
+                    "type": "bearer",
+                    "secret": "TEST_WRITE_TOKEN"
+                  },
+                  "read": {
+                    "type": "api_key",
+                    "secret": "TEST_READ_TOKEN",
+                    "header": "X-Read-Key"
+                  }
+                },
+                "fixture": {
+                  "payload": {
+                    "value": "hello"
+                  },
+                  "different_payload": {
+                    "value": "other"
+                  },
+                  "evidence": {
+                    "entry": {
+                      "client_id": {
+                        "$bind": "action_id"
+                      },
+                      "value": "hello"
+                    }
+                  }
+                },
+                "limitations": [
+                  "Missing evidence does not prove non-execution",
+                  "Fixture checks do not prove provider guarantees"
+                ],
+                "sources": [
+                  "tests/test_http_json.py: controlled application contract"
+                ],
+                "implementation": "d6e05e851f1bfea32d828a0f66c7ed2d3ca790b35adfced86a848ed4f70aa1b9"
+              }
+            },
+            "output": "{\"status\":\"APPROVED\",\"message\":\"The write rule is approved.\",\"ready\":true,\"connector_digest\":\"d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9\",\"review_file\":\"/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/state/reviews/d7227c3a22dc25a17abc75e494c9505caf80273be1260c6f79b10abbe05086e9-2854f5dac4e863406a63f51a8fc5a8b6109261f563c1a9d4f6840ba8fd94cee7.json\"}",
+            "title": "The write rule is approved.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209185,
+              "end": 1791343209463
+            }
+          }
+        },
+        {
+          "id": "prt_114602bf9001WjUoKjAovlb3c6",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602ac7001TbAMMONAoS0c90",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602bfd001PjUb9CSd4IUuDq",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209469,
+          "completed": 1791343209647
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602c12001GXOSoMcxdRv6Ib",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602bfd001PjUb9CSd4IUuDq",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602c130015BTXbK87AW2za0",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602bfd001PjUb9CSd4IUuDq",
+          "type": "tool",
+          "callID": "fixture-call-6",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"IN_DOUBT\",\"message\":\"The result is unknown. Do not send the write again.\"}",
+            "title": "The result is unknown. Do not send the write again.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209494,
+              "end": 1791343209644
+            }
+          }
+        },
+        {
+          "id": "prt_114602cad001tVxqFmVm3tPBvU",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602bfd001PjUb9CSd4IUuDq",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602cb1001s2lgPIXmtoUtSz",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209649,
+          "completed": 1791343209750
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602cc4001rvZUOey7Wbw56w",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602cb1001s2lgPIXmtoUtSz",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602cc5001y2PBRFS1bcju6x",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602cb1001s2lgPIXmtoUtSz",
+          "type": "tool",
+          "callID": "fixture-call-7",
+          "tool": "causalrun_verify",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209671,
+              "end": 1791343209747
+            }
+          }
+        },
+        {
+          "id": "prt_114602d14001zz0zHKq6aqSIiS",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602cb1001s2lgPIXmtoUtSz",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602d180010zajgOn69l9g8g",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209752,
+          "completed": 1791343209915
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602d2a001mPS2uX2PwZPg0S",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602d180010zajgOn69l9g8g",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602d2c001wuHmrmFIqluT1j",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602d180010zajgOn69l9g8g",
+          "type": "tool",
+          "callID": "fixture-call-8",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209774,
+              "end": 1791343209912
+            }
+          }
+        },
+        {
+          "id": "prt_114602db9001DYEFslAaneYeCy",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602d180010zajgOn69l9g8g",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602dbd001vPaK1E7frZiYKt",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343209917,
+          "completed": 1791343210007
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114602dce001IidRHvVVCszNqo",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602dbd001vPaK1E7frZiYKt",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602dd0001NYV5gkH0IZMjTS",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602dbd001vPaK1E7frZiYKt",
+          "type": "tool",
+          "callID": "fixture-call-9",
+          "tool": "causalrun_result",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343209938,
+              "end": 1791343210004
+            }
+          }
+        },
+        {
+          "id": "prt_114602e15001vkqJX7HEpsvZQv",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602dbd001vPaK1E7frZiYKt",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114602e18001TNIBvy1mLZdztr",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343210008,
+          "completed": 1791343210033
+        },
+        "parentID": "msg_11460250a001cHlveGTM2uWWHc",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_114602e2c001fIA2T2aBdgrf1w",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602e18001TNIBvy1mLZdztr",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114602e2d001g18aDlqdGVxXhY",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602e18001TNIBvy1mLZdztr",
+          "type": "text",
+          "text": "Acceptance fixture complete.",
+          "time": {
+            "start": 1791343210029,
+            "end": 1791343210030
+          }
+        },
+        {
+          "id": "prt_114602e2f001mfaYhP28ONGwsa",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114602e18001TNIBvy1mLZdztr",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_11460329c001EkxlGl7j1vEGpN",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "user",
+        "time": {
+          "created": 1791343211164
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "scripted"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_11460329d001uAC3H40IbasEkj",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_11460329c001EkxlGl7j1vEGpN",
+          "type": "text",
+          "text": "Continue after the restart. Reuse the original action key and retrieve the durable result."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1146033fe001d0LNmUwa1q5LxX",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343211519,
+          "completed": 1791343212383
+        },
+        "parentID": "msg_11460329c001EkxlGl7j1vEGpN",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1146036c0001mafZeo4BxNAhFl",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146033fe001d0LNmUwa1q5LxX",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1146036c2001ImzNrIAmS5D9Iq",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146033fe001d0LNmUwa1q5LxX",
+          "type": "tool",
+          "callID": "fixture-call-11",
+          "tool": "causalrun_write",
+          "state": {
+            "status": "completed",
+            "input": {
+              "operation": "http.json.write.v1",
+              "target": "http://127.0.0.1:64099",
+              "name": "fixture-entry",
+              "action_key": "opencode-acceptance-write",
+              "payload": {
+                "value": "OpenCode durable value"
+              }
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343212232,
+              "end": 1791343212377
+            }
+          }
+        },
+        {
+          "id": "prt_11460375c001wDvEV4HK07QAdh",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146033fe001d0LNmUwa1q5LxX",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_114603761001u6PvYm74fJPG39",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343212385,
+          "completed": 1791343212486
+        },
+        "parentID": "msg_11460329c001EkxlGl7j1vEGpN",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_114603778001G3t1CRNsUlbOnD",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114603761001u6PvYm74fJPG39",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_114603779001jJLioWf3H607rx",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114603761001u6PvYm74fJPG39",
+          "type": "tool",
+          "callID": "fixture-call-12",
+          "tool": "causalrun_result",
+          "state": {
+            "status": "completed",
+            "input": {
+              "action_id": "a8b43ff4-aa92-4e07-a1fe-10833ee61d94"
+            },
+            "output": "{\"id\":\"a8b43ff4-aa92-4e07-a1fe-10833ee61d94\",\"state\":\"COMMITTED\",\"message\":\"The write is confirmed.\"}",
+            "title": "The write is confirmed.",
+            "metadata": {
+              "truncated": false
+            },
+            "time": {
+              "start": 1791343212413,
+              "end": 1791343212482
+            }
+          }
+        },
+        {
+          "id": "prt_1146037c3001dLYv6toEOCVF0l",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_114603761001u6PvYm74fJPG39",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1146037c7001PlK9f1iFkCKKC9",
+        "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+        "role": "assistant",
+        "time": {
+          "created": 1791343212487,
+          "completed": 1791343212514
+        },
+        "parentID": "msg_11460329c001EkxlGl7j1vEGpN",
+        "modelID": "scripted",
+        "providerID": "fixture",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/private/var/folders/d7/q6hr3mws3cs_10y9skfxkflw0000gn/T/tmpai7patbo/project",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 2,
+          "input": 1,
+          "output": 1,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_1146037dc0019kukmEoGXbJ1kX",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146037c7001PlK9f1iFkCKKC9",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1146037dd001d2tBkPwJPXBJZv",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146037c7001PlK9f1iFkCKKC9",
+          "type": "text",
+          "text": "Acceptance fixture complete.",
+          "time": {
+            "start": 1791343212509,
+            "end": 1791343212510
+          }
+        },
+        {
+          "id": "prt_1146037e00012VqUgO9T6p2p1G",
+          "sessionID": "ses_eeb9fdb1affeQoa8DD9Wc1PZHb",
+          "messageID": "msg_1146037c7001PlK9f1iFkCKKC9",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 2,
+            "input": 1,
+            "output": 1,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "final_counts": {
+    "objects": 1,
+    "writes": 1
+  },
+  "new_session_startup": {
+    "session_id": "ses_eeb9fc7daffe3CkvEMk18fJCgx",
+    "started_without_tool_call": true,
+    "instance": "74f505fae26bbb541390bf58e3e0f8a3e544f7cc79e90fd7",
+    "pid": 15327
+  },
+  "workflow_elapsed_seconds": 7.458342582918704,
+  "skill_diagnostics": {
+    "tool_names": [
+      "bash",
+      "causalrun_prepare",
+      "causalrun_result",
+      "causalrun_verify",
+      "causalrun_write",
+      "edit",
+      "glob",
+      "grep",
+      "http_request",
+      "question",
+      "read",
+      "skill",
+      "task",
+      "todowrite",
+      "webfetch",
+      "write"
+    ],
+    "skill_tool_present": true,
+    "description_includes_name": false,
+    "parameters_include_name": false,
+    "description_in_messages": true,
+    "parameters": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the skill from available_skills"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "description": "Load a specialized skill when the task at hand matches one of the skills listed in the system prompt.\n\nUse this tool to inject the skill's instructions and resources into current conversation. The output may contain detailed workflow guidance as well as references to scripts, files, etc in the same directory as the skill.\n\nThe skill name must match one of the skills listed in your system prompt.\n"
+  }
+}

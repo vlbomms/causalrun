@@ -7,7 +7,7 @@ from pathlib import Path
 SOURCE = (Path(__file__).resolve().parents[1] / 'examples/verify_value.py').read_text()
 
 
-def create_model(target, repair=False, selective=False, ambiguous=False, generic=False):
+def create_model(target, repair=False, selective=False, ambiguous=False, generic=False, load_skill=False):
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
             pass
@@ -22,6 +22,8 @@ def create_model(target, repair=False, selective=False, ambiguous=False, generic
             if body.get('tools'):
                 step = server.step
                 server.step += 1
+                if load_skill:
+                    step -= 1
                 if repair and step >= 5:
                     step -= 1
                 common = {'operation': 'controlled.value.create.v1', 'target': target}
@@ -95,6 +97,22 @@ def create_model(target, repair=False, selective=False, ambiguous=False, generic
                         call = ('causalrun_result', {'action_id': server.action_id})
                     else:
                         call = None
+                if load_skill and step == -1:
+                    skills = [item for item in body['tools'] if item.get('function', {}).get('name') == 'skill']
+                    server.skill_diagnostics = {
+                        'tool_names': [item.get('function', {}).get('name', item.get('name')) for item in body['tools']],
+                        'skill_tool_present': bool(skills),
+                        'description_includes_name': bool(skills and 'causalrun' in skills[0]['function'].get('description', '')),
+                        'parameters_include_name': bool(skills and 'causalrun' in json.dumps(skills[0]['function'].get('parameters', {}))),
+                        'description_in_messages': 'Use causalrun for external API writes requested in ordinary development tasks' in json.dumps(body['messages']),
+                        'parameters': skills[0]['function'].get('parameters', {}) if skills else {},
+                        'description': skills[0]['function'].get('description', '') if skills else '',
+                    }
+                    advertised = (server.skill_diagnostics['description_includes_name']
+                                  or server.skill_diagnostics['description_in_messages'])
+                    assert skills and advertised, 'Skill not advertised to the model'
+                    server.skill_advertised = advertised
+                    call = ('skill', {'name': 'causalrun'})
                 server.calls.append({'step': step, 'tool': call[0] if call else None})
             message = {'role': 'assistant', 'content': 'Acceptance fixture complete.' if call is None else None}
             if call:
@@ -124,4 +142,6 @@ def create_model(target, repair=False, selective=False, ambiguous=False, generic
     server.step = 0
     server.calls = []
     server.action_id = None
+    server.skill_advertised = False
+    server.skill_diagnostics = {}
     return server

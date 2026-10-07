@@ -21,6 +21,21 @@ def write_private(path, text):
     os.replace(temporary, path)
 
 
+def check_skill(source, config):
+    source_file = source / 'skills/causalrun/SKILL.md'
+    destination = config / 'skills/causalrun/SKILL.md'
+    text = source_file.read_text()
+    if destination.exists() and '\n  managed-by: causalrun\n' not in destination.read_text():
+        raise Rejected('Refusing to overwrite an unrelated causalrun skill')
+    return destination, text
+
+
+def install_skill(source, config):
+    destination, text = check_skill(source, config.resolve())
+    write_private(destination, text)
+    return {'skill': str(destination), 'next': 'Restart OpenCode. The skill requires the causalrun plugin or MCP tools.'}
+
+
 def install(source, config, state):
     config, state = config.resolve(), state.resolve()
     if config == state or config in state.parents or state in config.parents:
@@ -38,12 +53,13 @@ def install(source, config, state):
     plugin = config / 'plugins/causalrun.ts'
     if plugin.exists() and not plugin.read_text().startswith('// causalrun managed bootstrap\n'):
         raise Rejected('Refusing to overwrite an unrelated causalrun.ts plugin')
+    skill, skill_text = check_skill(source, config)
     from .native import running
     if running(state) is not None:
         raise Rejected('Quit OpenCode and stop its runtime with this installer --stop before updating executable files')
     runtime = state / 'runtime'
     state.mkdir(parents=True, exist_ok=True); os.chmod(state, 0o700)
-    for folder in ('causalrun', 'examples', 'adapters'):
+    for folder in ('causalrun', 'examples', 'adapters', 'skills'):
         shutil.copytree(source / folder, runtime / folder, dirs_exist_ok=True,
                         ignore=shutil.ignore_patterns('__pycache__', '*.sqlite*'))
     # Bootstrap in the host's normal plugin directory; SDK is supplied by OpenCode.
@@ -56,15 +72,16 @@ def install(source, config, state):
     if settings_path.exists() and not (config / 'opencode.json.before-causalrun').exists():
         shutil.copy2(settings_path, config / 'opencode.json.before-causalrun')
     write_private(plugin, bootstrap)
+    write_private(skill, skill_text)
     write_private(settings_path, json.dumps(settings, indent=2) + '\n')
-    return {'installed': str(plugin), 'runtime': str(runtime), 'state': str(state),
+    return {'installed': str(plugin), 'skill': str(skill), 'runtime': str(runtime), 'state': str(state),
             'next': 'Restart OpenCode. The plugin starts the service automatically. Use local gh auth login for GitHub; no secrets in chat.'}
 
 
 def build(destination):
     with tempfile.TemporaryDirectory() as directory:
         staging = Path(directory)
-        for folder in ('causalrun', 'examples', 'adapters'):
+        for folder in ('causalrun', 'examples', 'adapters', 'skills'):
             shutil.copytree(ROOT / folder, staging / folder, ignore=shutil.ignore_patterns('__pycache__', '*.sqlite*'))
         # zipapp's generated entry point discards main()'s status. Preserve it so
         # failed review, MCP startup, and installation are visible to callers.
@@ -82,7 +99,10 @@ def main():
     parser.add_argument('--mcp', action='store_true', help='Serve MCP tools over stdio using the installed runtime')
     parser.add_argument('--build', help='Developer: build a distributable .pyz')
     parser.add_argument('--json', action='store_true', help='Return machine-readable installation results')
+    parser.add_argument('--skill-only', action='store_true', help='Install only the discovery skill; plugin or MCP runtime is still required')
     args = parser.parse_args()
+    success_message = ('The causalrun skill is installed.\nRestart OpenCode.\nThe skill requires causalrun tools.' if args.skill_only
+                       else 'causalrun is installed.\nOpen a new OpenCode session.\nThe local service starts for you.')
     try:
         if os.name != 'posix' or sys.version_info < (3, 10):
             raise Rejected('This installer supports macOS/Linux with Python 3.10+')
@@ -107,11 +127,13 @@ def main():
                 with zipfile.ZipFile(sys.argv[0]) as archive:
                     # The archive is our own executable payload, not user-supplied connector data.
                     archive.extractall(directory)
-                result = install(Path(directory), Path(args.config_dir), Path(args.state_dir))
-                print(json.dumps(result) if args.json else 'causalrun is installed.\nOpen a new OpenCode session.\nThe local service starts for you.')
+                result = (install_skill(Path(directory), Path(args.config_dir)) if args.skill_only
+                          else install(Path(directory), Path(args.config_dir), Path(args.state_dir)))
+                print(json.dumps(result) if args.json else success_message)
         else:
-            result = install(ROOT, Path(args.config_dir), Path(args.state_dir))
-            print(json.dumps(result) if args.json else 'causalrun is installed.\nOpen a new OpenCode session.\nThe local service starts for you.')
+            result = (install_skill(ROOT, Path(args.config_dir)) if args.skill_only
+                      else install(ROOT, Path(args.config_dir), Path(args.state_dir)))
+            print(json.dumps(result) if args.json else success_message)
     except (Rejected, OSError, ValueError) as error:
         print('Installation failed: ' + str(error), file=sys.stderr)
         return 1
